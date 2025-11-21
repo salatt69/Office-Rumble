@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4def625e7968ea249bef1d0676033bab, type: 3}
+  m_Name: Stepler
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  itemName: STEPLER
+  icon: {fileID: -1766476269, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  prefab: {fileID: 1538920619850770153, guid: 21ef2024b1f2d524fb391873fc6291e7, type: 3}
+  damage: 3
+  fireRate: 100
+  fireSound: {fileID: 0}

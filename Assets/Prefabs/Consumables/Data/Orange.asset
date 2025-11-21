@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2517a667481d5a4bb4a4a7a4ac1da5d, type: 3}
+  m_Name: Orange
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
+  itemName: ORANGE
+  icon: {fileID: 1809442258, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  prefab: {fileID: 2115411700821621942, guid: bed8e7484c98cce4dbbaca3ee4ae6e32, type: 3}
+  healAmount: 52
+  useTime: 0
