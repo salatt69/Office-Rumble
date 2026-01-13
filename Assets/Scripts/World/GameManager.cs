@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Unity.Hierarchy;
 
 public class GameManager : MonoBehaviour
 {
