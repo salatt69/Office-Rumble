@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class InventoryUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private InventorySystem inventorySystem;
+    [SerializeField] private Inventory inventorySystem;
     [SerializeField] private ItemSlot[] slots;
 
     void Awake()
@@ -45,9 +45,9 @@ public class InventoryUI : MonoBehaviour
         slots[slotIndex].SetItem(data);
     }
 
-void UpdateSelection(int selectedIndex)
-{
-    for (int i = 0; i < slots.Length; i++)
-        slots[i].SetSelected(i == selectedIndex);
-}
+    void UpdateSelection(int selectedIndex)
+    {
+        for (int i = 0; i < slots.Length; i++)
+            slots[i].SetSelected(i == selectedIndex);
+    }
 }

@@ -16,7 +16,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
-        var inventory = player.GetComponent<InventorySystem>();
+        var inventory = player.GetComponent<Inventory>();
         ItemData oldItem;
 
         if (inventory.Add(data))

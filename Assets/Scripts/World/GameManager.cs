@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Hierarchy;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public HUD hud { get; private set; }
+
 
     private bool isFreezing = false;
 
@@ -12,6 +15,11 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
             new GameObject("GameManager").AddComponent<GameManager>();
+    }
+
+    public void RegisterHUD(HUD hud)
+    {
+        this.hud = hud;
     }
 
     void Awake()

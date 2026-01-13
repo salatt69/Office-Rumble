@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
 
     PlayerInteraction playerInteraction;
-    InventorySystem inventory;
+    Inventory inventory;
 
     void Awake()
     {
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         hand = GameObject.Find("Hand");
 
         playerInteraction = GetComponent<PlayerInteraction>();
-        inventory = GetComponent<InventorySystem>();
+        inventory = GetComponent<Inventory>();
 
         pixelPerfectCamera = Camera.main.GetComponent<PixelPerfectCamera>();
 

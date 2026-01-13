@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InventorySystem : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] ItemHolder itemHolder;
