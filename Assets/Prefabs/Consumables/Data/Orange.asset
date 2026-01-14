@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Orange
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
   itemName: ORANGE
-  icon: {fileID: 1809442258, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   prefab: {fileID: 2115411700821621942, guid: bed8e7484c98cce4dbbaca3ee4ae6e32, type: 3}
+  unequipped: {fileID: -2594991749270144440, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  highlightedUnequipped: {fileID: -7794112339037250244, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  equipped: {fileID: 5710046658965445949, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  icon: {fileID: 1809442258, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   healAmount: 52
   useTime: 0

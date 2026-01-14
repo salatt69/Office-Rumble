@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Stepler
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   itemName: STEPLER
-  icon: {fileID: -1766476269, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   prefab: {fileID: 1538920619850770153, guid: 21ef2024b1f2d524fb391873fc6291e7, type: 3}
+  unequipped: {fileID: 318814351, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  highlightedUnequipped: {fileID: 1986834126, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  equipped: {fileID: -693905458, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  icon: {fileID: -1766476269, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   damage: 3
   fireRate: 100
   fireSound: {fileID: 0}

@@ -1,15 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class ItemPickup : MonoBehaviour, IInteractable
 {
     [SerializeField] ItemData data;
 
-    Animator animator;
+    SpriteRenderer spriteRenderer;
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public string GetInteractionText() => $"Pick up {data.itemName}";
@@ -34,6 +35,6 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     public void SetHighlight(bool state)
     {
-        animator.SetBool("Interactable", state);
+        spriteRenderer.sprite = state ? data.highlightedUnequipped : data.unequipped;
     }
 }

@@ -5,7 +5,7 @@ public class Weapon : Item, IUsable
     [Header("References")]
     [SerializeField] protected Transform firePoint;
 
-    public WeaponData wd => (WeaponData)Data;
+    public WeaponData WD => (WeaponData)Data;
 
     protected override void Awake()
     {
@@ -24,14 +24,14 @@ public class Weapon : Item, IUsable
     {
         base.OnEquip();
 
-        Debug.Log($"Weapon [{wd.itemName}] ready for battle!");
+        Debug.Log($"Weapon [{WD.itemName}] ready for battle!");
     }
 
     public override void OnUnequip()
     {
         base.OnUnequip();
 
-        Debug.Log($"Weapon [{wd.itemName}] being unequipped...");
+        Debug.Log($"Weapon [{WD.itemName}] being unequipped...");
     }
 
     public void Use(GameObject target)
@@ -43,6 +43,6 @@ public class Weapon : Item, IUsable
         }
 
         Debug.DrawRay(firePoint.position, firePoint.right, Color.red, 1f);
-        Debug.Log($"{wd.itemName} fired, and dealt WHOPPING {wd.damage} DAMAGE to ABSOLUTELY nothing!");
+        Debug.Log($"{WD.itemName} fired, and dealt WHOPPING {WD.damage} DAMAGE to ABSOLUTELY nothing!");
     }
 }

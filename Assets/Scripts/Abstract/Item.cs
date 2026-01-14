@@ -1,18 +1,17 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public abstract class Item : MonoBehaviour
 {
     protected ItemData data;
-    protected SpriteRenderer sprite;
-    protected Animator animator;
+    protected SpriteRenderer spriteRenderer;
     protected ItemHolder holder;
 
     public ItemData Data => data;
 
     protected virtual void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public virtual void Initialize(ItemData newData)
@@ -22,23 +21,19 @@ public abstract class Item : MonoBehaviour
 
     public virtual void OnEquip()
     {
-        if (sprite)
-            sprite.sortingLayerName = "Held Item";
-
-        if (animator)
-            animator.SetBool("Equipped", true);
-
-        Debug.Log($"[{data.itemName}] equipped.");
+        if (spriteRenderer)
+        {
+            spriteRenderer.sortingLayerName = "Held Item";
+            spriteRenderer.sprite = data.equipped;
+        }
     }
 
     public virtual void OnUnequip()
     {
-        if (sprite)
-            sprite.sortingLayerName = "Item";
-
-        if (animator)
-            animator.SetBool("Equipped", false);
-
-        Debug.Log($"[{data.itemName}] unequipped.");
+        if (spriteRenderer)
+        {
+            spriteRenderer.sortingLayerName = "Item";
+            spriteRenderer.sprite = data.unequipped;
+        }
     }
 }
