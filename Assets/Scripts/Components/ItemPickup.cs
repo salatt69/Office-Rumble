@@ -1,40 +1,31 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class ItemPickup : MonoBehaviour, IInteractable
 {
     [SerializeField] ItemData data;
 
-    SpriteRenderer spriteRenderer;
-
-    void Awake()
+    public void TryInteract(PlayerController player)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    public string GetInteractionText() => $"Pick up {data.itemName}";
-
-    public void Interact(PlayerController player)
-    {
-        var inventory = player.GetComponent<Inventory>();
-        ItemData oldItem;
-
-        if (inventory.Add(data))
+        if (player.canPickup)
         {
-            inventory.SelectSlot(inventory.SelectedIndex);
+            var inventory = player.GetComponent<Inventory>();
+
+            if (inventory.Add(data))
+            {
+                inventory.SelectSlot(inventory.SelectedIndex);
+            }
+            else
+            {
+                inventory.Drop(player.GetItemDropPosition());
+                inventory.ReplaceSelected(data);
+            }
+            player.AddItemPickupCooldown();
+
+            Destroy(transform.parent.gameObject);
         }
         else
         {
-            oldItem = inventory.ReplaceSelected(data);
-            Instantiate(oldItem.prefab, player.transform.position, Quaternion.identity);
+            Debug.Log("Player cannot pick up items right now.");
         }
-
-        Destroy(gameObject);
-    }
-
-    public void SetHighlight(bool state)
-    {
-        spriteRenderer.sprite = state ? data.highlightedUnequipped : data.unequipped;
     }
 }

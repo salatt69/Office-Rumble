@@ -6,7 +6,7 @@ using URandom = UnityEngine.Random;
 
 public class LevelGeneration : MonoBehaviour
 {
-    public enum RoomType
+    public enum Rooms
     {
         Empty,
         Start,
@@ -14,6 +14,18 @@ public class LevelGeneration : MonoBehaviour
         Merchant,
         Hidden,
         Exit
+    }
+
+    public readonly struct LevelData
+    {
+        public readonly Rooms[,] Map;
+        public readonly Vector2Int Exit;
+
+        public LevelData(Rooms[,] map, Vector2Int exit)
+        {
+            Map = map;
+            Exit = exit;
+        }
     }
 
     [Header("Grid Settings")]
@@ -48,24 +60,23 @@ public class LevelGeneration : MonoBehaviour
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
 
-        (int x, int y) startRoom = (width / 2, height / 2);
-        var (map, exitRoom) = GenerateLevel(width, height, maxNormalRooms, startRoom);
+        Vector2Int startRoom = new(width / 2, height / 2);
+        LevelData level = GenerateLevel(maxNormalRooms, startRoom);
 
         ClearPreviousLevel();
-        SpawnLevel(map);
+        SpawnLevel(level.Map);
 
         watch.Stop();
         Debug.Log($"Generation time (ms): {watch.Elapsed.TotalMilliseconds:F3} (ticks): {watch.ElapsedTicks}");
     }
 
-    (RoomType[,] map, (int x, int y) levelExit) GenerateLevel(
-        int width, int height, int targetRooms, (int x, int y) startRoom)
+    LevelData GenerateLevel(int targetRooms, Vector2Int startRoom)
     {
-        RoomType[,] map = new RoomType[width, height];
-        List<(int x, int y)> placedRooms = new();
+        Rooms[,] map = new Rooms[width, height];
+        List<Vector2Int> placedRooms = new();
 
         // Start
-        map[startRoom.x, startRoom.y] = RoomType.Start;
+        map[startRoom.x, startRoom.y] = Rooms.Start;
         placedRooms.Add(startRoom);
 
         // Normal
@@ -73,12 +84,14 @@ public class LevelGeneration : MonoBehaviour
         while (roomsCreated < targetRooms)
         {
             bool normalPlaced = TryPlaceRoom(
-                map, placedRooms, width, height,
-                RoomType.Normal, 200, _ => true
+                map, placedRooms, Rooms.Normal, 200, out Vector2Int normalRoomPosition,
+                _ =>
+                {
+                    return true;
+                }
             );
 
-            if (!normalPlaced) break;
-            roomsCreated++;
+            if (normalPlaced) roomsCreated++;
         }
 
         if (printToConsole) Debug.Log($"Normal rooms: {roomsCreated}");
@@ -88,13 +101,16 @@ public class LevelGeneration : MonoBehaviour
         if (URandom.Range(0f, 1f) < merchantRoomRate)
         {
             bool merchantPlaced = TryPlaceRoom(
-                map, placedRooms, width, height,
-                RoomType.Merchant, 200,
-                neighbors => !neighbors.Contains(RoomType.Exit)
-                          && !neighbors.Contains(RoomType.Hidden)
-                          && !neighbors.Contains(RoomType.Start)
+                map, placedRooms, Rooms.Merchant, 200, out Vector2Int merchantRoomPosition,
+                neighbors => 
+                {
+                    return !neighbors.Contains(Rooms.Exit)
+                        && !neighbors.Contains(Rooms.Hidden)
+                        && !neighbors.Contains(Rooms.Start);
+                }
             );
-            merchantCreated++;
+
+            if (merchantPlaced) merchantCreated++;
         }
 
         if (printToConsole) Debug.Log("Merchant room: " + merchantCreated);
@@ -111,11 +127,13 @@ public class LevelGeneration : MonoBehaviour
                 continue;
 
             bool hiddenPlaced = TryPlaceRoom(
-                map, placedRooms, width, height,
-                RoomType.Hidden, 200,
-                neighbors => !neighbors.Contains(RoomType.Hidden)
-                          && !neighbors.Contains(RoomType.Start)
-                          && !neighbors.Contains(RoomType.Merchant)
+                map, placedRooms, Rooms.Hidden, 200, out Vector2Int hiddenRoomPosition,
+                neighbors => 
+                {
+                    return !neighbors.Contains(Rooms.Hidden)
+                        && !neighbors.Contains(Rooms.Start)
+                        && !neighbors.Contains(Rooms.Merchant);
+                }
             );
 
             if (hiddenPlaced)
@@ -129,120 +147,120 @@ public class LevelGeneration : MonoBehaviour
 
         // Exit
         bool exitPlaced = TryPlaceRoom(
-            map, placedRooms, width, height,
-            RoomType.Exit, 500,
+            map, placedRooms, Rooms.Exit, 500, out Vector2Int exitRoomPosition,
             neighbors =>
             {
-                int emptyCount = neighbors.Count(n => n == RoomType.Empty);
-                return !neighbors.Contains(RoomType.Start)
-                    && !neighbors.Contains(RoomType.Hidden)
-                    && !neighbors.Contains(RoomType.Merchant)
+                int emptyCount = neighbors.Count(n => n == Rooms.Empty);
+                return !neighbors.Contains(Rooms.Start)
+                    && !neighbors.Contains(Rooms.Hidden)
+                    && !neighbors.Contains(Rooms.Merchant)
                     && emptyCount >= 2;
             }
         );
 
         if (printToConsole) Debug.Log(exitPlaced ? "Exit room placed!" : "Failed to place exit room!");
-
         if (printToConsole) Debug.Log($"Total rooms placed: {placedRooms.Count}");
 
-        // Locate Exit 
-        (int x, int y) exit = (-1, -1);
-        for (int x = 0; x < width; x++)
-            for (int y = 0; y < height; y++)
-                if (map[x, y] == RoomType.Exit)
-                    exit = (x, y);
-
-        return (map, exit);
+        return new LevelData(map, exitRoomPosition);
     }
 
     bool TryPlaceRoom(
-        RoomType[,] map,
-        List<(int x, int y)> placedRooms,
-        int width,
-        int height,
-        RoomType roomType,
+        Rooms[,] map,
+        List<Vector2Int> placedRooms,
+        Rooms roomType,
         int maxAttempts,
-        Func<List<RoomType>, bool> isValidNeighborCondition)
+        out Vector2Int placedRoomPosition,
+        Func<List<Rooms>, bool> isValidNeighborCondition)
     {
         for (int attempts = 0; attempts < maxAttempts; attempts++)
         {
-            var parent = placedRooms[URandom.Range(0, placedRooms.Count)];
-            var candidate = GenerateRoom(parent);
+            Vector2Int parent = placedRooms[URandom.Range(0, placedRooms.Count)];
+            Vector2Int candidate = GenerateRoom(parent);
 
-            if (!IsInBounds(candidate.x, candidate.y, width, height))
+            if (!IsInBounds(candidate, width, height))
                 continue;
 
-            if (map[candidate.x, candidate.y] != RoomType.Empty)
+            if (map[candidate.x, candidate.y] != Rooms.Empty)
                 continue;
 
-            List<RoomType> neighbors = GetNeighbors(map, candidate.x, candidate.y);
+            List<Rooms> neighbors = GetNeighbors(map, candidate.x, candidate.y);
             if (!isValidNeighborCondition(neighbors))
                 continue;
+
+            placedRoomPosition = candidate;
 
             map[candidate.x, candidate.y] = roomType;
             placedRooms.Add(candidate);
             return true;
         }
 
+        placedRoomPosition = default;
         return false;
     }
 
-    static (int x, int y) GenerateRoom((int x, int y) parentRoom)
+    static Vector2Int GenerateRoom(Vector2Int parentRoom)
     {
-        (int dx, int dy) dir = RandomDirection();
-        return (parentRoom.x + dir.dx, parentRoom.y + dir.dy);
+        Vector2Int dir = RandomDirection();
+        return parentRoom + dir;
     }
 
-    static (int dx, int dy) RandomDirection()
+    static Vector2Int RandomDirection()
     {
         int value = URandom.Range(0, 4);
         return value switch
         {
-            0 => (0, 1),   // up
-            1 => (0, -1),  // down
-            2 => (1, 0),   // right
-            3 => (-1, 0),  // left
-            _ => (0, 0)
+            0 => new Vector2Int(0, 1),   // up
+            1 => new Vector2Int(0, -1),  // down
+            2 => new Vector2Int(1, 0),   // right
+            3 => new Vector2Int(-1, 0),  // left
+            _ => Vector2Int.zero
         };
     }
 
-    static bool IsInBounds(int x, int y, int width, int height)
-        => x >= 0 && y >= 0 && x < width && y < height;
+    static bool IsInBounds(Vector2Int p, int width, int height)
+        => p.x >= 0 && p.y >= 0 && p.x < width && p.y < height;
 
-    static List<RoomType> GetNeighbors(RoomType[,] map, int x, int y)
+    static List<Rooms> GetNeighbors(Rooms[,] map, int x, int y)
     {
         int width = map.GetLength(0);
         int height = map.GetLength(1);
-        List<RoomType> neighbors = new(4);
+        List<Rooms> neighbors = new(4);
 
-        (int dx, int dy)[] dirs = { (0, 1), (0, -1), (1, 0), (-1, 0) };
-        foreach (var (dx, dy) in dirs)
+        Vector2Int[] dirs =
         {
-            int nx = x + dx, ny = y + dy;
+            new(0, 1),
+            new(0, -1),
+            new(1, 0),
+            new(-1, 0),
+        };
+
+        foreach (var d in dirs)
+        {
+            int nx = x + d.x, ny = y + d.y;
             if (nx >= 0 && ny >= 0 && nx < width && ny < height)
                 neighbors.Add(map[nx, ny]);
             else
-                neighbors.Add(RoomType.Empty);
+                neighbors.Add(Rooms.Empty);
         }
+
         return neighbors;
     }
 
-    void SpawnLevel(RoomType[,] map)
+    void SpawnLevel(Rooms[,] map)
     {
         int width = map.GetLength(0);
         int height = map.GetLength(1);
 
         for (int y = 0; y < height; y++)
-        {
             for (int x = 0; x < width; x++)
             {
                 GameObject roomToSpawn = map[x, y] switch
                 {
-                    RoomType.Start => StartRoom,
-                    RoomType.Normal => NormalRoom,
-                    RoomType.Merchant => MerchantRoom,
-                    RoomType.Hidden => HiddenRoom,
-                    RoomType.Exit => ExitRoom,
+                    Rooms.Start => StartRoom,
+                    Rooms.Normal => NormalRoom,
+                    Rooms.Merchant => MerchantRoom,
+                    Rooms.Hidden => HiddenRoom,
+                    Rooms.Exit => ExitRoom,
                     _ => null
                 };
 
@@ -252,7 +270,6 @@ public class LevelGeneration : MonoBehaviour
                 Vector3 spawnPos = new Vector3(x * 1f, y * 1f, 0);
                 Instantiate(roomToSpawn, spawnPos, Quaternion.identity, transform);
             }
-        }
     }
 
     public void ClearPreviousLevel()

@@ -1,15 +1,20 @@
+using Assets.Scripts.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class PlayerInteraction : MonoBehaviour
+[RequireComponent(typeof(PlayerController))]
+public class HighlightItemsForPlayer : MonoBehaviour
 {
-    List<IInteractable> nearbyInteractables = new();
-    IInteractable currentInteractable;
-    
+    [SerializeField] Collider2D interactionCollider;
+
+    readonly List<IHighlight> nearbyInteractables = new();
+    IHighlight currentInteractable;
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<IInteractable>(out var interactable))
+
+        if (other.TryGetComponent<IHighlight>(out var interactable))
         {
             RegisterInteractable(interactable);
             // TODO: Add UIManager to display GetInteractionText()
@@ -18,7 +23,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent<IInteractable>(out var interactable))
+        if (other.TryGetComponent<IHighlight>(out var interactable))
         {
             interactable.SetHighlight(false);
 
@@ -40,7 +45,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         // find nearest interactable
-        IInteractable nearest = null;
+        IHighlight nearest = null;
         float minDistance = float.MaxValue;
 
         foreach (var interactable in nearbyInteractables)
@@ -63,7 +68,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    void RegisterInteractable(IInteractable interactable)
+    void RegisterInteractable(IHighlight interactable)
     {
         if (!nearbyInteractables.Contains(interactable))
             nearbyInteractables.Add(interactable);
@@ -71,12 +76,12 @@ public class PlayerInteraction : MonoBehaviour
         UpdateCurrentInteractable();
     }
 
-    void UnregisterInteractable(IInteractable interactable)
+    void UnregisterInteractable(IHighlight interactable)
     {
         nearbyInteractables.Remove(interactable);
 
         UpdateCurrentInteractable();
     }
 
-    public IInteractable GetCurrentInteractable() { return currentInteractable; }
+    public IHighlight GetCurrentInteractable() { return currentInteractable; }
 }

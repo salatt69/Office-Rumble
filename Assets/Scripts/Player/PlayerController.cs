@@ -30,18 +30,23 @@ public class PlayerController : MonoBehaviour
 
     private float knockbackTimer = 0f;
     private bool isKnockedBack => knockbackTimer > 0f;
+    private float pickupCooldownExitTime = 0f;
+
+    public bool canPickup;
 
     Vector2 moveInput;
 
-    PlayerInteraction playerInteraction;
+    HighlightItemsForPlayer playerInteraction;
     Inventory inventory;
+
+    public bool isLeftFacing;
 
     void Awake()
     {
         // parent has to have 'Hand' child for this to work
         hand = GameObject.Find("Hand");
 
-        playerInteraction = GetComponent<PlayerInteraction>();
+        playerInteraction = GetComponent<HighlightItemsForPlayer>();
         inventory = GetComponent<Inventory>();
 
         pixelPerfectCamera = Camera.main.GetComponent<PixelPerfectCamera>();
@@ -89,6 +94,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        canPickup = Time.time >= pickupCooldownExitTime;
+
         Vector2 move = moveInput * MoveSpeed * Time.fixedDeltaTime;
 
         rb.AddForce(move * MoveSpeed * Time.fixedDeltaTime);
@@ -121,6 +128,7 @@ public class PlayerController : MonoBehaviour
 
         bool isLeft = mouseWorld.x < transform.position.x;
         playerSprite.flipX = isLeft;
+        isLeftFacing = isLeft;
 
         var holder = hand.GetComponentInChildren<ItemHolder>();
         holder.FlipY(isLeft);
@@ -138,15 +146,11 @@ public class PlayerController : MonoBehaviour
         knockbackTimer = duration;
     }
 
-    void TryInteract()
+    public void AddItemPickupCooldown(float cooldownTime = 2f)
     {
-        if (playerInteraction.GetCurrentInteractable() != null)
+        if (canPickup)
         {
-            playerInteraction.GetCurrentInteractable().Interact(this);
-        }
-        else
-        {
-            Debug.LogWarning("Nothing to interact with.");
+            pickupCooldownExitTime = Time.time + cooldownTime;
         }
     }
 
@@ -169,6 +173,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public Vector3 GetItemDropPosition()
+    {
+        return transform.position + (isLeftFacing ? Vector3.left : Vector3.right) * 0.5f;
+    }
+
     #region Inputs
 
     void BindInputActions()
@@ -176,7 +185,7 @@ public class PlayerController : MonoBehaviour
         var move = controls.FindActionMap("Player", true);
         move.FindAction("Move").performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         move.FindAction("Move").canceled += ctx => moveInput = Vector2.zero;
-        move.FindAction("Interact").performed += _ => TryInteract();
+        //move.FindAction("Interact").performed += _ => TryInteract();
         move.FindAction("Attack").performed += _ => TryFire();
         move.FindAction("Alternative").performed += _ => isScoped = true;
         move.FindAction("Alternative").canceled += _ => isScoped = false;
@@ -185,7 +194,7 @@ public class PlayerController : MonoBehaviour
         inv.FindAction("Slot1").performed += _ => inventory.SelectSlot(0);
         inv.FindAction("Slot2").performed += _ => inventory.SelectSlot(1);
         inv.FindAction("Slot3").performed += _ => inventory.SelectSlot(2);
-        inv.FindAction("Drop Item").performed += _ => inventory.Drop(transform.position);
+        inv.FindAction("Drop Item").performed += _ => inventory.Drop(GetItemDropPosition());
         inv.FindAction("Select Next").performed += ctx =>
         {
             Vector2 s = ctx.ReadValue<Vector2>();
