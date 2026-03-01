@@ -102,7 +102,7 @@ public class LevelGeneration : MonoBehaviour
         {
             bool merchantPlaced = TryPlaceRoom(
                 map, placedRooms, Rooms.Merchant, 200, out Vector2Int merchantRoomPosition,
-                neighbors => 
+                neighbors =>
                 {
                     return !neighbors.Contains(Rooms.Exit)
                         && !neighbors.Contains(Rooms.Hidden)
@@ -128,7 +128,7 @@ public class LevelGeneration : MonoBehaviour
 
             bool hiddenPlaced = TryPlaceRoom(
                 map, placedRooms, Rooms.Hidden, 200, out Vector2Int hiddenRoomPosition,
-                neighbors => 
+                neighbors =>
                 {
                     return !neighbors.Contains(Rooms.Hidden)
                         && !neighbors.Contains(Rooms.Start)

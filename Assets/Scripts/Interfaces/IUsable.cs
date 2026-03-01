@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IUsable
 {
-    void Use(GameObject target = null);
+    void Use(GameObject owner);
 }

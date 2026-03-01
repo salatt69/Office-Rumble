@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
 
 public class InventoryUI : MonoBehaviour
 {

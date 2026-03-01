@@ -1,8 +1,5 @@
-﻿namespace Assets.Scripts.Interfaces
+﻿public interface IHighlight
 {
-    public interface IHighlight
-    {
-        string GetInteractionText();
-        void SetHighlight(bool state);
-    }
+    string GetInteractionText();
+    void SetHighlight(bool state);
 }

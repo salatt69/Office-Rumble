@@ -18,6 +18,8 @@ MonoBehaviour:
   highlightedUnequipped: {fileID: 422744106880848825, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   equipped: {fileID: 1176767005, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   icon: {fileID: 538158944, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
-  damage: 2
-  fireRate: 25
-  fireSound: {fileID: 0}
+  projectilePrefab: {fileID: 3307094065993342272, guid: 3b141eba91b276f4185f1c8f9515b70e, type: 3}
+  projectileSpeed: 4.5
+  projectileLifetime: 3
+  baseDamage: 1
+  knockbackMultiplier: 1

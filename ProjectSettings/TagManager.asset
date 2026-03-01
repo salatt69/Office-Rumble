@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Interaction
+  - Enemy
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Player HitBox
-  - 
-  - 
+  - Enemy
+  - Walls
   - 
   - 
   - 
@@ -47,6 +49,9 @@ TagManager:
     locked: 0
   - name: Floor Layer
     uniqueID: 3820067969
+    locked: 0
+  - name: Shadow
+    uniqueID: 50136071
     locked: 0
   - name: Wall
     uniqueID: 1041705329

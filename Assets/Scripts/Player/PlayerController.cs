@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -25,6 +24,8 @@ public class PlayerController : MonoBehaviour
     Vector3 localHandPos;
     float localHandPosX, localHandPosXInverted;
 
+    private bool attackHeld;
+
     bool isScoped = false;
     PixelPerfectCamera pixelPerfectCamera;
 
@@ -36,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInput;
 
-    HighlightItemsForPlayer playerInteraction;
     Inventory inventory;
 
     public bool isLeftFacing;
@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour
         // parent has to have 'Hand' child for this to work
         hand = GameObject.Find("Hand");
 
-        playerInteraction = GetComponent<HighlightItemsForPlayer>();
         inventory = GetComponent<Inventory>();
 
         pixelPerfectCamera = Camera.main.GetComponent<PixelPerfectCamera>();
@@ -57,7 +56,7 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         if (controls != null)
-           EnableInputActions(true);
+            EnableInputActions(true);
     }
 
     void OnDisable()
@@ -78,10 +77,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Set conditional values for animations
         animator.SetFloat("Horizontal", moveInput.x);
         animator.SetFloat("Vertical", moveInput.y);
         animator.SetFloat("Speed", moveInput.sqrMagnitude);
+
+        if (attackHeld)
+            TryFire();
     }
 
     void FixedUpdate()
@@ -181,12 +182,14 @@ public class PlayerController : MonoBehaviour
     #region Inputs
 
     void BindInputActions()
-    { 
+    {
         var move = controls.FindActionMap("Player", true);
         move.FindAction("Move").performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         move.FindAction("Move").canceled += ctx => moveInput = Vector2.zero;
-        //move.FindAction("Interact").performed += _ => TryInteract();
-        move.FindAction("Attack").performed += _ => TryFire();
+
+        move.FindAction("Attack").performed += _ => attackHeld = true;
+        move.FindAction("Attack").canceled += _ => attackHeld = false;
+
         move.FindAction("Alternative").performed += _ => isScoped = true;
         move.FindAction("Alternative").canceled += _ => isScoped = false;
 
@@ -199,10 +202,8 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 s = ctx.ReadValue<Vector2>();
             float v = s.y;
-            if (v < 0)
-                inventory.SelectNext();
-            if (v > 0)
-                inventory.SelectPrevious();
+            if (v < 0) inventory.SelectNext();
+            if (v > 0) inventory.SelectPrevious();
         };
     }
 

@@ -9,7 +9,7 @@ public static class EffectSystem
             // rb.linearVelocity = Vector2.zero;
             rb.AddForce(direction * force, ForceMode2D.Impulse);
         }
-    }   
+    }
 
     public static void FreezeFrame(float duration)
     {

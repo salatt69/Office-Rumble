@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 7924051455067210895}
   - component: {fileID: 4831544126756904819}
   - component: {fileID: 5457466803577255094}
-  - component: {fileID: 9064083003697768113}
   - component: {fileID: 7672125853995414422}
+  - component: {fileID: 532561940002273459}
   m_Layer: 0
   m_Name: Energy Drink
   m_TagString: Untagged
@@ -162,19 +162,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &9064083003697768113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3479667308067201379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a000b99192c0334297d27a72cd44535, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  firePoint: {fileID: 8623366560730866108}
 --- !u!114 &7672125853995414422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +176,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemHighlight
   data: {fileID: 11400000, guid: 7d27526f43e21304a96a84a5d1f4caea, type: 2}
   spriteRenderer: {fileID: 4831544126756904819}
+--- !u!114 &532561940002273459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3479667308067201379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb67804049e8074887657b91fa42c47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  firePoint: {fileID: 8623366560730866108}
+  maxChargeTime: 2.1
+  minProjectiles: 1
+  maxProjectiles: 12
+  arcDegrees: 90
+  releaseGrace: 0.08
+  centerBias: 0.197
+  spawnJitterRadius: 0.17
+  speedMultiplierRange: {x: 0.7, y: 1.15}
+  scaleRange: {x: 0.8, y: 1.35}
+  LifetimeMultiplierRange: {x: 0.75, y: 1.15}
 --- !u!1 &7724412063332066681
 GameObject:
   m_ObjectHideFlags: 0

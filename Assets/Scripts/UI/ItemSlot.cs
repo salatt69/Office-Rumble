@@ -19,7 +19,7 @@ public class ItemSlot : MonoBehaviour
         else
         {
             itemName.enabled = false;
-            
+
             itemIcon.sprite = emptySlot;
             itemName.text = null;
         }

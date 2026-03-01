@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Health : MonoBehaviour, IDamageable
 {
@@ -10,143 +8,155 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] float maxHealth = 100f;
 
     [Header("I-Frames Settings")]
+    [SerializeField] bool haveIFrames = true;
     [SerializeField] float invulnerabilityTime = 0.5f;
     [SerializeField] float flickerInterval = 0.1f;
-    [Tooltip("If true, use alpha flicker (recommended). If false, will toggle SpriteRenderer.enabled.")]
     [SerializeField] bool useAlphaFlicker = true;
 
     [Header("References")]
-    [Tooltip("Assign the root player object manually if not found automatically.")]
-    [SerializeField] GameObject playerRoot;
+    [SerializeField] GameObject objectRoot;
+
+    private DamageFlash damageFlash;
 
     float currentHealth;
+    bool isInvulnerable = false;
+
     public bool IsAlive => currentHealth > 0;
     public System.Action<float, float> OnHealthChanged;
     public System.Action OnDied;
 
-    private bool isInvulnerable = false;
-    private bool debugLoggedThisFlicker = false;
+    Coroutine iFrameRoutine;
 
     void Awake()
     {
         currentHealth = maxHealth;
 
-        if (playerRoot == null)
-            playerRoot = transform.root?.gameObject ?? gameObject;
+        if (objectRoot == null)
+            objectRoot = transform.root?.gameObject ?? gameObject;
+
+        damageFlash = objectRoot.GetComponent<DamageFlash>()
+                  ?? objectRoot.GetComponentInChildren<DamageFlash>(true);
     }
 
     public void TakeDamage(DamageData damageData)
     {
         if (!IsAlive || isInvulnerable) return;
 
+        // Flash
+        damageFlash?.Flash();
 
+        // Knockback direction (away from source)
+        if (damageData.source != null)
+            damageData.direction = objectRoot.transform.position - damageData.source.transform.position;
 
-        EffectSystem.FreezeFrame(0.25f);
+        EffectSystem.Knockback(objectRoot, damageData.NormalizedDirection, damageData.knockbackForce);
 
-        damageData.direction = playerRoot.transform.position - damageData.source.transform.position;
-
-        EffectSystem.Knockback(playerRoot, damageData.NormalizedDirection, damageData.knockbackForce);
-        
-        if (playerRoot.TryGetComponent(out PlayerController controller))
+        if (objectRoot.TryGetComponent(out PlayerController controller))
             controller.ApplyKnockbackLock(0.2f);
 
         currentHealth = Mathf.Max(0, currentHealth - damageData.amount);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-        Debug.Log($"{name} took {damageData.amount} damage from "
-            + $"{damageData.source?.name ?? "Unknown"}");
-
-        if (currentHealth <= 0)
+        if (currentHealth <= 0f)
+        {
             Die();
-        else
-            StartCoroutine(InvulnerabilityCoroutine());
+            return;
+        }
+
+        if (haveIFrames)
+        {
+            // Restart i-frames cleanly if hit again
+            if (iFrameRoutine != null)
+                StopCoroutine(iFrameRoutine);
+
+            iFrameRoutine = StartCoroutine(InvulnerabilityCoroutine());
+        }
     }
+
     IEnumerator InvulnerabilityCoroutine()
     {
         isInvulnerable = true;
-        debugLoggedThisFlicker = false;
 
         float elapsed = 0f;
-        bool visiblePhase = true;
-        bool firstFrame = true;
 
-        // Cache original colors so we can restore them exactly afterwards
-        var originalColors = new Dictionary<SpriteRenderer, Color>();
+        // Cache original alpha only (never touch RGB)
+        var originalAlpha = new Dictionary<SpriteRenderer, float>();
+
+        SpriteRenderer[] renderers = objectRoot.GetComponentsInChildren<SpriteRenderer>(true);
+
+        foreach (var r in renderers)
+        {
+            if (r == null) continue;
+            originalAlpha[r] = r.color.a;
+
+            // 🔥 Ensure FULL opacity at start
+            if (useAlphaFlicker)
+            {
+                Color c = r.color;
+                c.a = originalAlpha[r];
+                r.color = c;
+            }
+            else
+            {
+                r.enabled = true;
+            }
+        }
+
+        yield return new WaitForSecondsRealtime(flickerInterval);
+        elapsed += flickerInterval;
+
+        bool visiblePhase = false;
 
         while (elapsed < invulnerabilityTime)
         {
             visiblePhase = !visiblePhase;
 
-            // Re-query renderers every tick to include newly attached items (we intentionally include inactive)
-            SpriteRenderer[] renderers = playerRoot.GetComponentsInChildren<SpriteRenderer>(true);
-
-            if (!debugLoggedThisFlicker)
-            {
-                Debug.Log($"[Health] Flicker started for '{playerRoot.name}'. Found {renderers.Length} SpriteRenderers.");
-                debugLoggedThisFlicker = true;
-            }
+            renderers = objectRoot.GetComponentsInChildren<SpriteRenderer>(true);
 
             foreach (var r in renderers)
             {
                 if (r == null) continue;
 
-                // store original color once
-                if (!originalColors.ContainsKey(r))
-                    originalColors[r] = r.color;
+                if (!originalAlpha.ContainsKey(r))
+                    originalAlpha[r] = r.color.a;
 
                 if (useAlphaFlicker)
                 {
-                    // safe alpha flicker: set alpha to either 1 or 0.25
                     Color c = r.color;
-                    if (firstFrame)
-                    {
-                        c.g = .85f;
-                        c.b = .85f;
-                    }
-                    else
-                    {
-                        float targetAlpha = visiblePhase ? originalColors[r].a : originalColors[r].a * 0.25f;
-                        c.g = originalColors[r].g;
-                        c.b = originalColors[r].b;
-                        c.a = targetAlpha;
-                    }
+                    float a0 = originalAlpha[r];
+                    c.a = visiblePhase ? a0 : a0 * 0.25f;
                     r.color = c;
                 }
                 else
                 {
-                    // fallback: toggle enabled (less smooth, but works)
                     r.enabled = visiblePhase;
                 }
             }
-            firstFrame = false;
 
             elapsed += flickerInterval;
-            yield return new WaitForSeconds(flickerInterval);
+            yield return new WaitForSecondsRealtime(flickerInterval);
         }
 
-        // restore everything to original color / enabled state
-        SpriteRenderer[] finalRenderers = playerRoot.GetComponentsInChildren<SpriteRenderer>(true);
-        foreach (var r in finalRenderers)
+        // Restore alpha / enabled
+        renderers = objectRoot.GetComponentsInChildren<SpriteRenderer>(true);
+
+        foreach (var r in renderers)
         {
             if (r == null) continue;
-            if (originalColors.TryGetValue(r, out var orig))
+
+            if (useAlphaFlicker)
             {
-                r.color = orig;
+                Color c = r.color;
+                c.a = originalAlpha.TryGetValue(r, out float a0) ? a0 : 1f;
+                r.color = c;
             }
             else
             {
-                // If renderer appeared after we started flicker, ensure it's fully visible
-                Color c = r.color;
-                c.a = 1f;
-                r.color = c;
-            }
-
-            if (!useAlphaFlicker)
                 r.enabled = true;
+            }
         }
 
         isInvulnerable = false;
-        yield break;
     }
 
     public void Heal(float amount)
@@ -155,20 +165,11 @@ public class Health : MonoBehaviour, IDamageable
 
         currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
-
-        Debug.Log($"Healed for {amount}!");
     }
 
-    private void StartInvisibility()
-    {
-
-    }
-
-    private void Die()
+    void Die()
     {
         OnDied?.Invoke();
         Debug.Log($"{name} died!");
-
-        // TODO: Animations, disable components, blah blah blah
     }
 }

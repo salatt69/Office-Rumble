@@ -10,4 +10,9 @@ public class Consumable : Item, IUsable
 
         hp.Heal(CD.healAmount);
     }
+
+    public void StopUsing(GameObject owner)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -1,48 +1,27 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Weapon : Item, IUsable
 {
-    [Header("References")]
     [SerializeField] protected Transform firePoint;
-
     public WeaponData WD => (WeaponData)Data;
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
 
     public override void Initialize(ItemData newData)
     {
         base.Initialize(newData);
-
         if (firePoint == null)
             firePoint = transform.Find("FirePoint");
     }
 
-    public override void OnEquip()
+    public virtual void Use(GameObject owner)
     {
-        base.OnEquip();
-
-        Debug.Log($"Weapon [{WD.itemName}] ready for battle!");
     }
 
-    public override void OnUnequip()
+    protected Vector2 GetMouseDir(Vector3 fromWorldPos)
     {
-        base.OnUnequip();
-
-        Debug.Log($"Weapon [{WD.itemName}] being unequipped...");
-    }
-
-    public void Use(GameObject target)
-    {
-        if (firePoint == null)
-        {
-            Debug.LogWarning($"{name} has no FirePoint assigned!");
-            return;
-        }
-
-        Debug.DrawRay(firePoint.position, firePoint.right, Color.red, 1f);
-        Debug.Log($"{WD.itemName} fired, and dealt WHOPPING {WD.damage} DAMAGE to ABSOLUTELY nothing!");
+        Vector2 mouseScreen = Mouse.current.position.ReadValue();
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
+        mouseWorld.z = 0f;
+        return ((Vector2)(mouseWorld - fromWorldPos)).normalized;
     }
 }

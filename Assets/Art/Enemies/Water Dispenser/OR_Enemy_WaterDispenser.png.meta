@@ -113,6 +113,116 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04f74a7de67eccc46b8e0af174da1407
+      internalID: 213089753022995999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dc77bf5d343e2b40ba0c09c0408ddd2
+      internalID: -3250282094144698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72174fb2c88f134469804263ea425561
+      internalID: 5351385905900887015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaecb9e1c71ff4c48b023707ce0767f3
+      internalID: 1882578993111419750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fa112e9f00889143ae3984379f16b51
+      internalID: -674860602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_5
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 128
         width: 32
         height: 32
@@ -124,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f9c6780cc5e5ad4e8002ba2efdcea61
-      internalID: 213089753022995999
+      spriteID: 157fe5e061e7a5c459040912c9adf497
+      internalID: -758816473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OR_Enemy_WaterDispenser_1
+      name: OR_Enemy_WaterDispenser_6
       rect:
         serializedVersion: 2
         x: 32
@@ -146,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6c3e3760de2c204fbf949f1ad2726c7
-      internalID: -3250282094144698
+      spriteID: 106cf41c7aa7de94fabd9ddda6f59ed5
+      internalID: 152766345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OR_Enemy_WaterDispenser_2
+      name: OR_Enemy_WaterDispenser_7
       rect:
         serializedVersion: 2
         x: 64
@@ -168,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94a0976778ed1e240a564af6e9e53e89
-      internalID: 5351385905900887015
+      spriteID: 980eb6472626b13438809b5cc21a0fda
+      internalID: -1675314702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OR_Enemy_WaterDispenser_3
+      name: OR_Enemy_WaterDispenser_8
       rect:
         serializedVersion: 2
         x: 96
@@ -190,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3ad0b14405f7dd4793a93aab415b8bf
-      internalID: 1882578993111419750
+      spriteID: 48809e5ea8717e043973fabeee8b875e
+      internalID: 1113778000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OR_Enemy_WaterDispenser_4
+      name: OR_Enemy_WaterDispenser_9
       rect:
         serializedVersion: 2
         x: 128
@@ -212,14 +322,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a46da1cc579ad34eaead011ea6de0a4
-      internalID: -674860602
+      spriteID: 73154a662cb7f6444a78abe5898db7df
+      internalID: 360752490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OR_Enemy_WaterDispenser_5
+      name: OR_Enemy_WaterDispenser_10
       rect:
         serializedVersion: 2
         x: 0
@@ -234,8 +344,426 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3761f97dc4658d44abd64c9068f0e910
-      internalID: -758816473
+      spriteID: 7c4093ee17fc6cb4d8adc56acfc5bf13
+      internalID: -2145086645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9869faae6601b943bad4fc4e11365ae
+      internalID: 95130598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcd1aede11f531d4aabebc6fedb96acf
+      internalID: 2117805638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4091d61a6f1ff864a89fcd02894984d7
+      internalID: -1829105679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3de594c77e7b7742afb14e6e94edc2f
+      internalID: 1896509613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6b9bf4d3ea09c845b0eaff8881839fb
+      internalID: -1063500512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_16
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 263fc9a52a582c348bb1ece98114d708
+      internalID: 1863144935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2713cb88a8d7394439b8a97d3448db2f
+      internalID: 374813617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_18
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8fe9caea8c24e544bd4bfd27e547ae7
+      internalID: 480732623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_19
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9ac2e93f962dc94580a04bf6a0ec65a
+      internalID: -1414429892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce4efefb01a3d64082532b21ec1884c
+      internalID: -258587228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f164187c92fb4494c9486745a05b1efa
+      internalID: 1100024964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d001dec3f4a04f44c8601a09039fbf09
+      internalID: 138260302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 312535230c557f14599d40711d60d1ef
+      internalID: 525197252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e03ae506ad93994b88fa456cc17bf96
+      internalID: -1873855391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3caf3c8448ab292479bb2a46e574c53f
+      internalID: 171266830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_26
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5256f44a3f1ced640baa726efe70133d
+      internalID: -645511427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_27
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fc15af0dd7d1184a8d07c25460006b1
+      internalID: 1474421646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_28
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e6af1ca1d3195340878d7f436d94a62
+      internalID: -1432083035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_Enemy_WaterDispenser_29
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e28bbab763437a54ea10fb565734e62c
+      internalID: -207220349
       vertices: []
       indices: 
       edges: []
@@ -260,10 +788,34 @@ TextureImporter:
     nameFileIdTable:
       OR_Enemy_WaterDispenser_0: 213089753022995999
       OR_Enemy_WaterDispenser_1: -3250282094144698
+      OR_Enemy_WaterDispenser_10: -2145086645
+      OR_Enemy_WaterDispenser_11: 95130598
+      OR_Enemy_WaterDispenser_12: 2117805638
+      OR_Enemy_WaterDispenser_13: -1829105679
+      OR_Enemy_WaterDispenser_14: 1896509613
+      OR_Enemy_WaterDispenser_15: -1063500512
+      OR_Enemy_WaterDispenser_16: 1863144935
+      OR_Enemy_WaterDispenser_17: 374813617
+      OR_Enemy_WaterDispenser_18: 480732623
+      OR_Enemy_WaterDispenser_19: -1414429892
       OR_Enemy_WaterDispenser_2: 5351385905900887015
+      OR_Enemy_WaterDispenser_20: -258587228
+      OR_Enemy_WaterDispenser_21: 1100024964
+      OR_Enemy_WaterDispenser_22: 138260302
+      OR_Enemy_WaterDispenser_23: 525197252
+      OR_Enemy_WaterDispenser_24: -1873855391
+      OR_Enemy_WaterDispenser_25: 171266830
+      OR_Enemy_WaterDispenser_26: -645511427
+      OR_Enemy_WaterDispenser_27: 1474421646
+      OR_Enemy_WaterDispenser_28: -1432083035
+      OR_Enemy_WaterDispenser_29: -207220349
       OR_Enemy_WaterDispenser_3: 1882578993111419750
       OR_Enemy_WaterDispenser_4: -674860602
       OR_Enemy_WaterDispenser_5: -758816473
+      OR_Enemy_WaterDispenser_6: 152766345
+      OR_Enemy_WaterDispenser_7: -1675314702
+      OR_Enemy_WaterDispenser_8: 1113778000
+      OR_Enemy_WaterDispenser_9: 360752490
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

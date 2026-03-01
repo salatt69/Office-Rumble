@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
                 if (i == SelectedIndex)
                     EquipSelected();
 
-                SelectSlot(i);
+                //SelectSlot(i);
 
                 OnSlotChanged?.Invoke(i, slots[i]);
                 return true;
@@ -109,15 +109,15 @@ public class Inventory : MonoBehaviour
 
     public void SelectNext()
     {
-        int nextSlot = SelectedIndex + 1; 
+        int nextSlot = SelectedIndex + 1;
         int final = nextSlot > 2 ? 0 : nextSlot;
 
         SelectSlot(final);
     }
-    
+
     public void SelectPrevious()
     {
-        int nextSlot = SelectedIndex - 1; 
+        int nextSlot = SelectedIndex - 1;
         int final = nextSlot < 0 ? 2 : nextSlot;
 
         SelectSlot(final);
