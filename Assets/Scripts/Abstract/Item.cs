@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public abstract class Item : MonoBehaviour
 {
     protected ItemData data;
@@ -11,7 +10,11 @@ public abstract class Item : MonoBehaviour
 
     protected virtual void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogWarning($"{name}: No SpriteRenderer found in children.");
+        }
     }
 
     public virtual void Initialize(ItemData newData)

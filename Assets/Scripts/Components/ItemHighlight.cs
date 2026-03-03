@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class ItemHighlight : MonoBehaviour, IHighlight
 {
     [SerializeField] ItemData data;
@@ -13,6 +12,11 @@ public class ItemHighlight : MonoBehaviour, IHighlight
 
     public void SetHighlight(bool state)
     {
+        if (spriteRenderer == null)
+        {
+            Debug.LogWarning("ItemHighlight: No SpriteRenderer assigned.", this);
+            return;
+        }
         spriteRenderer.sprite = state ? data.highlightedUnequipped : data.unequipped;
     }
 }

@@ -2,30 +2,25 @@ using UnityEngine;
 
 public class StaplerWeapon : Weapon
 {
-    [Header("Configuration")]
-    [SerializeField] float shotInterval = 0.3f;
-
     float nextShotTime;
 
     public override void Use(GameObject owner)
     {
-        if (Time.time < nextShotTime)
-            return;
+        if (!owner || !WD || !WD.projectilePrefab) return;
 
-        Fire(owner);
-        nextShotTime = Time.time + shotInterval;
-    }
+        if (Time.time < nextShotTime) return;
 
-    void Fire(GameObject owner)
-    {
-        Debug.Log($"Stapler fired by {owner.name}! {Random.Range(10000, 1000000)}");
+        Vector2 dir = GetMouseDir(owner.transform.position);
 
-        if (owner == null) return;
-        if (firePoint == null || WD.projectilePrefab == null) return;
+        DamageData dmg = BuildProjectileDamage(owner, dir);
 
-        Vector2 dir = GetMouseDir(firePoint.position);
+        Projectile proj = Instantiate(WD.projectilePrefab, firePoint.position, Quaternion.identity);
 
-        var proj = Instantiate(WD.projectilePrefab, firePoint.position, Quaternion.identity);
-        proj.Init(owner, dir);
+        float? spd = WD.projectileSpeedOverride > 0f ? WD.projectileSpeedOverride : (float?)null;
+        float? life = WD.projectileLifetimeOverride > 0f ? WD.projectileLifetimeOverride : (float?)null;
+
+        proj.Init(owner, dir, dmg, spd, life);
+
+        nextShotTime = Time.time + GetShotInterval(owner);
     }
 }

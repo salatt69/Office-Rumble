@@ -43,8 +43,6 @@ public class Inventory : MonoBehaviour
         {
             if (slots[i] == null)
             {
-                Debug.Log($"{data.itemName} added to slot: {i}");
-
                 slots[i] = data;
 
                 if (i == SelectedIndex)
@@ -69,8 +67,6 @@ public class Inventory : MonoBehaviour
         OnSlotChanged?.Invoke(SelectedIndex, slots[SelectedIndex]);
 
         EquipSelected();
-
-        Debug.Log($"Replaced slot: {SelectedIndex}");
 
         return old;
     }
@@ -103,8 +99,6 @@ public class Inventory : MonoBehaviour
         selectedIndex = slotIndex;
         OnSelectedSlotChanged?.Invoke(selectedIndex);
         EquipSelected();
-
-        Debug.Log($"Selected slot: {selectedIndex}");
     }
 
     public void SelectNext()

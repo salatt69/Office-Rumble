@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EntityBody))]
 public class Health : MonoBehaviour, IDamageable
 {
-    [Header("Health Settings")]
-    [SerializeField] float maxHealth = 100f;
+    [Header("Health")]
+    [SerializeField] bool setFullHealthOnAwake = true;
+    [SerializeField] bool keepHealthRatioOnMaxHealthChange = true;
+
+    [Header("Colliders")]
+    [SerializeField] HurtboxGroup hurtboxGroup;
 
     [Header("I-Frames Settings")]
     [SerializeField] bool haveIFrames = true;
@@ -13,29 +18,82 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] float flickerInterval = 0.1f;
     [SerializeField] bool useAlphaFlicker = true;
 
-    [Header("References")]
-    [SerializeField] GameObject objectRoot;
-
-    private DamageFlash damageFlash;
+    GameObject objectRoot;
+    DamageFlash damageFlash;
+    EntityBody body;
 
     float currentHealth;
-    bool isInvulnerable = false;
-
-    public bool IsAlive => currentHealth > 0;
-    public System.Action<float, float> OnHealthChanged;
-    public System.Action OnDied;
+    bool isInvulnerable;
 
     Coroutine iFrameRoutine;
 
+    public bool IsAlive => currentHealth > 0f;
+
+    public System.Action<float, float> OnHealthChanged; // (current, max)
+    public System.Action OnDied;
+
+    float LastMaxHealth { get; set; }
+
     void Awake()
     {
-        currentHealth = maxHealth;
+        body = GetComponent<EntityBody>();
 
-        if (objectRoot == null)
-            objectRoot = transform.root?.gameObject ?? gameObject;
+        objectRoot = transform.root?.gameObject ?? gameObject;
+        damageFlash = objectRoot.GetComponent<DamageFlash>();
 
-        damageFlash = objectRoot.GetComponent<DamageFlash>()
-                  ?? objectRoot.GetComponentInChildren<DamageFlash>(true);
+        float max = GetMaxHealth();
+
+        if (setFullHealthOnAwake)
+            currentHealth = max;
+        else
+            currentHealth = Mathf.Clamp(currentHealth, 0f, max);
+
+        LastMaxHealth = max;
+        OnHealthChanged?.Invoke(currentHealth, max);
+    }
+
+    void Update()
+    {
+        if (!IsAlive || body == null) return;
+
+        // Regen
+        float regen = body.HealthRegen;
+        if (regen != 0f)
+        {
+            float max = GetMaxHealth();
+            currentHealth = Mathf.Min(max, currentHealth + regen * Time.deltaTime);
+        }
+
+        // If max health changes due to upgrades/buffs, decide how to adjust current health
+        float newMax = GetMaxHealth();
+        if (!Mathf.Approximately(newMax, LastMaxHealth))
+        {
+            if (keepHealthRatioOnMaxHealthChange && LastMaxHealth > 0.0001f)
+            {
+                float ratio = currentHealth / LastMaxHealth;
+                currentHealth = Mathf.Clamp(ratio * newMax, 0f, newMax);
+            }
+            else
+            {
+                currentHealth = Mathf.Clamp(currentHealth, 0f, newMax);
+            }
+
+            LastMaxHealth = newMax;
+            OnHealthChanged?.Invoke(currentHealth, newMax);
+        }
+    }
+
+    float GetMaxHealth()
+    {
+        // EntityBody is the source of truth
+        return body ? Mathf.Max(1f, body.MaxHealth) : 1f;
+    }
+
+    public bool IsHurtbox(Collider2D col)
+    {
+        if (hurtboxGroup == null || col == null) return false;
+
+        return hurtboxGroup.CompareColliderToHurtbox(col);
     }
 
     public void TakeDamage(DamageData damageData)
@@ -47,15 +105,17 @@ public class Health : MonoBehaviour, IDamageable
 
         // Knockback direction (away from source)
         if (damageData.source != null)
-            damageData.direction = objectRoot.transform.position - damageData.source.transform.position;
+            damageData.direction = (Vector2)(objectRoot.transform.position - damageData.source.transform.position);
 
         EffectSystem.Knockback(objectRoot, damageData.NormalizedDirection, damageData.knockbackForce);
 
+        // Optional: player-only knockback lock
         if (objectRoot.TryGetComponent(out PlayerController controller))
             controller.ApplyKnockbackLock(0.2f);
 
-        currentHealth = Mathf.Max(0, currentHealth - damageData.amount);
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        float max = GetMaxHealth();
+        currentHealth = Mathf.Max(0f, currentHealth - damageData.amount);
+        OnHealthChanged?.Invoke(currentHealth, max);
 
         if (currentHealth <= 0f)
         {
@@ -65,7 +125,6 @@ public class Health : MonoBehaviour, IDamageable
 
         if (haveIFrames)
         {
-            // Restart i-frames cleanly if hit again
             if (iFrameRoutine != null)
                 StopCoroutine(iFrameRoutine);
 
@@ -81,7 +140,6 @@ public class Health : MonoBehaviour, IDamageable
 
         // Cache original alpha only (never touch RGB)
         var originalAlpha = new Dictionary<SpriteRenderer, float>();
-
         SpriteRenderer[] renderers = objectRoot.GetComponentsInChildren<SpriteRenderer>(true);
 
         foreach (var r in renderers)
@@ -89,7 +147,7 @@ public class Health : MonoBehaviour, IDamageable
             if (r == null) continue;
             originalAlpha[r] = r.color.a;
 
-            // 🔥 Ensure FULL opacity at start
+            // Ensure FULL opacity at start
             if (useAlphaFlicker)
             {
                 Color c = r.color;
@@ -163,8 +221,16 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (!IsAlive) return;
 
-        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        float max = GetMaxHealth();
+        currentHealth = Mathf.Min(max, currentHealth + amount);
+        OnHealthChanged?.Invoke(currentHealth, max);
+    }
+
+    public void SetHealth(float newHealth)
+    {
+        float max = GetMaxHealth();
+        currentHealth = Mathf.Clamp(newHealth, 0f, max);
+        OnHealthChanged?.Invoke(currentHealth, max);
     }
 
     void Die()

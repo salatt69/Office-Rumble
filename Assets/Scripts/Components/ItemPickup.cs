@@ -6,7 +6,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     public void TryInteract(PlayerController player)
     {
-        if (player.canPickup)
+        if (player.CanPickup)
         {
             var inventory = player.GetComponent<Inventory>();
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1538920619850770153
+--- !u!1 &1250610857128934282
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 895970794844763170}
-  - component: {fileID: 1444913409662790801}
-  - component: {fileID: 7042534998523677439}
-  - component: {fileID: 2522421104724678675}
-  - component: {fileID: 3221693850018232853}
+  - component: {fileID: 5136664646145253405}
+  - component: {fileID: 4118366389215968266}
   m_Layer: 0
-  m_Name: Stapler
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &895970794844763170
+--- !u!4 &5136664646145253405
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538920619850770153}
+  m_GameObject: {fileID: 1250610857128934282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7956112187232641809}
-  - {fileID: 7794686360432745150}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 895970794844763170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1444913409662790801
+--- !u!212 &4118366389215968266
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538920619850770153}
+  m_GameObject: {fileID: 1250610857128934282}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -95,6 +90,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1538920619850770153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895970794844763170}
+  - component: {fileID: 7042534998523677439}
+  - component: {fileID: 2522421104724678675}
+  - component: {fileID: 3221693850018232853}
+  m_Layer: 0
+  m_Name: Stapler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &895970794844763170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538920619850770153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5136664646145253405}
+  - {fileID: 7956112187232641809}
+  - {fileID: 7794686360432745150}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &7042534998523677439
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -130,7 +162,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.75
 --- !u!114 &2522421104724678675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemHighlight
   data: {fileID: 11400000, guid: 41b3089e67ebe8b4ea47ea282ce729bf, type: 2}
-  spriteRenderer: {fileID: 1444913409662790801}
+  spriteRenderer: {fileID: 4118366389215968266}
 --- !u!114 &3221693850018232853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaplerWeapon
   firePoint: {fileID: 7956112187232641809}
-  shotInterval: 0.2
 --- !u!1 &4954714290428215971
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,14 +3,12 @@
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(EnemySensor))]
 [RequireComponent(typeof(EnemyShooter))]
-[RequireComponent(typeof(FaceTarget))]
-[RequireComponent(typeof(Collider2D))]
 public class TurretBrain : MonoBehaviour
 {
     EnemySensor sensor;
     EnemyShooter shooter;
     FaceTarget faceTarget;
-    Collider2D col;
+    HurtboxGroup hurtboxGroup;
     public Animator animator;
 
     bool isTargetInRange;
@@ -21,8 +19,8 @@ public class TurretBrain : MonoBehaviour
     {
         sensor = GetComponent<EnemySensor>();
         shooter = GetComponent<EnemyShooter>();
-        faceTarget = GetComponent<FaceTarget>();
-        col = GetComponent<Collider2D>();
+        faceTarget = GetComponentInChildren<FaceTarget>();
+        hurtboxGroup = GetComponentInChildren<HurtboxGroup>();
 
         GetComponent<Health>().OnDied += OnDeath;
     }
@@ -47,10 +45,13 @@ public class TurretBrain : MonoBehaviour
 
         shooter.enabled = false;
 
-        faceTarget.ResetSpriteFlip();
-        faceTarget.enabled = false;
+        if (faceTarget != null)
+        {
+            faceTarget.ResetSpriteFlip();
+            faceTarget.enabled = false;
+        }
 
-        col.enabled = false;
+        hurtboxGroup?.SetColliderActive(false);
 
         animator.SetTrigger("Dead");
     }

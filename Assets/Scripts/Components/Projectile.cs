@@ -6,7 +6,6 @@ public class Projectile : MonoBehaviour
 {
     [Header("Basics")]
     [SerializeField] float speed;
-    [SerializeField] float damage;
     [SerializeField] float knockbackMultiplier = 1f;
     [SerializeField] float lifetime;
 
@@ -20,12 +19,12 @@ public class Projectile : MonoBehaviour
     [SerializeField] GameObject deathEffect;
     [SerializeField] ParticleSystem trailParticles;
 
-    [Header("Motion (Optional)")]
+    [Header("Motion")]
     [SerializeField] bool useSpeedCurve = false;
-    [SerializeField] AnimationCurve speedOverLife = AnimationCurve.EaseInOut(0f, 1f, 1f, 0.2f);
+    [SerializeField] AnimationCurve speedOverLifetime;
 
     Rigidbody2D rb;
-    Collider2D col;
+    Collider2D col; 
 
     GameObject owner;
     int ownerLayer;
@@ -66,7 +65,12 @@ public class Projectile : MonoBehaviour
             spriteRenderer = GetComponentInChildren<SpriteRenderer>(true);
     }
 
-    public void Init(GameObject owner, Vector2 direction, float? speedOverride = null, float? lifetimeOverride = null)
+    public void Init(
+        GameObject owner,
+        Vector2 direction,
+        DamageData damageData,
+        float? speedOverride = null,
+        float? lifetimeOverride = null)
     {
         float finalSpeed = speedOverride ?? speed;
         float finalLifetime = lifetimeOverride ?? lifetime;
@@ -76,19 +80,23 @@ public class Projectile : MonoBehaviour
 
         Vector2 dir = direction.sqrMagnitude < 0.0001f ? Vector2.right : direction.normalized;
 
-        damageData = new DamageData(owner, damage, dir, DamageType.Projectile)
-        {
-            knockbackForceMultiplier = knockbackMultiplier
-        };
+        // Bake damage data provided by weapon/body
+        this.damageData = damageData ?? new DamageData(owner, 1f, dir, DamageType.Projectile);
+        this.damageData.source = owner; // enforce correct source
+        this.damageData.type = DamageType.Projectile; // enforce projectile type (optional, but consistent)
+        this.damageData.direction = dir;
+        this.damageData.knockbackForceMultiplier *= knockbackMultiplier;
 
+        // Random sprite
         if (spriteRenderer != null && sprites != null && sprites.Length > 0)
             spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
 
+        // Face travel direction
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
         moveDir = dir;
-        initialSpeed = finalSpeed;
+        initialSpeed = Mathf.Max(0f, finalSpeed);
 
         spawnTime = Time.time;
         usedLifetime = Mathf.Max(0.01f, finalLifetime);
@@ -96,14 +104,17 @@ public class Projectile : MonoBehaviour
 
         rb.linearVelocity = moveDir * initialSpeed;
 
+        // Ignore collisions with owner's colliders
         if (owner != null && col != null)
         {
             foreach (var c in owner.GetComponentsInChildren<Collider2D>())
                 Physics2D.IgnoreCollision(col, c, true);
         }
 
+        // Ensure trail particles exist under projectile
         if (trailParticles != null)
         {
+            // If the assigned trail is not a child instance, instantiate one
             if (trailParticles.transform.parent != transform)
             {
                 var trail = Instantiate(trailParticles, transform);
@@ -128,7 +139,7 @@ public class Projectile : MonoBehaviour
         if (useSpeedCurve)
         {
             float t = Mathf.Clamp01((Time.time - spawnTime) / usedLifetime); // 0..1
-            float mult = speedOverLife.Evaluate(t);
+            float mult = speedOverLifetime.Evaluate(t);
             rb.linearVelocity = moveDir * (initialSpeed * mult);
         }
     }
@@ -137,8 +148,7 @@ public class Projectile : MonoBehaviour
     {
         if (!initialized || dying) return;
 
-        if (owner && other.transform.IsChildOf(owner.transform))
-            return;
+        if (owner && other.transform.IsChildOf(owner.transform)) return;
 
         if (destroyOnWallHit && ((1 << other.gameObject.layer) & wallMask.value) != 0)
         {
@@ -146,14 +156,17 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        if (ownerLayer != -1 && other.gameObject.layer == ownerLayer)
-            return;
+        if (ownerLayer != -1 && other.gameObject.layer == ownerLayer) return;
 
-        var damageable = other.GetComponentInParent<IDamageable>();
-        if (damageable != null)
+        var health = other.transform.root.GetComponent<Health>();
+        if (health != null && health.IsHurtbox(other))
         {
+            // ignore self-hit (same root as owner)
+            if (owner && health.transform.root == owner.transform.root)
+                return;
+
             damageData.direction = rb.linearVelocity;
-            damageable.TakeDamage(damageData);
+            health.TakeDamage(damageData);
             DestroyProjectile();
         }
     }

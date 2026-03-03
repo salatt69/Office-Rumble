@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(PlayerController))]
 public class HighlightItemsForPlayer : MonoBehaviour
 {
     [SerializeField] Collider2D interactionCollider;

@@ -1,222 +1,105 @@
+// PlayerController.cs
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Player Settings")]
-    [SerializeField] float MoveSpeed;
-
-    [Header("References")]
-    [SerializeField] Rigidbody2D rb;
+    [Header("Refs")]
+    [SerializeField] InputRouter input;
+    [SerializeField] EntityMotor2D motor;
+    [SerializeField] PlayerAimAndHand aim;
+    [SerializeField] CameraFollow2D cam;
+    [SerializeField] PlayerCombat combat;
+    [SerializeField] Inventory inventory;
     [SerializeField] Animator animator;
-    [SerializeField] SpriteRenderer playerSprite;
-    [SerializeField] InputActionAsset controls;
 
-    [Header("Camera Settings")]
-    [SerializeField, Range(0f, 1f)] float lagTime;
-    [SerializeField] float cursorOffsetStrength;
-    [SerializeField] float maxOffsetDistance;
+    [Header("Pickup")]
+    [SerializeField] float defaultPickupCooldown = 2f;
 
-    Vector3 velocity = Vector3.zero;
-
-    GameObject hand;
-    Vector3 localHandPos;
-    float localHandPosX, localHandPosXInverted;
-
-    private bool attackHeld;
-
-    bool isScoped = false;
-    PixelPerfectCamera pixelPerfectCamera;
-
-    private float knockbackTimer = 0f;
-    private bool isKnockedBack => knockbackTimer > 0f;
-    private float pickupCooldownExitTime = 0f;
-
-    public bool canPickup;
-
-    Vector2 moveInput;
-
-    Inventory inventory;
-
-    public bool isLeftFacing;
+    float pickupCooldownExitTime;
+    public bool CanPickup => Time.time >= pickupCooldownExitTime;
 
     void Awake()
     {
-        // parent has to have 'Hand' child for this to work
-        hand = GameObject.Find("Hand");
+        if (!input) input = GetComponent<InputRouter>();
+        if (!motor) motor = GetComponent<EntityMotor2D>();
+        if (!aim) aim = GetComponent<PlayerAimAndHand>();
+        if (!cam) cam = GetComponent<CameraFollow2D>();
+        if (!combat) combat = GetComponent<PlayerCombat>();
+        if (!inventory) inventory = GetComponent<Inventory>();
+        if (!animator) animator = GetComponentInChildren<Animator>(true);
 
-        inventory = GetComponent<Inventory>();
-
-        pixelPerfectCamera = Camera.main.GetComponent<PixelPerfectCamera>();
-
-        BindInputActions();
-    }
-
-    void OnEnable()
-    {
-        if (controls != null)
-            EnableInputActions(true);
-    }
-
-    void OnDisable()
-    {
-        if (controls != null)
-            EnableInputActions(false);
+        // Let input router call back into controller for inventory actions
+        if (input) input.SetOwner(this);
     }
 
     void Start()
     {
-        localHandPos = hand.transform.localPosition;
-        localHandPosX = localHandPos.x;
-        localHandPosXInverted = -localHandPosX;
-
-        inventory.SelectSlot(inventory.SelectedIndex);
+        inventory?.SelectSlot(inventory.SelectedIndex);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("Horizontal", moveInput.x);
-        animator.SetFloat("Vertical", moveInput.y);
-        animator.SetFloat("Speed", moveInput.sqrMagnitude);
+        if (input && input.AttackHeld)
+            combat.TryFire();
 
-        if (attackHeld)
-            TryFire();
+        if (animator && input)
+        {
+            Vector2 m = input.MoveInput;
+            animator.SetFloat("Horizontal", m.x);
+            animator.SetFloat("Vertical", m.y);
+            animator.SetFloat("Speed", m.sqrMagnitude);
+        }
     }
 
     void FixedUpdate()
     {
-        UpdateCameraAndHand();
+        if (motor && input)
+            motor.SetMoveInput(input.MoveInput);
 
-        if (isKnockedBack)
-        {
-            knockbackTimer -= Time.fixedDeltaTime;
-            return;
-        }
-
-        canPickup = Time.time >= pickupCooldownExitTime;
-
-        Vector2 move = moveInput * MoveSpeed * Time.fixedDeltaTime;
-
-        rb.AddForce(move * MoveSpeed * Time.fixedDeltaTime);
+        cam?.TickFixed();
+        motor?.FixedTick();
     }
 
-
-    void UpdateCameraAndHand()
+    void LateUpdate()
     {
-        Vector2 mouseScreen = Mouse.current.position.ReadValue();
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
-        Vector3 offset = new Vector3();
+        if (aim && input)
+            aim.SetScoped(input.IsScoped);
 
-        if (isScoped)
-        {
-            mouseWorld.z = 0f;
-
-            offset = mouseWorld - transform.position;
-            if (offset.magnitude > 0.001f)
-                offset = offset.normalized * Mathf.Min(offset.magnitude, maxOffsetDistance) * cursorOffsetStrength;
-
-            pixelPerfectCamera.assetsPPU = 24;
-        }
-        else
-        {
-            pixelPerfectCamera.assetsPPU = 32;
-        }
-
-        Vector3 desiredPosition = transform.position + offset + new Vector3(0f, 0f, -1f);
-        Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, desiredPosition, ref velocity, lagTime);
-
-        bool isLeft = mouseWorld.x < transform.position.x;
-        playerSprite.flipX = isLeft;
-        isLeftFacing = isLeft;
-
-        var holder = hand.GetComponentInChildren<ItemHolder>();
-        holder.FlipY(isLeft);
-
-        float handX = isLeft ? localHandPosXInverted : localHandPosX;
-        hand.transform.localPosition = new Vector3(handX, localHandPos.y, localHandPos.z);
+        aim?.Tick();
     }
 
-    public void SetHitFrameSprite()
+    public void AddItemPickupCooldown(float cooldownTime = -1f)
     {
-    }
-
-    public void ApplyKnockbackLock(float duration)
-    {
-        knockbackTimer = duration;
-    }
-
-    public void AddItemPickupCooldown(float cooldownTime = 2f)
-    {
-        if (canPickup)
-        {
-            pickupCooldownExitTime = Time.time + cooldownTime;
-        }
-    }
-
-    void TryFire()
-    {
-        if (hand == null)
-        {
-            Debug.LogWarning("Hand not found!");
-            return;
-        }
-
-        var holder = hand.GetComponentInChildren<ItemHolder>();
-        if (holder != null)
-        {
-            holder.UseCurrentItem();
-        }
-        else
-        {
-            Debug.LogWarning("Can't fire! No weapon equipped.");
-        }
+        float cd = cooldownTime >= 0f ? cooldownTime : defaultPickupCooldown;
+        pickupCooldownExitTime = Mathf.Max(pickupCooldownExitTime, Time.time + cd);
     }
 
     public Vector3 GetItemDropPosition()
     {
-        return transform.position + (isLeftFacing ? Vector3.left : Vector3.right) * 0.5f;
+        return aim ? aim.GetItemDropPosition() : transform.position;
     }
 
-    #region Inputs
-
-    void BindInputActions()
+    public void ApplyKnockbackLock(float duration)
     {
-        var move = controls.FindActionMap("Player", true);
-        move.FindAction("Move").performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        move.FindAction("Move").canceled += ctx => moveInput = Vector2.zero;
-
-        move.FindAction("Attack").performed += _ => attackHeld = true;
-        move.FindAction("Attack").canceled += _ => attackHeld = false;
-
-        move.FindAction("Alternative").performed += _ => isScoped = true;
-        move.FindAction("Alternative").canceled += _ => isScoped = false;
-
-        var inv = controls.FindActionMap("Inventory", true);
-        inv.FindAction("Slot1").performed += _ => inventory.SelectSlot(0);
-        inv.FindAction("Slot2").performed += _ => inventory.SelectSlot(1);
-        inv.FindAction("Slot3").performed += _ => inventory.SelectSlot(2);
-        inv.FindAction("Drop Item").performed += _ => inventory.Drop(GetItemDropPosition());
-        inv.FindAction("Select Next").performed += ctx =>
-        {
-            Vector2 s = ctx.ReadValue<Vector2>();
-            float v = s.y;
-            if (v < 0) inventory.SelectNext();
-            if (v > 0) inventory.SelectPrevious();
-        };
+        if (motor) motor.ApplyKnockbackLock(duration);
     }
 
-    void EnableInputActions(bool enable)
+    // Inventory actions triggered by input router
+    public void TryDrop()
     {
-        var move = controls.FindActionMap("Player", false);
-        if (move == null) return;
-        if (enable) move.Enable(); else move.Disable();
+        if (!inventory) return;
 
-        var inv = controls.FindActionMap("Inventory", false);
-        if (inv == null) return;
-        if (enable) inv.Enable(); else inv.Disable();
+        // Dropping is not the same as picking up, but if you want to block it during pickup lock,
+        // keep this check. If you DON'T want that, remove this if.
+        if (!CanPickup)
+            return;
+
+        Vector3 dropPos = GetItemDropPosition();
+        inventory.Drop(dropPos);
+        AddItemPickupCooldown(); // optional: add cooldown after dropping too
     }
 
-    #endregion
+    public void SelectSlot(int index) => inventory?.SelectSlot(index);
+    public void SelectNext() => inventory?.SelectNext();
+    public void SelectPrevious() => inventory?.SelectPrevious();
 }
