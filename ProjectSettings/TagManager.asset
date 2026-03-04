@@ -44,37 +44,16 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Floor
+  - name: Background
     uniqueID: 1043506455
-    locked: 0
-  - name: Floor Layer
-    uniqueID: 3820067969
-    locked: 0
-  - name: Shadow
-    uniqueID: 50136071
     locked: 0
   - name: Wall
     uniqueID: 1041705329
     locked: 0
-  - name: Item
-    uniqueID: 1808325783
-    locked: 0
-  - name: Enemy
-    uniqueID: 4151719029
-    locked: 0
-  - name: Player
+  - name: Foreground
     uniqueID: 2859573597
     locked: 0
-  - name: Hand
-    uniqueID: 3164704105
-    locked: 0
-  - name: Held Item
-    uniqueID: 1477961601
-    locked: 0
-  - name: Decoration
-    uniqueID: 1781815041
-    locked: 0
-  - name: Projectile
+  - name: Projectiles
     uniqueID: 3600882879
     locked: 0
   - name: UI

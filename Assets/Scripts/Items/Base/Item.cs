@@ -1,0 +1,62 @@
+using UnityEngine;
+
+public abstract class Item : MonoBehaviour
+{
+    [Tooltip("GameObjects to disable when this item is equipped.")]
+    [SerializeField] GameObject[] gameObjectsToDisableOnEquip;
+
+    protected ItemData data;
+    protected SpriteRenderer spriteRenderer;
+    protected ItemHolder holder;
+
+    public ItemData Data => data;
+
+    protected virtual void Awake()
+    {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogWarning($"{name}: No SpriteRenderer found in children.");
+        }
+    }
+
+    public virtual void Initialize(ItemData newData)
+    {
+        data = newData;
+    }
+
+    public virtual void OnEquip()
+    {
+        if (gameObjectsToDisableOnEquip != null)
+        {
+            SetGameObjectsActive(false);
+        }
+        if (spriteRenderer)
+        {
+            spriteRenderer.sprite = data.equipped;
+        }
+    }
+
+    public virtual void OnUnequip()
+    {
+        if (gameObjectsToDisableOnEquip != null)
+        {
+            SetGameObjectsActive(true);
+        }
+        if (spriteRenderer)
+        {
+            spriteRenderer.sprite = data.unequipped;
+        }
+    }
+
+    private void SetGameObjectsActive(bool isActive)
+    {
+        foreach (GameObject go in gameObjectsToDisableOnEquip)
+        {
+            if (go != null)
+            {
+                go.SetActive(isActive);
+            }
+        }
+    }
+}
