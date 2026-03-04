@@ -9,13 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4def625e7968ea249bef1d0676033bab, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a2720c4dad1e8c409af52ef0861c462, type: 3}
   m_Name: Stapler
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   itemName: STAPLER
-  prefab: {fileID: 1538920619850770153, guid: 21ef2024b1f2d524fb391873fc6291e7, type: 3}
+  prefab: {fileID: 1538920619850770153, guid: 21a15ade4a415e54db5769517ba9e65c, type: 3}
   unequipped: {fileID: 725893805, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   highlightedUnequipped: {fileID: -113355084, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   equipped: {fileID: -2137077630, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   icon: {fileID: -2122668965, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  shotInterval: 0.2
+  damageCoefficient: 0.3
   projectilePrefab: {fileID: 3018930152244974964, guid: 49f096f7a4dc5ed4a92fe14e644214ca, type: 3}
+  projectileSpeedOverride: -1
+  projectileLifetimeOverride: -1

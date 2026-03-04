@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4def625e7968ea249bef1d0676033bab, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a2720c4dad1e8c409af52ef0861c462, type: 3}
   m_Name: Energy Drink
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   itemName: ENERGY DRINK
-  prefab: {fileID: 3479667308067201379, guid: d917ad8bb1270e6438330861a1534c52, type: 3}
+  prefab: {fileID: 3479667308067201379, guid: 545adda4a3ac6a34a8534e58449d4dd4, type: 3}
   unequipped: {fileID: 4870367397653811455, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   highlightedUnequipped: {fileID: 422744106880848825, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   equipped: {fileID: 1176767005, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   icon: {fileID: 538158944, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   shotInterval: 0.3
-  damageCoefficient: 0.3
+  damageCoefficient: 0.5
   projectilePrefab: {fileID: 3307094065993342272, guid: 3b141eba91b276f4185f1c8f9515b70e, type: 3}
   projectileSpeedOverride: -1
   projectileLifetimeOverride: -1
