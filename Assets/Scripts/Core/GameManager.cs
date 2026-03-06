@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,14 +5,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public HUD hud { get; private set; }
 
-
-    private bool isFreezing = false;
+    DamageNumber damageNumberPrefab;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void AutoInit()
     {
         if (Instance == null)
+        {
             new GameObject("GameManager").AddComponent<GameManager>();
+        }
     }
 
     public void RegisterHUD(HUD hud)
@@ -30,25 +30,25 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // stays across scene loads
+        DontDestroyOnLoad(gameObject);
+
+        if (!damageNumberPrefab)
+        {
+            damageNumberPrefab = Resources.Load<DamageNumber>("Prefabs/UI/DamageNumber");
+        }
     }
 
-    // 🔹 Freeze Frame / Hit Stop
-    public void FreezeFrame(float duration)
+    public void SpawnDamageNumber(float amount, Vector3 worldPos)
     {
-        if (!isFreezing)
-            StartCoroutine(DoFreeze(duration));
-    }
+        if (!damageNumberPrefab) return;
 
-    private IEnumerator DoFreeze(float duration)
-    {
-        isFreezing = true;
-        float originalTimeScale = Time.timeScale;
+        Vector3 jitter = new(
+            Random.Range(-damageNumberPrefab.spawnJitter.x, damageNumberPrefab.spawnJitter.x),
+            Random.Range(-damageNumberPrefab.spawnJitter.y, damageNumberPrefab.spawnJitter.y),
+            0f
+        );
 
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = originalTimeScale;
-
-        isFreezing = false;
+        var dn = Instantiate(damageNumberPrefab, worldPos + jitter, Quaternion.identity);
+        dn.Init(amount);
     }
 }

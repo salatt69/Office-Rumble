@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour
             holder = hand.GetComponentInChildren<ItemHolder>(true);
     }
 
-    public void TryFire()
+    public void TryUse()
     {
         if (!holder)
         {
@@ -21,6 +21,6 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        holder.UseCurrentItem();
+        //holder.UseCurrentItem();
     }
 }

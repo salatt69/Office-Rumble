@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Items/Consumable Data")]
+[CreateAssetMenu(menuName = "Items/Consumable")]
 public class ConsumableData : ItemData
 {
-    [Header("Consumable Info")]
-    public float healAmount;
-    public float useTime;
+    [Header("Consumable Settings")]
+    public int maxUses = 1;
+    public BuffData[] buffs;
 }

@@ -11,11 +11,6 @@ public static class EffectSystem
         }
     }
 
-    public static void FreezeFrame(float duration)
-    {
-        GameManager.Instance?.FreezeFrame(duration);
-    }
-
     public static void CameraShake(float intensity, float duration)
     {
         // TODO: Camera shake

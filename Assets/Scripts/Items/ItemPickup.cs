@@ -12,7 +12,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
             if (inventory.Add(data))
             {
-                //inventory.SelectSlot(inventory.SelectedIndex);
+                inventory.SelectSlot(inventory.SelectedIndex);
             }
             else
             {

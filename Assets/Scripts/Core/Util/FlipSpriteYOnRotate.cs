@@ -33,7 +33,10 @@ public class FlipSpriteYOnRotate : MonoBehaviour
 
         foreach (SpriteRenderer spriteRenderer in spriteRenderers)
         {
-            spriteRenderer.flipY = isFlipped;
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.flipY = isFlipped;
+            }
         }
     }
 

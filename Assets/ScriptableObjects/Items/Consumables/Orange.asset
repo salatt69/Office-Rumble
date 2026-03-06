@@ -18,5 +18,5 @@ MonoBehaviour:
   highlightedUnequipped: {fileID: -7794112339037250244, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   equipped: {fileID: 5710046658965445949, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   icon: {fileID: 1809442258, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
-  healAmount: 0
-  useTime: 0
+  maxUses: 2
+  buffs: []

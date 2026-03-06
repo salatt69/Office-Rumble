@@ -20,10 +20,12 @@ public class Weapon : Item, IUsable
         var body = owner ? owner.GetComponent<EntityBody>() : null;
 
         float dmgAmount = body.Damage * Mathf.Max(0f, WD.damageCoefficient);
+        float critChanceValue = body.CritChance * Mathf.Max(1f, WD.critChanceCoefficient);
 
-        if (Random.value < body.CritChance)
+        if (Random.value < critChanceValue)
         {
-            dmgAmount *= body.CritMultiplier;
+            float critDamageValue = body.CritDamage * Mathf.Max(1f, WD.critDamageCoefficient);
+            dmgAmount *= critDamageValue;
         }
 
         return new DamageData(owner, dmgAmount, dir, DamageType.Projectile);

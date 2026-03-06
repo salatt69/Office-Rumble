@@ -19,7 +19,9 @@ MonoBehaviour:
   equipped: {fileID: 1176767005, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   icon: {fileID: 538158944, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   shotInterval: 0.3
-  damageCoefficient: 0.5
+  damageCoefficient: 1.2
+  critDamageCoefficient: 2
+  critChanceCoefficient: 1
   projectilePrefab: {fileID: 3307094065993342272, guid: 3b141eba91b276f4185f1c8f9515b70e, type: 3}
   projectileSpeedOverride: -1
   projectileLifetimeOverride: -1

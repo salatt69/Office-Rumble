@@ -40,7 +40,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (input && input.AttackHeld)
-            combat.TryFire();
+        {
+            inventory?.TryUseSelected(gameObject);
+        }
+        else
+        {
+            inventory?.SetUseHeld(false);
+        }
 
         if (animator && input)
         {
@@ -95,7 +101,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         Vector3 dropPos = GetItemDropPosition();
-        inventory.Drop(dropPos);
+        inventory?.Drop(dropPos);
         AddItemPickupCooldown(); // optional: add cooldown after dropping too
     }
 

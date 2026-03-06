@@ -4,15 +4,13 @@ public class Consumable : Item, IUsable
 {
     public ConsumableData CD => (ConsumableData)Data;
 
-    public void Use(GameObject target)
+    public void Use(GameObject owner)
     {
-        var hp = target.GetComponentInChildren<Health>();
+        if (CD == null) return;
 
-        hp.Heal(CD.healAmount);
-    }
-
-    public void StopUsing(GameObject owner)
-    {
-        throw new System.NotImplementedException();
+        foreach (var b in CD.buffs)
+        {
+            if (b) b.Apply(owner);
+        }
     }
 }

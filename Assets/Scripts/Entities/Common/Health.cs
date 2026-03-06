@@ -12,7 +12,9 @@ public class Health : MonoBehaviour, IDamageable
     [Header("Colliders")]
     [SerializeField] HurtboxGroup hurtboxGroup;
 
-    [Header("I-Frames Settings")]
+    [Header("Invulnerability Settings")]
+    [Tooltip("If true, the object will be completely invulnerable.")]
+    [SerializeField] bool hardInvulnerability = false;
     [SerializeField] bool haveIFrames = true;
     [SerializeField] float invulnerabilityTime = 0.5f;
     [SerializeField] float flickerInterval = 0.1f;
@@ -23,7 +25,7 @@ public class Health : MonoBehaviour, IDamageable
     EntityBody body;
 
     float currentHealth;
-    bool isInvulnerable;
+    bool isTemporaryInvulnerable;
 
     Coroutine iFrameRoutine;
 
@@ -98,10 +100,11 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(DamageData damageData)
     {
-        if (!IsAlive || isInvulnerable) return;
+        if (!IsAlive || isTemporaryInvulnerable) return;
 
         // Flash
         damageFlash?.Flash();
+        GameManager.Instance?.SpawnDamageNumber(damageData.amount, objectRoot.transform.position);
 
         // Knockback direction (away from source)
         if (damageData.source != null)
@@ -113,9 +116,12 @@ public class Health : MonoBehaviour, IDamageable
         if (objectRoot.TryGetComponent(out PlayerController controller))
             controller.ApplyKnockbackLock(0.2f);
 
-        float max = GetMaxHealth();
-        currentHealth = Mathf.Max(0f, currentHealth - damageData.amount);
-        OnHealthChanged?.Invoke(currentHealth, max);
+        if (!hardInvulnerability)
+        {
+            float max = GetMaxHealth();
+            currentHealth = Mathf.Max(0f, currentHealth - damageData.amount);
+            OnHealthChanged?.Invoke(currentHealth, max);
+        }
 
         if (currentHealth <= 0f)
         {
@@ -134,7 +140,7 @@ public class Health : MonoBehaviour, IDamageable
 
     IEnumerator InvulnerabilityCoroutine()
     {
-        isInvulnerable = true;
+        isTemporaryInvulnerable = true;
 
         float elapsed = 0f;
 
@@ -214,7 +220,7 @@ public class Health : MonoBehaviour, IDamageable
             }
         }
 
-        isInvulnerable = false;
+        isTemporaryInvulnerable = false;
     }
 
     public void Heal(float amount)
