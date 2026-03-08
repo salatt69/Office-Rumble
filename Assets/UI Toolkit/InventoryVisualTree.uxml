@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/InventoryStyleSheet.uxml.uss?fileID=7433441132597879392&amp;guid=5e2e1a96a78e2cc43a50b6b904af7d52&amp;type=3#InventoryStyleSheet.uxml" />
+    <ui:VisualElement name="inventory-root" class="inventory-root">
+        <ui:VisualElement name="slot-0" class="item-slot">
+            <ui:VisualElement name="icon" class="item-icon" />
+            <ui:Label name="uses" class="usage-text" />
+        </ui:VisualElement>
+        <ui:VisualElement name="slot-1" class="item-slot">
+            <ui:VisualElement name="icon" class="item-icon" />
+            <ui:Label name="uses" class="usage-text" />
+        </ui:VisualElement>
+        <ui:VisualElement name="slot-2" class="item-slot">
+            <ui:VisualElement name="icon" class="item-icon" />
+            <ui:Label name="uses" class="usage-text" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

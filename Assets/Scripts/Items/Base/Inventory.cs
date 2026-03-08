@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class InventorySlot
+public class InventoryItemSlot
 {
     public ItemData data;
     public int uses;
@@ -23,22 +23,22 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] int slotCount = 3;
 
-    InventorySlot[] slots;
+    InventoryItemSlot[] slots;
 
     int selectedIndex = 0;
     Item currentEquippedInstance;
     bool useLatch;
 
     public int SelectedIndex => selectedIndex;
-    public InventorySlot[] Slots => slots;
+    public InventoryItemSlot[] Slots => slots;
 
     void Awake()
     {
         if (slots == null || slots.Length != slotCount)
         {
-            slots = new InventorySlot[slotCount];
+            slots = new InventoryItemSlot[slotCount];
             for (int i = 0; i < slotCount; i++)
-                slots[i] = new InventorySlot();
+                slots[i] = new InventoryItemSlot();
         }
 
         if (itemHolder == null)

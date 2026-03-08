@@ -734,7 +734,7 @@ MonoBehaviour:
   baseMaxHealth: 7
   baseHealthRegen: 0
   baseMoveSpeed: 4.5
-  baseAcceleration: 16
+  baseAcceleration: 14
   baseDamage: 1
   baseAttackSpeed: 1
   baseCritChance: 0.1
