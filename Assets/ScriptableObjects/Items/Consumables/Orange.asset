@@ -19,4 +19,5 @@ MonoBehaviour:
   equipped: {fileID: 5710046658965445949, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   icon: {fileID: 1809442258, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   maxUses: 2
-  buffs: []
+  buffs:
+  - {fileID: 11400000, guid: dbe0c4dc6a9f9684ead194cd1802845f, type: 2}

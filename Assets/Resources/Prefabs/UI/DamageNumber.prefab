@@ -169,8 +169,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0.58715813547154615761534
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d23c9c04f6ba944bbc577e8872550a3, type: 2}
-  m_sharedMaterial: {fileID: 2157543509229770350, guid: 9d23c9c04f6ba944bbc577e8872550a3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ce58930a28fbe74bb48ee4a2b313a94, type: 2}
+  m_sharedMaterial: {fileID: 6809275543791596094, guid: 6ce58930a28fbe74bb48ee4a2b313a94, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -265,7 +265,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.612, z: 0}
-  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8693485494600102610}
@@ -344,6 +344,6 @@ MonoBehaviour:
   minDamage: 0
   maxDamage: 500
   baseScale: 1
-  minScale: 0.0015
-  maxScale: 0.005
+  minScale: 0.005
+  maxScale: 0.01
   spawnJitter: {x: 0.15, y: 0.15}

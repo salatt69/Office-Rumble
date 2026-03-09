@@ -1,0 +1,41 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/HealthBarStyleSheet.uss?fileID=7433441132597879392&amp;guid=c810074196798b243954603c668c77c5&amp;type=3#HealthBarStyleSheet" />
+    <ui:VisualElement name="Container" class="heart-container">
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_FullHeart" class="heart heart-full" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+        <ui:VisualElement name="Preview_EmptyHeart" class="heart heart-empty" style="flex-grow: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

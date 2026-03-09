@@ -20,6 +20,9 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] float flickerInterval = 0.1f;
     [SerializeField] bool useAlphaFlicker = true;
 
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => GetMaxHealth();
+
     GameObject objectRoot;
     DamageFlash damageFlash;
     EntityBody body;

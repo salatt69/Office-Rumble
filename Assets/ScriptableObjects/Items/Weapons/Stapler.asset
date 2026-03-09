@@ -20,7 +20,7 @@ MonoBehaviour:
   icon: {fileID: -2122668965, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   shotInterval: 0.2
   damageCoefficient: 1
-  critDamageCoefficient: 1
+  critDamageCoefficient: 1000
   critChanceCoefficient: 1
   projectilePrefab: {fileID: 3018930152244974964, guid: 49f096f7a4dc5ed4a92fe14e644214ca, type: 3}
   projectileSpeedOverride: -1

@@ -733,7 +733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityBody
   baseMaxHealth: 7
   baseHealthRegen: 0
-  baseMoveSpeed: 4.5
+  baseMoveSpeed: 3.7
   baseAcceleration: 14
   baseDamage: 1
   baseAttackSpeed: 1
@@ -756,8 +756,8 @@ MonoBehaviour:
   hurtboxGroup: {fileID: 1498700726695827463}
   hardInvulnerability: 0
   haveIFrames: 1
-  invulnerabilityTime: 1.2
-  flickerInterval: 0.1
+  invulnerabilityTime: 2
+  flickerInterval: 0.07
   useAlphaFlicker: 1
 --- !u!114 &6704897193616559558
 MonoBehaviour:

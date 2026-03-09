@@ -1,0 +1,29 @@
+.heart-container {
+    flex-direction: row;
+    width: 512px;
+    min-height: 36px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    flex-wrap: wrap;
+}
+
+.heart {
+    width: 36px;
+    height: 36px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    -unity-background-image-tint-color: rgb(255, 78, 78);
+}
+
+.heart-full {
+    background-image: resource('Art/OR_HealthHeart_Pixelated (More)');
+}
+
+.heart-empty {
+    background-image: resource('Art/OR_HealthHeart_Empty_Pixelated (More)');
+    -unity-background-image-tint-color: rgb(113, 113, 113);
+}

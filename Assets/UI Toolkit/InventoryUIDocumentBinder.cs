@@ -6,7 +6,7 @@ public class InventoryUIDocumentBinder : MonoBehaviour
     [SerializeField] Inventory inventorySystem;
     [SerializeField] Sprite emptySlotIcon;
     [SerializeField] Color selectedTint;
-    [SerializeField] Color unSelectedTint;
+    [SerializeField] Color deSelectedTint;
 
     UIDocument uiDocument;
     VisualElement[] slotRoots;
@@ -99,8 +99,8 @@ public class InventoryUIDocumentBinder : MonoBehaviour
             else
             {
                 slotRoots[i].RemoveFromClassList("selected");
-                slotIcons[i].style.unityBackgroundImageTintColor = unSelectedTint;
-                slotUses[i].style.color = unSelectedTint;
+                slotIcons[i].style.unityBackgroundImageTintColor = deSelectedTint;
+                slotUses[i].style.color = deSelectedTint;
             }
         }
     }

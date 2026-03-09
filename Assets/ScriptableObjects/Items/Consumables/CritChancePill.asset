@@ -18,6 +18,6 @@ MonoBehaviour:
   highlightedUnequipped: {fileID: 1558446235, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   equipped: {fileID: -172213185, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   icon: {fileID: -1585013568, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
-  maxUses: 21
+  maxUses: 1
   buffs:
   - {fileID: 11400000, guid: 018dc042cb15bc24d80d8f796c031a16, type: 2}

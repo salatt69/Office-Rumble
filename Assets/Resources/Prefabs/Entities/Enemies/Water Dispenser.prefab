@@ -210,7 +210,7 @@ MonoBehaviour:
   baseDamage: 1
   baseAttackSpeed: 1
   baseCritChance: 0
-  baseCritDamage: 1.5
+  baseCritDamage: 1
 --- !u!114 &5964612386592309698
 MonoBehaviour:
   m_ObjectHideFlags: 0
