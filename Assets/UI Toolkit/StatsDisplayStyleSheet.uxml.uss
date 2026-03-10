@@ -37,13 +37,13 @@
 }
 
 .stat-value {
-    flex-grow: 1;
     color: rgba(255, 255, 255, 0.5);
     font-size: 22px;
     unity-text-align: middle-left;
-    -unity-font-definition: resource('Art/Fonts/OR_Font_Regular');
-    -unity-text-align: upper-left;
+    -unity-font-definition: resource('Art/Fonts/OR_Font_Stats');
+    -unity-text-align: middle-left;
     -unity-font-style: normal;
+    top: 5px;
 }
 
 .stat-icon-speed {

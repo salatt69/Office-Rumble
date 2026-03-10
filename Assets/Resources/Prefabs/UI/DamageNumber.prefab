@@ -169,8 +169,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0.58715813547154615761534
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ce58930a28fbe74bb48ee4a2b313a94, type: 2}
-  m_sharedMaterial: {fileID: 6809275543791596094, guid: 6ce58930a28fbe74bb48ee4a2b313a94, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cd9ca9e2c9c77d94daa787cc9e192015, type: 2}
+  m_sharedMaterial: {fileID: 3934448370414509499, guid: cd9ca9e2c9c77d94daa787cc9e192015, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -344,6 +344,6 @@ MonoBehaviour:
   minDamage: 0
   maxDamage: 500
   baseScale: 1
-  minScale: 0.005
+  minScale: 0.0043
   maxScale: 0.01
   spawnJitter: {x: 0.15, y: 0.15}

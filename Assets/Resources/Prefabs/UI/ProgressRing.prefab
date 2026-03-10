@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643d3e328e8a62a4db3305e326e3b4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepeatedFlashing
-  flashingSpeed: 12
-  flashingColor: {r: 0.92, g: 0.24029905, b: 0.24029905, a: 1}
+  flashingSpeed: 16
+  flashingColor: {r: 1, g: 0.24029905, b: 0.24029905, a: 1}
   flashingEnabled: 0
 --- !u!1 &7575886695581038573
 GameObject:
