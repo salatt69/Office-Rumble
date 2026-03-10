@@ -4,8 +4,8 @@ using UnityEngine;
 public class WeaponData : ItemData
 {
     [Header("Firing")]
-    public float shotInterval = 0.3f;
     public float damageCoefficient = 1f;
+    public float attackSpeedCoefficient = 1f;
     public float critDamageCoefficient = 1f;
     public float critChanceCoefficient = 1f;
 

@@ -34,13 +34,14 @@ public class Weapon : Item, IUsable
     protected float GetAttackSpeed()
     {
         var body = Owner ? Owner.GetComponent<EntityBody>() : null;
-        return body ? body.AttackSpeed : 1f;
+        return (body ? body.AttackSpeed : 1f) * WD.attackSpeedCoefficient;
     }
 
     protected float GetShotInterval()
     {
         float atkSpd = Mathf.Max(0.01f, GetAttackSpeed());
-        return WD.shotInterval / atkSpd;
+        // Attack speed stat means "attacks per second", so interval is inverse of that
+        return 1.0f / atkSpd;
     }
 
     protected Vector2 GetMouseDir(Vector3 fromWorldPos)

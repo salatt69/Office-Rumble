@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class EnergyDrinkWeapon : Weapon
+public class EnergyDrinkWeapon : ChargedWeapon
 {
-    [Header("Charge")]
-    [SerializeField] float maxChargeTime = 1.2f;
+    [Header("Burst Settings")]
     [SerializeField] int minProjectiles = 3;
     [SerializeField] int maxProjectiles = 12;
     [SerializeField, Range(30f, 180f)] float arcDegrees = 90f;
-    [SerializeField] float releaseGrace = 0.08f;
 
     [Header("Burst Randomness")]
     [SerializeField, Range(0f, 1f)] float centerBias = 0.7f;
@@ -16,67 +14,12 @@ public class EnergyDrinkWeapon : Weapon
     [SerializeField] Vector2 scaleRange = new(0.8f, 1.35f);
     [SerializeField] Vector2 lifetimeMultiplierRange = new(0.75f, 1.15f);
 
-    ProgressRingUI chargeRing;
-    ProgressRingUI chargeRingPrefab;
-    Transform chargeRingTarget;
-
-    float charge;
-    float lastUseTime;
-    bool charging;
-    GameObject lastOwner;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        chargeRingPrefab = Resources.Load<ProgressRingUI>("Prefabs/UI/ProgressRing");
-        if (!chargeRingPrefab)
-            Debug.LogWarning("EnergyDrinkWeapon: Could not load ProgressRing prefab from Resources/Prefabs/UI/ProgressRing");
-    }
-
-    void Update()
-    {
-        if (charging && (Time.time - lastUseTime) > releaseGrace)
-        {
-            FireBurst(lastOwner);
-            charging = false;
-            charge = 0f;
-
-            if (chargeRing)
-            {
-                chargeRing.SetProgress(0f);
-                chargeRing.Hide();
-            }
-        }
-    }
-
-    public override void Use()
-    {
-        if (!Owner) return;
-
-        EnsureChargeRing();
-
-        charging = true;
-        lastOwner = Owner;
-        lastUseTime = Time.time;
-
-        charge += Time.deltaTime;
-        if (charge > maxChargeTime)
-            charge = maxChargeTime;
-
-        if (chargeRing)
-        {
-            chargeRing.Show();
-            chargeRing.SetProgress(charge / maxChargeTime);
-        }
-    }
-
-    void FireBurst(GameObject owner)
+    public override void Fire(GameObject owner)
     {
         if (!owner) return;
         if (!firePoint || WD == null || !WD.projectilePrefab) return;
 
-        float tCharge = Mathf.Clamp01(charge / maxChargeTime);
+        float tCharge = Mathf.Clamp01(currentCharge / CWD.weaponChargeTime);
         int count = Mathf.RoundToInt(Mathf.Lerp(minProjectiles, maxProjectiles, tCharge));
 
         // Aim source: holder direction (not mouse)
@@ -118,29 +61,6 @@ public class EnergyDrinkWeapon : Weapon
             DamageData dmg = BuildProjectileDamage(dir);
 
             proj.Init(owner, dir, dmg, speedOverride, lifetimeOverride);
-        }
-    }
-
-    void EnsureChargeRing()
-    {
-        if (!Owner) return;
-
-        if (!chargeRingTarget)
-            chargeRingTarget = Owner.transform;
-
-        if (!chargeRing)
-        {
-            chargeRing = Owner.GetComponentInChildren<ProgressRingUI>(true);
-
-            if (!chargeRing && chargeRingPrefab)
-                chargeRing = Instantiate(chargeRingPrefab, chargeRingTarget);
-        }
-
-        if (chargeRing)
-        {
-            chargeRing.transform.SetParent(chargeRingTarget, false);
-            chargeRing.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            chargeRing.SetTarget(chargeRingTarget);
         }
     }
 
