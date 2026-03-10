@@ -4,23 +4,23 @@ public class StaplerWeapon : Weapon
 {
     float nextShotTime;
 
-    public override void Use(GameObject owner)
+    public override void Use()
     {
-        if (!owner || !WD || !WD.projectilePrefab) return;
+        if (!Owner || !WD || !WD.projectilePrefab) return;
 
         if (Time.time < nextShotTime) return;
 
-        Vector2 dir = GetMouseDir(owner.transform.position);
+        Vector2 dir = GetMouseDir(Owner.transform.position);
 
-        DamageData dmg = BuildProjectileDamage(owner, dir);
+        DamageData dmg = BuildProjectileDamage(dir);
 
         Projectile proj = Instantiate(WD.projectilePrefab, firePoint.position, Quaternion.identity);
 
         float? spd = WD.projectileSpeedOverride > 0f ? WD.projectileSpeedOverride : (float?)null;
         float? life = WD.projectileLifetimeOverride > 0f ? WD.projectileLifetimeOverride : (float?)null;
 
-        proj.Init(owner, dir, dmg, spd, life);
+        proj.Init(Owner, dir, dmg, spd, life);
 
-        nextShotTime = Time.time + GetShotInterval(owner);
+        nextShotTime = Time.time + GetShotInterval();
     }
 }

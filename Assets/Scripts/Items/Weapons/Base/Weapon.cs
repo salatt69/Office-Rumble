@@ -13,11 +13,11 @@ public class Weapon : Item, IUsable
             firePoint = transform.Find("FirePoint");
     }
 
-    public virtual void Use(GameObject owner) { }
+    public virtual void Use() { }
 
-    protected DamageData BuildProjectileDamage(GameObject owner, Vector2 dir)
+    protected DamageData BuildProjectileDamage(Vector2 dir)
     {
-        var body = owner ? owner.GetComponent<EntityBody>() : null;
+        var body = Owner ? Owner.GetComponent<EntityBody>() : null;
 
         float dmgAmount = body.Damage * Mathf.Max(0f, WD.damageCoefficient);
         float critChanceValue = body.CritChance * Mathf.Max(1f, WD.critChanceCoefficient);
@@ -28,18 +28,18 @@ public class Weapon : Item, IUsable
             dmgAmount *= critDamageValue;
         }
 
-        return new DamageData(owner, dmgAmount, dir, DamageType.Projectile);
+        return new DamageData(Owner, dmgAmount, dir, DamageType.Projectile);
     }
 
-    protected float GetAttackSpeed(GameObject owner)
+    protected float GetAttackSpeed()
     {
-        var body = owner ? owner.GetComponent<EntityBody>() : null;
+        var body = Owner ? Owner.GetComponent<EntityBody>() : null;
         return body ? body.AttackSpeed : 1f;
     }
 
-    protected float GetShotInterval(GameObject owner)
+    protected float GetShotInterval()
     {
-        float atkSpd = Mathf.Max(0.01f, GetAttackSpeed(owner));
+        float atkSpd = Mathf.Max(0.01f, GetAttackSpeed());
         return WD.shotInterval / atkSpd;
     }
 

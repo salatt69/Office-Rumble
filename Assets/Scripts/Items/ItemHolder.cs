@@ -3,7 +3,21 @@ using UnityEngine;
 public class ItemHolder : MonoBehaviour
 {
     private Item currentItem;
+    private EntityBody body;
+    private GameObject owner;
+
     public Item CurrentItem => currentItem;
+
+    private void Awake()
+    {
+        body = GetComponentInParent<EntityBody>();
+        if (body == null)
+        {
+            Debug.LogWarning("ItemHolder is not a child of an EntityBody.");
+            return;
+        }
+        owner = body.EntityGameObject;
+    }
 
     public void Equip(Item newItem)
     {
@@ -18,7 +32,7 @@ public class ItemHolder : MonoBehaviour
         currentItem = newItem;
         currentItem.transform.SetParent(transform);
         currentItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        currentItem.OnEquip();
+        currentItem.OnEquip(owner);
     }
 
     public void Unequip()

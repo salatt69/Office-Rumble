@@ -16,10 +16,23 @@ public class EnergyDrinkWeapon : Weapon
     [SerializeField] Vector2 scaleRange = new(0.8f, 1.35f);
     [SerializeField] Vector2 lifetimeMultiplierRange = new(0.75f, 1.15f);
 
+    ProgressRingUI chargeRing;
+    ProgressRingUI chargeRingPrefab;
+    Transform chargeRingTarget;
+
     float charge;
     float lastUseTime;
     bool charging;
     GameObject lastOwner;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        chargeRingPrefab = Resources.Load<ProgressRingUI>("Prefabs/UI/ProgressRing");
+        if (!chargeRingPrefab)
+            Debug.LogWarning("EnergyDrinkWeapon: Could not load ProgressRing prefab from Resources/Prefabs/UI/ProgressRing");
+    }
 
     void Update()
     {
@@ -28,19 +41,34 @@ public class EnergyDrinkWeapon : Weapon
             FireBurst(lastOwner);
             charging = false;
             charge = 0f;
+
+            if (chargeRing)
+            {
+                chargeRing.SetProgress(0f);
+                chargeRing.Hide();
+            }
         }
     }
 
-    public override void Use(GameObject owner)
+    public override void Use()
     {
+        if (!Owner) return;
+
+        EnsureChargeRing();
+
         charging = true;
-        lastOwner = owner;
+        lastOwner = Owner;
         lastUseTime = Time.time;
 
-        // NOTE: this assumes Use(owner) is called every frame while held (your pattern)
         charge += Time.deltaTime;
         if (charge > maxChargeTime)
             charge = maxChargeTime;
+
+        if (chargeRing)
+        {
+            chargeRing.Show();
+            chargeRing.SetProgress(charge / maxChargeTime);
+        }
     }
 
     void FireBurst(GameObject owner)
@@ -87,9 +115,32 @@ public class EnergyDrinkWeapon : Weapon
 
             // Build baked damage from EntityBody + WeaponData coefficient
             // (crit can roll per projectile; if you want per-burst, compute once outside loop)
-            DamageData dmg = BuildProjectileDamage(owner, dir);
+            DamageData dmg = BuildProjectileDamage(dir);
 
             proj.Init(owner, dir, dmg, speedOverride, lifetimeOverride);
+        }
+    }
+
+    void EnsureChargeRing()
+    {
+        if (!Owner) return;
+
+        if (!chargeRingTarget)
+            chargeRingTarget = Owner.transform;
+
+        if (!chargeRing)
+        {
+            chargeRing = Owner.GetComponentInChildren<ProgressRingUI>(true);
+
+            if (!chargeRing && chargeRingPrefab)
+                chargeRing = Instantiate(chargeRingPrefab, chargeRingTarget);
+        }
+
+        if (chargeRing)
+        {
+            chargeRing.transform.SetParent(chargeRingTarget, false);
+            chargeRing.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            chargeRing.SetTarget(chargeRingTarget);
         }
     }
 

@@ -7,9 +7,10 @@ public abstract class Item : MonoBehaviour
 
     protected ItemData data;
     protected SpriteRenderer spriteRenderer;
-    protected ItemHolder holder;
+    protected GameObject owner;
 
     public ItemData Data => data;
+    public GameObject Owner => owner;
 
     protected virtual void Awake()
     {
@@ -25,8 +26,11 @@ public abstract class Item : MonoBehaviour
         data = newData;
     }
 
-    public virtual void OnEquip()
+    public virtual void OnEquip(GameObject owner)
     {
+        if (owner == null) return;
+        this.owner = owner;
+        
         if (gameObjectsToDisableOnEquip != null)
         {
             SetGameObjectsActive(false);
@@ -39,6 +43,9 @@ public abstract class Item : MonoBehaviour
 
     public virtual void OnUnequip()
     {
+        if (this.owner == null) return;
+        this.owner = null;
+
         if (gameObjectsToDisableOnEquip != null)
         {
             SetGameObjectsActive(true);

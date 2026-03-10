@@ -148,7 +148,7 @@ public class Inventory : MonoBehaviour
             useLatch = false;
     }
 
-    public void TryUseSelected(GameObject owner)
+    public void TryUseSelected()
     {
         var slot = slots[selectedIndex];
         if (slot.data == null || currentEquippedInstance == null)
@@ -166,7 +166,7 @@ public class Inventory : MonoBehaviour
             useLatch = true;
         }
 
-        usable.Use(owner);
+        usable.Use();
 
         if (isConsumable)
         {

@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         if (input && input.AttackHeld)
         {
-            inventory?.TryUseSelected(gameObject);
+            inventory?.TryUseSelected();
         }
         else
         {
