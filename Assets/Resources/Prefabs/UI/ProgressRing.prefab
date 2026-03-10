@@ -46,7 +46,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5137915875858895903}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 3252845484421832196}
   - component: {fileID: 1354120414367950466}
   - component: {fileID: 2866065885721716542}
+  - component: {fileID: 370502045365507505}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -177,6 +178,21 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &370502045365507505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7216388311738757397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643d3e328e8a62a4db3305e326e3b4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RepeatedFlashing
+  flashingSpeed: 12
+  flashingColor: {r: 0.92, g: 0.24029905, b: 0.24029905, a: 1}
+  flashingEnabled: 0
 --- !u!1 &7575886695581038573
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +241,6 @@ MonoBehaviour:
   worldCanvas: {fileID: 2491143351898124751}
   followTarget: {fileID: 0}
   fillImage: {fileID: 2866065885721716542}
-  backgroundImage: {fileID: 0}
-  borderImage: {fileID: 0}
+  repeatedFlashing: {fileID: 370502045365507505}
   worldOffset: {x: 0.275, y: 0.5, z: 0}
   billboardToCamera: 0

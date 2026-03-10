@@ -7,8 +7,7 @@ public class ProgressRingUI : MonoBehaviour
     [SerializeField] Canvas worldCanvas;
     [SerializeField] Transform followTarget;
     [SerializeField] Image fillImage;
-    [SerializeField] Image backgroundImage;
-    [SerializeField] Image borderImage;
+    [SerializeField] RepeatedFlashing repeatedFlashing;
 
     [Header("Follow")]
     [SerializeField] Vector3 worldOffset = new(0f, 1f, 0f);
@@ -33,6 +32,11 @@ public class ProgressRingUI : MonoBehaviour
 
         if (!fillImage)
             Debug.LogWarning($"{name}: ProgressRingUI has no fillImage assigned.");
+
+        if (!repeatedFlashing)
+            repeatedFlashing = GetComponentInChildren<RepeatedFlashing>(true);
+
+        repeatedFlashing?.SetFlashing(false);
 
         SetVisible(false);
         SetProgress(0f);
@@ -79,7 +83,12 @@ public class ProgressRingUI : MonoBehaviour
     public void SetProgress(float normalized)
     {
         if (!fillImage) return;
-        fillImage.fillAmount = Mathf.Clamp01(normalized);
+
+        normalized = Mathf.Clamp01(normalized);
+        fillImage.fillAmount = normalized;
+
+        if (repeatedFlashing)
+            repeatedFlashing.SetFlashing(normalized >= 1f);
     }
 
     public void SetVisible(bool visible)
@@ -98,6 +107,7 @@ public class ProgressRingUI : MonoBehaviour
 
     public void Hide()
     {
+        repeatedFlashing?.SetFlashing(false);
         gameObject.SetActive(false);
         SetVisible(false);
     }
@@ -119,6 +129,7 @@ public class ProgressRingUI : MonoBehaviour
     public void Stop(bool hide = true, bool reset = false)
     {
         isPlaying = false;
+        repeatedFlashing?.SetFlashing(false);
 
         if (reset)
         {
