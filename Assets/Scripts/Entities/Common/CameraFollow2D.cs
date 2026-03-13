@@ -23,12 +23,16 @@ public class CameraFollow2D : MonoBehaviour
     {
         if (!target) target = transform;
 
-        cam = Camera.main;
-        if (!pixelPerfectCamera && cam)
-            pixelPerfectCamera = cam.GetComponent<PixelPerfectCamera>();
-
         input = GetComponent<InputRouter>();
         targetRb = target.GetComponent<Rigidbody2D>();
+    }
+
+    public void BindCamera(Camera cameraRef)
+    {
+        cam = cameraRef;
+
+        if (cam)
+            pixelPerfectCamera = cam.GetComponent<PixelPerfectCamera>();
     }
 
     public void TickFixed()

@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50770a6ce0913fa4186ed8333e3a104d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySensor
-  acquireRadius: 3
+  acquireRadius: 5
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretBrain
   animator: {fileID: 4545030059146261705}
-  activationRadius: 3
+  activationRadius: 5
 --- !u!114 &6296918561362429646
 MonoBehaviour:
   m_ObjectHideFlags: 0

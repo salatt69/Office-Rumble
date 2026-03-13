@@ -206,6 +206,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3169188767391267945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2940539118002258075}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2940539118002258075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3169188767391267945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3078221933128778230}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4902118934982431844
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +698,8 @@ GameObject:
   - component: {fileID: 3841378942452156498}
   - component: {fileID: 901130360059950251}
   - component: {fileID: 8658586755750319074}
+  - component: {fileID: 1968571124725215207}
+  - component: {fileID: 7097817537143388937}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -690,6 +723,7 @@ Transform:
   - {fileID: 7988466735491715236}
   - {fileID: 8503689027533856858}
   - {fileID: 6635515909225213351}
+  - {fileID: 2940539118002258075}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4694378109666075409
@@ -733,7 +767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityBody
   baseMaxHealth: 7
   baseHealthRegen: 0
-  baseMoveSpeed: 3.7
+  baseMoveSpeed: 5
   baseAcceleration: 14
   baseDamage: 1
   baseAttackSpeed: 1
@@ -906,3 +940,33 @@ SortingGroup:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &1968571124725215207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458665112128769554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a19719fc7182154383304129e742bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMoney
+  money: 10000
+--- !u!114 &7097817537143388937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458665112128769554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb04363fac04cb4e810bc7d76ac65b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerUIBootstrap
+  healthUIPrefab: {fileID: 8717688731074238341, guid: 3bf0308f81553e9489e779f6f5030721, type: 3}
+  inventoryUIPrefab: {fileID: 5465817141884859160, guid: c4ec72e152ce64347817a166821f5a64, type: 3}
+  walletUIPrefab: {fileID: 7231312126042714398, guid: 089a2c618bac0a24080f18488bf965b3, type: 3}
+  statsUIPrefab: {fileID: 2254492446892991331, guid: 38bbfac1b7ef156469435c6598fb2ca3, type: 3}
+  uiParent: {fileID: 2940539118002258075}

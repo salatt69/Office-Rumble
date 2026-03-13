@@ -80,9 +80,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -694084417
-  m_SortingLayer: 11
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -471196740, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  m_Sprite: {fileID: 1735254962, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 10
-  damage: 0.3
   knockbackMultiplier: 0.5
   lifetime: 2
   destroyOnWallHit: 1
@@ -178,31 +177,13 @@ MonoBehaviour:
     m_Bits: 256
   spriteRenderer: {fileID: -432690082688079787}
   sprites:
-  - {fileID: -471196740, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  - {fileID: 1735254962, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   deathEffect: {fileID: 0}
   trailParticles: {fileID: 0}
   useSpeedCurve: 0
-  speedOverLife:
+  speedOverLifetime:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0.2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

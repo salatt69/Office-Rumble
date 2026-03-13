@@ -344,6 +344,6 @@ MonoBehaviour:
   minDamage: 0
   maxDamage: 500
   baseScale: 1
-  minScale: 0.0043
+  minScale: 0.0035
   maxScale: 0.01
   spawnJitter: {x: 0.15, y: 0.15}

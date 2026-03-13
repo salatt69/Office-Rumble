@@ -1,4 +1,3 @@
-// PlayerController.cs
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [Header("Pickup")]
     [SerializeField] float defaultPickupCooldown = 2f;
 
+    GameObject mainCameraPrefab;
+    GameObject mainCameraInstance;
+
     float pickupCooldownExitTime;
     public bool CanPickup => Time.time >= pickupCooldownExitTime;
 
@@ -28,7 +30,22 @@ public class PlayerController : MonoBehaviour
         if (!inventory) inventory = GetComponent<Inventory>();
         if (!animator) animator = GetComponentInChildren<Animator>(true);
 
-        // Let input router call back into controller for inventory actions
+        mainCameraPrefab = Resources.Load<GameObject>("Prefabs/Entities/Player/Main Camera");
+        if (mainCameraPrefab)
+        {
+            mainCameraInstance = Instantiate(mainCameraPrefab, transform.position, Quaternion.identity);
+
+            Camera spawnedCamera = mainCameraInstance.GetComponent<Camera>();
+            if (!spawnedCamera)
+                spawnedCamera = mainCameraInstance.GetComponentInChildren<Camera>(true);
+
+            if (cam && spawnedCamera)
+                cam.BindCamera(spawnedCamera);
+
+            if (aim && spawnedCamera)
+                aim.BindCamera(spawnedCamera);
+        }
+
         if (input) input.SetOwner(this);
     }
 
@@ -90,19 +107,14 @@ public class PlayerController : MonoBehaviour
         if (motor) motor.ApplyKnockbackLock(duration);
     }
 
-    // Inventory actions triggered by input router
     public void TryDrop()
     {
         if (!inventory) return;
-
-        // Dropping is not the same as picking up, but if you want to block it during pickup lock,
-        // keep this check. If you DON'T want that, remove this if.
-        if (!CanPickup)
-            return;
+        if (!CanPickup) return;
 
         Vector3 dropPos = GetItemDropPosition();
-        inventory?.Drop(dropPos);
-        AddItemPickupCooldown(); // optional: add cooldown after dropping too
+        inventory.Drop(dropPos);
+        AddItemPickupCooldown();
     }
 
     public void SelectSlot(int index) => inventory?.SelectSlot(index);

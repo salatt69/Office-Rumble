@@ -93,11 +93,16 @@ public class Inventory : MonoBehaviour
 
     public void Drop(Vector3 dropCoords)
     {
-        var slot = slots[selectedIndex];
+        var slot = slots[SelectedIndex];
         if (slot.data == null) return;
         if (slot.data.prefab == null) return;
 
-        Instantiate(slot.data.prefab, dropCoords, Quaternion.identity);
+        GameObject droppedObj = Instantiate(slot.data.prefab, dropCoords, Quaternion.identity);
+
+        ItemPickup pickup = droppedObj.GetComponentInChildren<ItemPickup>(true);
+        if (pickup)
+            pickup.SetFreeItem(true);
+
         Remove();
     }
 

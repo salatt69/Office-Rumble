@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   itemName: STAPLER
   prefab: {fileID: 1538920619850770153, guid: 21a15ade4a415e54db5769517ba9e65c, type: 3}
+  price: 15
   unequipped: {fileID: 725893805, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   highlightedUnequipped: {fileID: -113355084, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   equipped: {fileID: -2137077630, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}

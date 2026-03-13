@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
   itemName: FOCUS PILL
   prefab: {fileID: 554639737649061182, guid: a9f4ddd8befddb948b3f1e5e40cd862a, type: 3}
-  unequipped: {fileID: -1563681685, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
-  highlightedUnequipped: {fileID: 1558446235, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
-  equipped: {fileID: -172213185, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
-  icon: {fileID: -1585013568, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  price: 13
+  unequipped: {fileID: -4577031755040775505, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  highlightedUnequipped: {fileID: 1241311932990579013, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  equipped: {fileID: -8379603419791212513, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  icon: {fileID: 2807544022236895635, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   maxUses: 1
   buffs:
   - {fileID: 11400000, guid: 018dc042cb15bc24d80d8f796c031a16, type: 2}

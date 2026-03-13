@@ -5,6 +5,7 @@ public abstract class ItemData : ScriptableObject
     [Header("Item Info")]
     public string itemName;
     public GameObject prefab;
+    public int price;
 
     [Header("Item Sprites")]
     public Sprite unequipped;

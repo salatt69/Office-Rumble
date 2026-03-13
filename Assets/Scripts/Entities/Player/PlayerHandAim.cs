@@ -1,5 +1,4 @@
-﻿// PlayerAimAndHand.cs
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerHandAim : MonoBehaviour
@@ -24,13 +23,16 @@ public class PlayerHandAim : MonoBehaviour
 
     void Awake()
     {
-        cam = Camera.main;
-
         if (!hand) hand = transform.Find("Hand");
         if (!playerSprite) playerSprite = GetComponentInChildren<SpriteRenderer>(true);
 
         if (!holder && hand)
             holder = hand.GetComponentInChildren<ItemHolder>(true);
+    }
+
+    public void BindCamera(Camera cameraRef)
+    {
+        cam = cameraRef;
     }
 
     void Start()
@@ -49,7 +51,6 @@ public class PlayerHandAim : MonoBehaviour
     {
         if (!cam || !playerSprite) return;
 
-        // use mouse position only for facing/hand flip (even if you later aim differently)
         Vector2 mouseScreen = Mouse.current != null ? Mouse.current.position.ReadValue() : Vector2.zero;
         Vector3 mouseWorld = cam.ScreenToWorldPoint(mouseScreen);
         mouseWorld.z = 0f;

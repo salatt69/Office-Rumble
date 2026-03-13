@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Main%20Menu/MainMenuStyleSheet.uss?fileID=7433441132597879392&amp;guid=7481c2522566caa4c9f53f3a61abbe9c&amp;type=3#MainMenuStyleSheet" />
+    <ui:VisualElement name="Container" class="container" style="flex-grow: 1;">
+        <ui:VisualElement name="Splash" class="splash-logo" style="background-image: resource(&apos;Art/Main Menu/OR_LogoSplash&apos;);" />
+        <ui:VisualElement name="ButtonContainer" class="button-container">
+            <ui:Button text="Continue" name="ContinueButton" enabled="false" class="button button-diactivated" />
+            <ui:Button text="Start" name="StartButton" class="button" />
+            <ui:Button text="Options" name="OptionsButton" class="button" />
+            <ui:Button text="Exit Game" name="ExitButton" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

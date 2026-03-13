@@ -121,7 +121,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd27cf0b15da4ca4e941ea02b3751d79
+      spriteID: 5e60c85328977824f8a8b452517891af
       internalID: -2594991749270144440
       vertices: []
       indices: 
@@ -143,7 +143,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 294ea3feef487444ab226189716b70bc
+      spriteID: 8ae89804ade481d499dc8cdbb98ef114
       internalID: -7794112339037250244
       vertices: []
       indices: 
@@ -165,7 +165,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5fb17a4b47b3ba4cb10445a2465f8f6
+      spriteID: c434ceb9ba924724393022e3b3a01d36
       internalID: 5710046658965445949
       vertices: []
       indices: 
@@ -187,140 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dbbba4da9482d3489850668a45dee8f
+      spriteID: 8642777824a52634bacde7b50b40d27e
       internalID: 1809442258
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OR_Consumables_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 288
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5bf641bc661f7141aefa274ad907ecb
-      internalID: -948234590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OR_Consumables_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cfdd3b4ff80a78b4ca10904f42fac17e
-      internalID: -1563681685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OR_Consumables_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 256
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 670fa389b76034146bec65c009fdf29e
-      internalID: 1558446235
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OR_Consumables_7
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 256
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b6100c8345d87ca42a511dd760168588
-      internalID: -172213185
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OR_Consumables_8
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 256
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: afff4e71f18b84048890fb2ed86ad639
-      internalID: -1585013568
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OR_Consumables_9
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 256
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5340317d3e332de448f7411d78ac7921
-      internalID: -1215596847
       vertices: []
       indices: 
       edges: []
@@ -347,12 +215,6 @@ TextureImporter:
       OR_Consumables_1: -7794112339037250244
       OR_Consumables_2: 5710046658965445949
       OR_Consumables_3: 1809442258
-      OR_Consumables_4: -948234590
-      OR_Consumables_5: -1563681685
-      OR_Consumables_6: 1558446235
-      OR_Consumables_7: -172213185
-      OR_Consumables_8: -1585013568
-      OR_Consumables_9: -1215596847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

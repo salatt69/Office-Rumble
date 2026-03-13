@@ -2,23 +2,23 @@
     <Style src="project://database/Assets/UI%20Toolkit/StatsDisplayStyleSheet.uxml.uss?fileID=7433441132597879392&amp;guid=65b70b027c1352f45a3c79dfe8538617&amp;type=3#StatsDisplayStyleSheet.uxml" />
     <ui:VisualElement name="Container" class="stats-container">
         <ui:VisualElement name="Stat_Damage" class="stat">
-            <ui:VisualElement name="Icon_Damage" class="stat-icon" style="background-image: resource(&apos;Art/OR_StatIcon_Damage&apos;);" />
+            <ui:VisualElement name="Icon_Damage" class="stat-icon" style="background-image: resource(&apos;Art/UI/OR_StatIcon_Damage&apos;);" />
             <ui:Label name="Value_Damage" text="999.999" class="stat-value" />
         </ui:VisualElement>
         <ui:VisualElement name="Stat_AttackSpeed" class="stat">
-            <ui:VisualElement name="Icon_AttackSpeed" class="stat-icon" style="background-image: resource(&apos;Art/OR_StatIcon_AttackSpeed&apos;);" />
+            <ui:VisualElement name="Icon_AttackSpeed" class="stat-icon" style="background-image: resource(&apos;Art/UI/OR_StatIcon_AttackSpeed&apos;);" />
             <ui:Label name="Value_AttackSpeed" text="999.999" class="stat-value" />
         </ui:VisualElement>
         <ui:VisualElement name="Stat_MoveSpeed" class="stat">
-            <ui:VisualElement name="Icon_MoveSpeed" class="stat-icon" style="background-image: resource(&apos;Art/OR_StatIcon_MoveSpeed&apos;);" />
+            <ui:VisualElement name="Icon_MoveSpeed" class="stat-icon" style="background-image: resource(&apos;Art/UI/OR_StatIcon_MoveSpeed&apos;);" />
             <ui:Label name="Value_MoveSpeed" text="999.999" class="stat-value" />
         </ui:VisualElement>
         <ui:VisualElement name="Stat_CritChance" class="stat">
-            <ui:VisualElement name="Icon_CritChance" class="stat-icon" style="background-image: resource(&apos;Art/OR_StatIcon_CritChance&apos;);" />
+            <ui:VisualElement name="Icon_CritChance" class="stat-icon" style="background-image: resource(&apos;Art/UI/OR_StatIcon_CritChance&apos;);" />
             <ui:Label name="Value_CritChance" text="999.999" class="stat-value" />
         </ui:VisualElement>
         <ui:VisualElement name="Stat_CritMult" class="stat">
-            <ui:VisualElement name="Icon_CritMult" class="stat-icon" style="background-image: resource(&apos;Art/OR_StatIcon_CritMult&apos;);" />
+            <ui:VisualElement name="Icon_CritMult" class="stat-icon" style="background-image: resource(&apos;Art/UI/OR_StatIcon_CritMult&apos;);" />
             <ui:Label name="Value_CritMult" text="999.999" class="stat-value" />
         </ui:VisualElement>
     </ui:VisualElement>

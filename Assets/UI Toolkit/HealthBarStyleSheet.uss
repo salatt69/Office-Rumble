@@ -20,10 +20,10 @@
 }
 
 .heart-full {
-    background-image: resource('Art/OR_HealthHeart_Pixelated (More)');
+    background-image: resource('Art/UI/OR_HealthHeart_Pixelated (More)');
 }
 
 .heart-empty {
-    background-image: resource('Art/OR_HealthHeart_Empty_Pixelated (More)');
+    background-image: resource('Art/UI/OR_HealthHeart_Empty_Pixelated (More)');
     -unity-background-image-tint-color: rgb(113, 113, 113);
 }
