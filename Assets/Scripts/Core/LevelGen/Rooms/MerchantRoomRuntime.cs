@@ -8,6 +8,17 @@ public class MerchantRoomRuntime : RoomRuntime
         if (!spawnPoints || context == null || context.content == null)
             return;
 
+        Transform merchantPoint = spawnPoints.GetMerchantPoint(0);
+        GameObject merchantPrefab = Resources.Load<GameObject>("Prefabs/Entities/Dummy");
+        if (merchantPrefab)
+        {
+            GameObject merchantObject = Instantiate(merchantPrefab, merchantPoint.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("Failed to load merchantPrefab from 'Prefabs/Entities/Dummy'.");
+        }
+
         List<GameObject> pool = context.content.itemPrefabs;
         if (pool == null || pool.Count == 0)
             return;

@@ -4,6 +4,7 @@ using UnityEngine;
 public class RoomContext
 {
     public GameContentDatabase content;
+    public float overallScale = 1f;
 }
 
 public abstract class RoomRuntime : MonoBehaviour

@@ -45,6 +45,7 @@ public class ModularLevelGeneration : MonoBehaviour
 
     [Header("World Placement")]
     [SerializeField] Vector2 roomSize = new(16f, 16f);
+    [SerializeField] float roomScale = 0.75f;
 
     [Header("Room Modules")]
     [SerializeField] List<RoomModuleDefinition> roomModules = new();
@@ -180,7 +181,8 @@ public class ModularLevelGeneration : MonoBehaviour
 
         RoomContext roomContext = new()
         {
-            content = contentDatabase
+            content = contentDatabase,
+            overallScale = roomScale
         };
 
         foreach (var kv in cells)
@@ -195,8 +197,13 @@ public class ModularLevelGeneration : MonoBehaviour
                 continue;
             }
 
-            Vector3 worldPos = new(pos.x * roomSize.x, pos.y * roomSize.y, 0f);
+            float scaledRoomSizeX = roomSize.x * roomScale; 
+            float scaledRoomSizeY = roomSize.y * roomScale; 
+
+            Vector3 worldPos = new(pos.x * scaledRoomSizeX, pos.y * scaledRoomSizeY, 0f);
             RoomModuleDefinition room = Instantiate(prefab, worldPos, Quaternion.identity, transform);
+
+            room.transform.localScale *= roomScale;
 
             spawned[pos] = room;
 
