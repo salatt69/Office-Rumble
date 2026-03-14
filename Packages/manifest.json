@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.superjura.unity-zed-integration": "https://github.com/SuperJura/unity-zed-integration.git",
     "com.unity.2d.animation": "12.0.2",
     "com.unity.2d.psdimporter": "11.0.1",
     "com.unity.2d.sprite": "1.0.0",

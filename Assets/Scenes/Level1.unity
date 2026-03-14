@@ -296,6 +296,7 @@ MonoBehaviour:
   merchantChance: 0.75
   hiddenChance: 0.3
   roomSize: {x: 13, y: 12}
+  roomScale: 0.75
   roomModules:
   - {fileID: -2718210737621303803, guid: fe8cb482968a63145a4472ceeb658599, type: 3}
   - {fileID: -2718210737621303803, guid: c7c1eed07074e774db409e42c420c11b, type: 3}
