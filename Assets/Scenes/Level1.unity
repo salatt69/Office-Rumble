@@ -292,7 +292,7 @@ MonoBehaviour:
   contentDatabase: {fileID: 11400000, guid: fb82cf4f59010ea4588665194352ec72, type: 2}
   width: 9
   height: 9
-  targetNormalRooms: 6
+  targetNormalRooms: 9
   merchantChance: 0.75
   hiddenChance: 0.3
   roomSize: {x: 13, y: 12}
