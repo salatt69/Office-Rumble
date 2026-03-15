@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42dbbbdcaf4b2dc409ead7d8a8db827e, type: 3}
+  m_Name: T_DamagePill
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
+  itemName: RAGE PILL
+  prefab: {fileID: 1538920619850770153, guid: 9703471490f217b469226726c29b924b, type: 3}
+  price: 29
+  unequipped: {fileID: 2847175406539640119, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  highlightedUnequipped: {fileID: -6046069338114382816, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  equipped: {fileID: -7758966421044231880, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  icon: {fileID: 7873060791039548849, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  maxUses: 1
+  buffs:
+  - {fileID: 11400000, guid: 62f66337d4761a747a01f1db0489cce2, type: 2}

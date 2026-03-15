@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42dbbbdcaf4b2dc409ead7d8a8db827e, type: 3}
+  m_Name: T_AttackSpeedPill
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
+  itemName: FRENZY PILL
+  prefab: {fileID: 1538920619850770153, guid: 42f73d5b69ce21d4d90ece0509f5d18b, type: 3}
+  price: 26
+  unequipped: {fileID: -8647584102727861837, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  highlightedUnequipped: {fileID: -6065824021451516473, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  equipped: {fileID: 8835499619010449626, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  icon: {fileID: 8161405248128922811, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  maxUses: 1
+  buffs:
+  - {fileID: 11400000, guid: 1f0df5cebaa2bb24a8a5fd8dbf4dc293, type: 2}

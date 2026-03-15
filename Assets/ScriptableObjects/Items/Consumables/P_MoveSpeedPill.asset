@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42dbbbdcaf4b2dc409ead7d8a8db827e, type: 3}
-  m_Name: MoveSpeedPill
+  m_Name: P_MoveSpeedPill
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
   itemName: SPRINT PILL
   prefab: {fileID: 1538920619850770153, guid: 5eb2aadddc47c0649976eeaf8643c36e, type: 3}

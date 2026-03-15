@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42dbbbdcaf4b2dc409ead7d8a8db827e, type: 3}
+  m_Name: P_BottleOfWater
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
+  itemName: STAY HYDRATED!
+  prefab: {fileID: 1538920619850770153, guid: 7e6954fd3e0293847986293c856d530e, type: 3}
+  price: 52
+  unequipped: {fileID: 1067568612, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  highlightedUnequipped: {fileID: 561493201, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  equipped: {fileID: 1918456619, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  icon: {fileID: -1487607460, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  maxUses: 3
+  buffs:
+  - {fileID: 11400000, guid: 4c95bd9307714ee4782f371307e06e23, type: 2}

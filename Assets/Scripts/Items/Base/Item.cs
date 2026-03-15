@@ -2,10 +2,11 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
+    [SerializeField] ItemData data;
+
     [Tooltip("GameObjects to disable when this item is equipped.")]
     [SerializeField] GameObject[] gameObjectsToDisableOnEquip;
 
-    protected ItemData data;
     protected SpriteRenderer spriteRenderer;
     protected GameObject owner;
 

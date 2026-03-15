@@ -81,7 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120cab91796936447ad23bc9fd712d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
-  data: {fileID: 11400000, guid: a10db71dce9cf784dbdf55369251f40c, type: 2}
   requiresPurchase: 0
 --- !u!1 &291415455579201083
 GameObject:
@@ -164,8 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c1c46003abdad4facb66e3b0518842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemHighlight
-  data: {fileID: 11400000, guid: a10db71dce9cf784dbdf55369251f40c, type: 2}
-  spriteRenderer: {fileID: 3166553713982880742}
 --- !u!1 &554639737649061182
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd264e703b6fa8a49b13bb871b374e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Consumable
+  data: {fileID: 11400000, guid: a10db71dce9cf784dbdf55369251f40c, type: 2}
   gameObjectsToDisableOnEquip:
   - {fileID: 184142093444969422}
   - {fileID: 291415455579201083}

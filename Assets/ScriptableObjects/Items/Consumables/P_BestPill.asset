@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42dbbbdcaf4b2dc409ead7d8a8db827e, type: 3}
+  m_Name: P_BestPill
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
+  itemName: 4 FOR THE PRICE OF 1 PILL
+  prefab: {fileID: 1538920619850770153, guid: 6c3fe4a9b426d4e4e90d1148a0c1c21c, type: 3}
+  price: 50
+  unequipped: {fileID: 7575672447635342005, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  highlightedUnequipped: {fileID: 1347913494616627457, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  equipped: {fileID: -2573074044948308602, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  icon: {fileID: -7279146417581975045, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
+  maxUses: 1
+  buffs:
+  - {fileID: 11400000, guid: 018dc042cb15bc24d80d8f796c031a16, type: 2}
+  - {fileID: 11400000, guid: 4de4d583c181537428ffc111aceb2374, type: 2}
+  - {fileID: 11400000, guid: 20f5841ac2469684e83d76fd7759cab1, type: 2}
+  - {fileID: 11400000, guid: 4c95bd9307714ee4782f371307e06e23, type: 2}

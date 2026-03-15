@@ -4,9 +4,9 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour, IInteractable
 {
     [Header("Item")]
-    [SerializeField] ItemData data;
     [SerializeField] bool requiresPurchase;
 
+    ItemData data;
     GameObject priceTagPrefab;
     GameObject priceTagInstance;
     TMP_Text priceText;
@@ -17,6 +17,8 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     void Awake()
     {
+        data = GetItemDataFromRoot();
+
         priceTagPrefab = Resources.Load<GameObject>("Prefabs/UI/PriceTag");
         priceTagInstance = Instantiate(priceTagPrefab, transform);
 
@@ -41,7 +43,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
             priceTagInstance.SetActive(requiresPurchase);
 
         if (priceText)
-            priceText.text = requiresPurchase ? data.price.ToString() : "";
+            priceText.text = requiresPurchase ? data?.price.ToString() : "";
     }
 
     public void TryInteract(PlayerController player)
@@ -93,5 +95,19 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
         player.AddItemPickupCooldown();
         Destroy(transform.parent.gameObject);
+    }
+
+    private ItemData GetItemDataFromRoot()
+    {
+        var itemComp = GetComponentInParent<Item>();
+        if (itemComp != null)
+        {
+            return itemComp.Data;
+        }
+        else
+        {
+            Debug.LogWarning("No Item Component found in parent");
+            return null;
+        }
     }
 }

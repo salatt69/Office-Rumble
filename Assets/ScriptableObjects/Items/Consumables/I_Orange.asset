@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42dbbbdcaf4b2dc409ead7d8a8db827e, type: 3}
-  m_Name: Orange
+  m_Name: I_Orange
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
   itemName: ORANGE
   prefab: {fileID: 2115411700821621942, guid: c4641ad64cdcc514390e28a7e173e9ed, type: 3}

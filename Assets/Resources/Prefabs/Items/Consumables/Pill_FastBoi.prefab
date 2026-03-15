@@ -81,7 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c1c46003abdad4facb66e3b0518842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemHighlight
-  spriteRenderer: {fileID: 4118366389215968266}
 --- !u!1 &1250610857128934282
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +111,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7956112187232641809}
   - {fileID: 7794686360432745150}
   - {fileID: 7502680930120471198}
   m_Father: {fileID: 895970794844763170}
@@ -164,7 +162,7 @@ SpriteRenderer:
   m_SortingLayerID: -694084417
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 725893805, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  m_Sprite: {fileID: -768950134606738986, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -184,9 +182,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895970794844763170}
-  - component: {fileID: 3221693850018232853}
+  - component: {fileID: 8855165099279517398}
   m_Layer: 0
-  m_Name: Stapler
+  m_Name: Pill_FastBoi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,14 +199,14 @@ Transform:
   m_GameObject: {fileID: 1538920619850770153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5136664646145253405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3221693850018232853
+--- !u!114 &8855165099279517398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,45 +215,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1538920619850770153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b610daf41fcf49438477839df9c088d, type: 3}
+  m_Script: {fileID: 11500000, guid: dd264e703b6fa8a49b13bb871b374e78, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StaplerWeapon
-  data: {fileID: 11400000, guid: 79282e0a05e4c894292c415c08bc1df7, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::Consumable
+  data: {fileID: 11400000, guid: b076fd300aaee7841b53776d9bbae748, type: 2}
   gameObjectsToDisableOnEquip:
   - {fileID: 7086939410063522498}
   - {fileID: 967848558099630803}
-  firePoint: {fileID: 7956112187232641809}
---- !u!1 &4954714290428215971
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7956112187232641809}
-  m_Layer: 0
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7956112187232641809
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4954714290428215971}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1875, y: 0.015625, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5136664646145253405}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7086939410063522498
 GameObject:
   m_ObjectHideFlags: 0

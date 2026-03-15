@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42dbbbdcaf4b2dc409ead7d8a8db827e, type: 3}
+  m_Name: I_LunchBox
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableData
+  itemName: "BON APP\xC9TIT"
+  prefab: {fileID: 1538920619850770153, guid: 557804c2c4e3265478be7bf915a3a7c8, type: 3}
+  price: 103
+  unequipped: {fileID: -699628263, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  highlightedUnequipped: {fileID: -148197609, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  equipped: {fileID: -1125818926, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  icon: {fileID: 929434774, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
+  maxUses: 1
+  buffs:
+  - {fileID: 11400000, guid: 20f5841ac2469684e83d76fd7759cab1, type: 2}
+  - {fileID: 11400000, guid: 298386c53d827a74ea1f585f14385212, type: 2}

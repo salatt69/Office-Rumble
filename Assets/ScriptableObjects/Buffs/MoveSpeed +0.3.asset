@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d5eb59a355efa4449fd578f9448b1e2, type: 3}
-  m_Name: HealFor1
-  m_EditorClassIdentifier: Assembly-CSharp::ImmediateHealBuff
+  m_Script: {fileID: 11500000, guid: 5c79661a4777de04987c41fcd88cacdf, type: 3}
+  m_Name: MoveSpeed +0.3
+  m_EditorClassIdentifier: Assembly-CSharp::StatModifierBuff
   effects: []
-  amount: 1
+  stat: 2
+  mode: 0
+  value: 0.3

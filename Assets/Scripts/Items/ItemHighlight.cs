@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class ItemHighlight : MonoBehaviour, IHighlight
 {
-    [SerializeField] ItemData data;
-    [SerializeField] SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer;
+    ItemData data;
+
+    void Awake()
+    {
+        data = GetItemDataFromRoot();
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+    }
 
     public string GetInteractionText()
     {
@@ -18,5 +24,19 @@ public class ItemHighlight : MonoBehaviour, IHighlight
             return;
         }
         spriteRenderer.sprite = state ? data.highlightedUnequipped : data.unequipped;
+    }
+
+    private ItemData GetItemDataFromRoot()
+    {
+        var itemComp = GetComponentInParent<Item>();
+        if (itemComp != null)
+        {
+            return itemComp.Data;
+        }
+        else
+        {
+            Debug.LogWarning("No Item Component found in parent");
+            return null;
+        }
     }
 }

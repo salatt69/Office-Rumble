@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c79661a4777de04987c41fcd88cacdf, type: 3}
-  m_Name: PermaAdd_CritChance
-  m_EditorClassIdentifier: Assembly-CSharp::StatModifierBuff
+  m_Script: {fileID: 11500000, guid: 26a69732d4a3d324099846a033a7dd57, type: 3}
+  m_Name: CritDamage x3 5s
+  m_EditorClassIdentifier: Assembly-CSharp::StatModifierTimedBuff
   effects: []
-  stat: 6
-  mode: 0
-  value: 0.05
+  stat: 7
+  mode: 1
+  value: 3
+  duration: 5
