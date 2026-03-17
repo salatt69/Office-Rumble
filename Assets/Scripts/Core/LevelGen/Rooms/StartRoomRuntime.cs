@@ -1,11 +1,19 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class StartRoomRuntime : RoomRuntime
 {
+    private GameObject astarObjectPrefab;
+    private GameObject astarObjectInstance;
+
+    protected override void Awake()
+    {
+        astarObjectPrefab = Resources.Load<GameObject>("Prefabs/World/Astar");
+    }
+
     protected override void SetupRoom()
     {
+
         if (context?.content?.playerPrefab && spawnPoints)
         {
             Transform playerPoint = spawnPoints.GetRandomPlayerPoint();
@@ -16,7 +24,16 @@ public class StartRoomRuntime : RoomRuntime
                     playerPoint.position,
                     Quaternion.identity
                 );
+
+                //if (astarObjectPrefab)
+                //{
+                //    astarObjectInstance = Instantiate(
+                //        astarObjectPrefab,
+                //        playerPoint.position,
+                //        Quaternion.identity);
+                //}
             }
+
         }
 
         Transform itemPoint = spawnPoints ? spawnPoints.GetRandomItemPoint() : null;

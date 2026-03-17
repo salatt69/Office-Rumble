@@ -136,8 +136,10 @@ GameObject:
   - component: {fileID: 4531900831428322947}
   - component: {fileID: 950266770375276458}
   - component: {fileID: 3403368830520678469}
-  - component: {fileID: 6832682010229870184}
   - component: {fileID: 3429024404074169232}
+  - component: {fileID: 2752618503244676365}
+  - component: {fileID: 8024173074724584096}
+  - component: {fileID: 582365636648165300}
   - component: {fileID: 6296918561362429646}
   - component: {fileID: 3207696599828192173}
   m_Layer: 7
@@ -206,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityBody
   baseMaxHealth: 10
   baseHealthRegen: 0
-  baseMoveSpeed: 2
+  baseMoveSpeed: 1.5
   baseAcceleration: 0
   baseDamage: 1
   baseAttackSpeed: 1
@@ -266,10 +268,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50770a6ce0913fa4186ed8333e3a104d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySensor
-  acquireRadius: 6
   targetMask:
     serializedVersion: 2
     m_Bits: 64
+  acquireRadius: 4.5
+  loseRadius: 5.5
+  attackRadius: 3.5
+  drawGizmos: 1
 --- !u!114 &3403368830520678469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,21 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d42b1ffc6fe74b488b21d40274c4ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBrain
---- !u!114 &6832682010229870184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2930729359625549573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5596472edf747b546adfbb438c059e13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyChaser
-  stoppingDistance: 4
-  slowRadius: 1.5
-  chaseRadius: 10
 --- !u!114 &3429024404074169232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,11 +302,92 @@ MonoBehaviour:
   firePoint: {fileID: 3550724848409987662}
   projectilePrefab: {fileID: 1342612922178115808, guid: 6f00213b41c29a746a19324b5b5be3b9, type: 3}
   body: {fileID: 5146264691608645036}
-  shootRadius: 4.5
-  baseFireInterval: 0.8
-  damageCoefficient: 1
   projectileSpeedOverride: -1
   projectileLifetimeOverride: -1
+--- !u!114 &2752618503244676365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930729359625549573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.Seeker
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &8024173074724584096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930729359625549573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.AIPath
+  version: 5
+  radius: 0.5
+  height: 2
+  canMove: 1
+  maxSpeed: 1
+  gravity: {x: NaN, y: NaN, z: NaN}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  centerOffsetCompatibility: NaN
+  repathRateCompatibility: NaN
+  canSearchCompability: 0
+  orientation: 1
+  enableRotation: 0
+  autoRepath:
+    mode: 2
+    interval: 0.5
+    sensitivity: 10
+    maximumInterval: 2
+    visualizeSensitivity: 0
+  targetCompatibility: {fileID: 0}
+  maxAcceleration: -2.5
+  rotationSpeed: 360
+  slowdownDistance: 4
+  pickNextWaypointDist: 0.6
+  endReachedDistance: 2.5
+  alwaysDrawGizmos: 1
+  slowWhenNotFacingTarget: 1
+  whenCloseToDestination: 0
+  constrainInsideGraph: 0
+--- !u!114 &582365636648165300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930729359625549573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.AIDestinationSetter
+  version: 1
+  target: {fileID: 0}
 --- !u!114 &6296918561362429646
 MonoBehaviour:
   m_ObjectHideFlags: 0

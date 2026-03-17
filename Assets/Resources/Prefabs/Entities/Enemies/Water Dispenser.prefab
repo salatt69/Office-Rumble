@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 5964612386592309698}
   - component: {fileID: 4531900831428322947}
   - component: {fileID: 950266770375276458}
+  - component: {fileID: 3330169298969394945}
   - component: {fileID: 3429024404074169232}
-  - component: {fileID: 134475481136137525}
   - component: {fileID: 6296918561362429646}
   - component: {fileID: 3207696599828192173}
   m_Layer: 7
@@ -265,10 +265,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50770a6ce0913fa4186ed8333e3a104d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySensor
-  acquireRadius: 5
   targetMask:
     serializedVersion: 2
     m_Bits: 64
+  acquireRadius: 4
+  loseRadius: 4
+  attackRadius: 4
+  drawGizmos: 1
+--- !u!114 &3330169298969394945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930729359625549573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d42b1ffc6fe74b488b21d40274c4ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBrain
 --- !u!114 &3429024404074169232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,24 +299,8 @@ MonoBehaviour:
   firePoint: {fileID: 3550724848409987662}
   projectilePrefab: {fileID: 1342612922178115808, guid: a1132cbf8ca863d499c9d5ba907e27c7, type: 3}
   body: {fileID: 5146264691608645036}
-  baseFireInterval: 0.4
-  damageCoefficient: 1
   projectileSpeedOverride: -1
   projectileLifetimeOverride: -1
---- !u!114 &134475481136137525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2930729359625549573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d325bf93bdf18f4a8dbec15a4d92323, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TurretBrain
-  animator: {fileID: 4545030059146261705}
-  activationRadius: 5
 --- !u!114 &6296918561362429646
 MonoBehaviour:
   m_ObjectHideFlags: 0
