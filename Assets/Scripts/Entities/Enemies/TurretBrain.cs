@@ -29,7 +29,7 @@ public class TurretBrain : MonoBehaviour
     {
         if (sensor.target == null) return;
         isTargetInRange = sensor.distanceToTarget <= activationRadius;
-        animator.SetBool("TartgetInRange", isTargetInRange);
+        animator.SetBool("TargetInShootRange", isTargetInRange);
 
         if (isTargetInRange)
         {

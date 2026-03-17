@@ -8,6 +8,9 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField] Projectile projectilePrefab;
     [SerializeField] EntityBody body;
 
+    [Header("Radius")]
+    [SerializeField] float shootRadius = 10f;
+
     [Header("Firing")]
     [SerializeField] float baseFireInterval = 0.4f;   // interval at AttackSpeed = 1
     [SerializeField] float damageCoefficient = 1f;    // scales with body.Damage
@@ -15,6 +18,8 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField] float projectileLifetimeOverride = -1f; // <=0 uses prefab
 
     float nextFire;
+
+    public float Radius => shootRadius;
 
     void Awake()
     {

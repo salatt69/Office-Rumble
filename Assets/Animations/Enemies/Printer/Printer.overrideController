@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Printer
+  m_Controller: {fileID: 9100000, guid: 37aa2924151a76242a99cd8912d3a387, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8920022a3ba2a7844afbd69b295adf1d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a25ba6a9163748c4f8bd9e2e706abdbc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 621b17d0bbd08ca49b68f5c87f1eb011, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1528f94617affcb40a599155cda6eed1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 357ba9e2e4fa6b1418536eaa8dcc0ef5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 84f25a3af2f82ae41becc051527294d9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 449cf9ef92025494cb04df69c477ce98, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e8954c4982f19f64c9a700deac86f033, type: 2}

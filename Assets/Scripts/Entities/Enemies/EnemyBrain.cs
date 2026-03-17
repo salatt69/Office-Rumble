@@ -1,43 +1,73 @@
-﻿using Unity.IO.LowLevel.Unsafe;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(EnemySensor))]
-[RequireComponent(typeof(EnemyMover))]
 public class EnemyBrain : MonoBehaviour
 {
-    public EnemySensor sensor { get; private set; }
-    public EnemyMover mover { get; private set; }
-    public EnemyShooter shooter { get; private set; }
+    EnemySensor sensor;
+    EnemyChaser chaser;
+    EnemyShooter shooter;
+    FaceTarget faceTarget;
+    HurtboxGroup hurtboxGroup;
+    Animator animator;
 
-    [Header("Tuning")]
-    public float chaseDistance = 10f;
-    public float preferredShootDistance = 6f;
-    public float fleeDistance = 3f;
-    public float activationRadius = 8f;
-
-    IEnemyState state;
+    bool canChase;
+    bool canShoot;
+    bool hasFacing;
 
     void Awake()
     {
         sensor = GetComponent<EnemySensor>();
-        mover = GetComponent<EnemyMover>();
-        shooter = GetComponent<EnemyShooter>(); // optional
-    }
+        chaser = GetComponent<EnemyChaser>();
+        shooter = GetComponent<EnemyShooter>();
+        faceTarget = GetComponentInChildren<FaceTarget>();
+        hurtboxGroup = GetComponentInChildren<HurtboxGroup>();
+        animator = GetComponentInChildren<Animator>();
 
-    void Start()
-    {
-        SetState(new IdleState());
+        canChase = chaser != null;
+        canShoot = shooter != null;
+        hasFacing = faceTarget != null;
+
+        GetComponent<Health>().OnDied += OnDeath;
     }
 
     void Update()
     {
-        state?.Tick(this);
+        if (sensor.target == null) return;
+
+        float dist = sensor.distanceToTarget;
+
+        bool shouldChase = canChase && dist <= chaser.Radius;
+        bool inAttackRange = canShoot && dist <= shooter.Radius;
+
+        if (hasFacing && (shouldChase || inAttackRange))
+            faceTarget.SetTarget(sensor.target);
+
+        animator?.SetBool("ShouldChase", shouldChase && !inAttackRange);
+        animator?.SetBool("TargetInShootRange", inAttackRange);
+
+        if (shouldChase)
+            chaser.ChaseTarget(sensor.target);
+
+        if (inAttackRange)
+            shooter.TryShootAt(sensor.target);
     }
 
-    public void SetState(IEnemyState newState)
+    void OnDeath()
     {
-        state?.Exit(this);
-        state = newState;
-        state?.Enter(this);
+        sensor.ForgetTarget();
+        sensor.enabled = false;
+
+        if (canChase) chaser.enabled = false;
+        if (canShoot) shooter.enabled = false;
+
+        if (hasFacing)
+        {
+            faceTarget.ResetSpriteFlip();
+            faceTarget.enabled = false;
+        }
+
+        hurtboxGroup?.SetColliderActive(false);
+        animator?.SetTrigger("Dead");
     }
 }

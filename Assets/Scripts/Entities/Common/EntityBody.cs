@@ -59,7 +59,7 @@ public class EntityBody : MonoBehaviour
             if (m.stat != stat) continue;
 
             if (m.mode == StatModMode.Add) add += m.value;
-            else if (m.mode == StatModMode.Mul) mul *= (1f + m.value);
+            else if (m.mode == StatModMode.Mul) mul *= (m.value);
         }
 
         return (baseValue + add) * mul;
