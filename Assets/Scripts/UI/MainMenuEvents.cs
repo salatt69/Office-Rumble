@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(UIDocument))]
 public class MainMenuEvents : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    //[SerializeField] Animator animator;
 
     UIDocument document;
 
@@ -20,11 +20,11 @@ public class MainMenuEvents : MonoBehaviour
 
     void Awake()
     {
-        loadingScreen = Resources.Load<GameObject>("Prefabs/Scenes/LoadingScreen");
-        if (!loadingScreen)
-        {
-            Debug.LogError("Loading screen prefab not found in Resources/Prefabs/Scenes/LoadingScreen");
-        }
+        //loadingScreen = Resources.Load<GameObject>("Prefabs/Scenes/LoadingScreen");
+        //if (!loadingScreen)
+        //{
+        //    Debug.LogError("Loading screen prefab not found in Resources/Prefabs/Scenes/LoadingScreen");
+        //}
 
         document = GetComponent<UIDocument>();
 
@@ -38,24 +38,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private void StartGame(ClickEvent evt)
     {
-        StartCoroutine(LoadLevelAsync("Level1"));
-    }
-
-    IEnumerator LoadLevelAsync(string sceneName)
-    {
-        animator.SetTrigger("Start");
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        yield return new WaitForSeconds(stateInfo.length);
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-
-        loadingScreenInstance = Instantiate(loadingScreen);
-        loadingScreenInstance.SetActive(true);
-
-        while (!operation.isDone)
-        {
-            yield return null;
-        }
+        //StartCoroutine(LoadLevelAsync("Level1"));
+        GameSceneLoader.Instance.LoadSceneAsync("Level1");
     }
 }

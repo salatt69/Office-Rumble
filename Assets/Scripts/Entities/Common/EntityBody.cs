@@ -39,6 +39,7 @@ public class EntityBody : MonoBehaviour
     public void AddTimedBuff(BuffStat buff, float duration)
     {
         buffs.Add(buff);
+        OnStatsChanged?.Invoke();
         StartCoroutine(RemoveLater(buff, duration));
     }
 

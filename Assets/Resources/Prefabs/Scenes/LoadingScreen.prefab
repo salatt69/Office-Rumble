@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4271079045426186493}
   - component: {fileID: 7600028523838992394}
   - component: {fileID: 7659928015299281830}
+  - component: {fileID: 1903614408694606861}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -59,8 +60,8 @@ RectTransform:
   m_GameObject: {fileID: 1614592356141656544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4046142103004128644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 213089753022995999, guid: 6171af7a68014b04fa99cfa971e64181, type: 3}
+  m_Sprite: {fileID: 449009688, guid: e6338fa664ace90488f0e954134d9e1a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -107,6 +108,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1903614408694606861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614592356141656544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5508330f98f2cad4cb17dda61c3b5626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateAroundSelf
+  rotationSpeed: 180
+  clockwise: 1
+  randomStartRotation: 1
 --- !u!1 &5725264154931047377
 GameObject:
   m_ObjectHideFlags: 0
