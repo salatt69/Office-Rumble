@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Pathfinding;
 using URandom = UnityEngine.Random;
 
 [System.Flags]
@@ -24,11 +25,6 @@ public class ModularLevelGeneration : MonoBehaviour
         public bool occupied;
         public LevelGeneration.Rooms type;
         public DoorMask doors;
-    }
-
-    DoorMask NormalizeMask(DoorMask mask)
-    {
-        return mask & DoorMask.All;
     }
 
     [Header("Content")]
@@ -60,8 +56,14 @@ public class ModularLevelGeneration : MonoBehaviour
     [SerializeField] float markerDoorSize = 0.4f;
     [SerializeField] Vector2Int markerMapOffset = new(20, 0);
 
+    [Header("Pathfinder")]
+    [SerializeField] AstarPath pathfinderPrefab;
+
     readonly Dictionary<Vector2Int, CellData> cells = new();
     readonly Dictionary<Vector2Int, RoomModuleDefinition> spawned = new();
+
+    Vector2Int startCell;
+    AstarPath pathfinderInstance;
 
     static readonly Vector2Int[] DirVecs =
     {
@@ -73,8 +75,19 @@ public class ModularLevelGeneration : MonoBehaviour
 
     void Start()
     {
+        pathfinderInstance = Instantiate(pathfinderPrefab);
+        if (!pathfinderInstance)
+        {
+            Debug.LogError("Pathfinder has no instance");
+        }
+
         if (generateOnStart)
             Generate();
+    }
+
+    DoorMask NormalizeMask(DoorMask mask)
+    {
+        return mask & DoorMask.All;
     }
 
     [ContextMenu("Generate")]
@@ -82,12 +95,13 @@ public class ModularLevelGeneration : MonoBehaviour
     {
         Clear();
 
-        Vector2Int start = new(width / 2, height / 2);
+        startCell = new Vector2Int(width / 2, height / 2);
 
-        GenerateTopology(start);
-        AssignSpecialRooms(start);
+        GenerateTopology(startCell);
+        AssignSpecialRooms(startCell);
         SpawnRooms();
         SpawnMarkers(markerMapOffset);
+        FitPathfinderToLevel();
 
         if (printToConsole)
             DebugPrint();
@@ -98,11 +112,12 @@ public class ModularLevelGeneration : MonoBehaviour
     {
         Clear();
 
-        Vector2Int start = new(width / 2, height / 2);
+        startCell = new Vector2Int(width / 2, height / 2);
 
-        GenerateTopology(start);
-        AssignSpecialRooms(start);
+        GenerateTopology(startCell);
+        AssignSpecialRooms(startCell);
         SpawnMarkers();
+        FitPathfinderToLevel();
 
         if (printToConsole)
             DebugPrint();
@@ -185,6 +200,9 @@ public class ModularLevelGeneration : MonoBehaviour
             overallScale = roomScale
         };
 
+        float scaledRoomSizeX = roomSize.x * roomScale;
+        float scaledRoomSizeY = roomSize.y * roomScale;
+
         foreach (var kv in cells)
         {
             Vector2Int pos = kv.Key;
@@ -196,9 +214,6 @@ public class ModularLevelGeneration : MonoBehaviour
                 Debug.LogError($"No module found for type={cell.type}, doors={cell.doors}");
                 continue;
             }
-
-            float scaledRoomSizeX = roomSize.x * roomScale; 
-            float scaledRoomSizeY = roomSize.y * roomScale; 
 
             Vector3 worldPos = new(pos.x * scaledRoomSizeX, pos.y * scaledRoomSizeY, 0f);
             RoomModuleDefinition room = Instantiate(prefab, worldPos, Quaternion.identity, transform);
@@ -393,6 +408,93 @@ public class ModularLevelGeneration : MonoBehaviour
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
+    public bool TryGetBoundsRelativeToStart(out Vector2Int minOffset, out Vector2Int maxOffset)
+    {
+        minOffset = Vector2Int.zero;
+        maxOffset = Vector2Int.zero;
+
+        if (cells.Count == 0)
+            return false;
+
+        bool first = true;
+
+        foreach (var pos in cells.Keys)
+        {
+            Vector2Int offset = pos - startCell;
+
+            if (first)
+            {
+                minOffset = offset;
+                maxOffset = offset;
+                first = false;
+                continue;
+            }
+
+            minOffset = Vector2Int.Min(minOffset, offset);
+            maxOffset = Vector2Int.Max(maxOffset, offset);
+        }
+
+        return true;
+    }
+
+    public bool TryGetSymmetricWorldBoundsFromStart(out Vector2 center, out Vector2 size)
+    {
+        center = Vector2.zero;
+        size = Vector2.zero;
+
+        if (!TryGetBoundsRelativeToStart(out Vector2Int minOffset, out Vector2Int maxOffset))
+            return false;
+
+        float cellWidth = roomSize.x * roomScale;
+        float cellHeight = roomSize.y * roomScale;
+
+        center = new Vector2(startCell.x * cellWidth, startCell.y * cellHeight);
+
+        int maxHorizontal = Mathf.Max(Mathf.Abs(minOffset.x), Mathf.Abs(maxOffset.x));
+        int maxVertical = Mathf.Max(Mathf.Abs(minOffset.y), Mathf.Abs(maxOffset.y));
+
+        int roomsWide = maxHorizontal * 2 + 1;
+        int roomsHigh = maxVertical * 2 + 1;
+
+        size = new Vector2(
+            roomsWide * cellWidth * 2f,
+            roomsHigh * cellHeight * 2f
+        );
+
+        return true;
+    }
+
+    public void FitPathfinderToLevel()
+    {
+        if (pathfinderInstance == null)
+        {
+            Debug.LogWarning("Pathfinder is not assigned.");
+            return;
+        }
+
+        GridGraph grid = pathfinderInstance.data.gridGraph;
+        if (grid == null)
+        {
+            Debug.LogWarning("No GridGraph found on AstarPath.");
+            return;
+        }
+
+        if (!TryGetSymmetricWorldBoundsFromStart(out Vector2 center, out Vector2 size))
+        {
+            Debug.LogWarning("No generated cells to fit pathfinder to.");
+            return;
+        }
+
+        grid.center = new Vector3(center.x, center.y, 0f);
+
+        int nodesX = Mathf.CeilToInt(size.x / grid.nodeSize);
+        int nodesY = Mathf.CeilToInt(size.y / grid.nodeSize);
+
+        grid.SetDimensions(nodesX, nodesY, grid.nodeSize);
+
+        pathfinderInstance.Scan();
+    }
+
     public void Clear()
     {
         for (int i = transform.childCount - 1; i >= 0; i--)
@@ -405,6 +507,17 @@ public class ModularLevelGeneration : MonoBehaviour
     void DebugPrint()
     {
         Debug.Log($"Generated cells: {cells.Count}");
+
+        if (TryGetBoundsRelativeToStart(out Vector2Int minOffset, out Vector2Int maxOffset))
+        {
+            Debug.Log($"Relative bounds from start: min={minOffset}, max={maxOffset}");
+        }
+
+        if (TryGetSymmetricWorldBoundsFromStart(out Vector2 center, out Vector2 size))
+        {
+            Debug.Log($"Pathfinder center: {center}, size: {size}");
+        }
+
         foreach (var kv in cells.OrderBy(k => k.Key.y).ThenBy(k => k.Key.x))
             Debug.Log($"{kv.Key} | {kv.Value.type} | {kv.Value.doors}");
     }
