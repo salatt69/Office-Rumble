@@ -9,8 +9,7 @@ public class RoomContext
 
 public abstract class RoomRuntime : MonoBehaviour
 {
-    [SerializeField] protected RoomSpawnPoints spawnPoints;
-
+    protected RoomSpawnPoints spawnPoints;
     protected RoomContext context;
 
     protected virtual void Awake()
