@@ -12,6 +12,9 @@ public abstract class RoomRuntime : MonoBehaviour
     protected RoomSpawnPoints spawnPoints;
     protected RoomContext context;
 
+    protected List<GameObject> enemyInstances = new();
+    protected List<GameObject> itemInstances = new();
+
     protected virtual void Awake()
     {
         if (!spawnPoints)
@@ -29,13 +32,17 @@ public abstract class RoomRuntime : MonoBehaviour
     protected GameObject SpawnEnemy(GameObject prefab, Transform point)
     {
         if (!prefab || !point) return null;
-        return Instantiate(prefab, point.position, Quaternion.identity);
+        var enemy = Instantiate(prefab, point.position, Quaternion.identity);
+        enemyInstances.Add(enemy);
+        return enemy;
     }
 
-    protected GameObject SpawnItem(GameObject item, Transform point)
+    protected GameObject SpawnItem(GameObject prefab, Transform point)
     {
-        if (item == null || !point) return null;
-        return Instantiate(item, point.position, Quaternion.identity);
+        if (!prefab || !point) return null;
+        var item = Instantiate(prefab, point.position, Quaternion.identity);
+        itemInstances.Add(item);
+        return item;
     }
 
     protected GameObject RandomEnemy()
