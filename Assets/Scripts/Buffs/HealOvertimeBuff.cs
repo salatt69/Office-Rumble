@@ -13,4 +13,5 @@ public class HealOvertimeBuff : BuffData
         var h = target.GetComponent<Health>();
         if (h) h.Heal(amount);
     }
+    public override string GetDescription() => $"Heal {amount} HP over {duration}s";
 }

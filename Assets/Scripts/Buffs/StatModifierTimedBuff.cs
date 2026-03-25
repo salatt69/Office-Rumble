@@ -16,4 +16,5 @@ public class StatModifierTimedBuff : BuffData
 
         body.AddTimedBuff(new BuffStat { stat = stat, mode = mode, value = value }, duration);
     }
+    public override string GetDescription() => $"+{value} {stat} ({duration}s)";
 }

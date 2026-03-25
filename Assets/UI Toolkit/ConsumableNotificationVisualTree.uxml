@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/ConsumableNotificationStyleSheet.uxml.uss?fileID=7433441132597879392&amp;guid=331060612fcca6b4d8f07e9d41058de6&amp;type=3#ConsumableNotificationStyleSheet.uxml" />
+    <ui:VisualElement name="consumable-notification" class="consumable-notification">
+        <ui:VisualElement name="icon" class="notification-icon" />
+        <ui:Label name="effect-text" class="effect-text" />
+    </ui:VisualElement>
+</ui:UXML>

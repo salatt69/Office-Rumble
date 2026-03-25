@@ -15,4 +15,5 @@ public class StatModifierBuff : BuffData
 
         body.AddBuff(new BuffStat { stat = stat, mode = mode, value = value });
     }
+    public override string GetDescription() => $"+{value} {stat}";
 }

@@ -7,6 +7,7 @@ public class PlayerUIBootstrap : MonoBehaviour
     [SerializeField] GameObject inventoryUIPrefab;
     [SerializeField] GameObject walletUIPrefab;
     [SerializeField] GameObject statsUIPrefab;
+    [SerializeField] GameObject consumableNotificationUIPrefab;
 
     [Header("Optional Hierarchy Parent")]
     [SerializeField] Transform uiParent;
@@ -20,6 +21,7 @@ public class PlayerUIBootstrap : MonoBehaviour
     GameObject spawnedInventoryUI;
     GameObject spawnedWalletUI;
     GameObject spawnedStatsUI;
+    GameObject spawnedNotificationUI;
 
     void Awake()
     {
@@ -40,6 +42,7 @@ public class PlayerUIBootstrap : MonoBehaviour
         SpawnInventoryUI();
         SpawnWalletUI();
         SpawnStatsUI();
+        SpawnNotificationUI();
     }
 
     void SpawnHealthUI()
@@ -104,6 +107,13 @@ public class PlayerUIBootstrap : MonoBehaviour
             statsUI.Bind(body);
         else
             Debug.LogWarning($"{name}: Spawned stats UI prefab has no StatsDisplayUIDocumentBinder.");
+    }
+
+    void SpawnNotificationUI()
+    {
+        if (!consumableNotificationUIPrefab || spawnedNotificationUI) return;
+
+        spawnedNotificationUI = InstantiateUI(consumableNotificationUIPrefab);
     }
 
     GameObject InstantiateUI(GameObject prefab)

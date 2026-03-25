@@ -9,4 +9,5 @@ public class ImmediateHealBuff : BuffData
         var h = target.GetComponent<Health>();
         if (h) h.Heal(amount);
     }
+    public override string GetDescription() => $"Heal {amount} HP";
 }
