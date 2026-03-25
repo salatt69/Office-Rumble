@@ -26,6 +26,12 @@ public class EntityBody : MonoBehaviour
     public float AttackSpeed => ApplyMods(StatType.AttackSpeed, baseAttackSpeed);
     public float CritChance => ApplyMods(StatType.CritChance, baseCritChance);
     public float CritDamage => ApplyMods(StatType.CritDamage, baseCritDamage);
+
+    public float BaseMoveSpeed => baseMoveSpeed;
+    public float BaseDamage => baseDamage;
+    public float BaseAttackSpeed => baseAttackSpeed;
+    public float BaseCritChance => baseCritChance;
+    public float BaseCritDamage => baseCritDamage;
     public GameObject EntityGameObject => gameObject;
 
     public event Action OnStatsChanged;

@@ -37,13 +37,23 @@
 }
 
 .stat-value {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5019608);
     font-size: 22px;
-    unity-text-align: middle-left;
+    -unity-text-align: middle-left;
     -unity-font-definition: resource('Art/Fonts/OR_Font_Stats');
     -unity-text-align: middle-left;
     -unity-font-style: normal;
     top: 5px;
+}
+
+.stat-delta {
+    font-size: 22px;
+    -unity-text-align: middle-left;
+    -unity-font-definition: resource('Art/Fonts/OR_Font_Stats');
+    -unity-text-align: middle-left;
+    -unity-font-style: normal;
+    top: -3px;
+    color: rgba(27, 27, 27, 0.5);
 }
 
 .stat-icon-speed {

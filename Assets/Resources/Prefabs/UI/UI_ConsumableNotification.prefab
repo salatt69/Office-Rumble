@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5426018845035809651}
   - component: {fileID: 660599072498606788}
-  - component: {fileID: 5205008409203933817}
+  - component: {fileID: 806075624177840696}
   m_Layer: 5
   m_Name: UI_ConsumableNotification
   m_TagString: Untagged
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!114 &5205008409203933817
+--- !u!114 &806075624177840696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,8 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9a84bb8c746754aa8284dd907c7783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableNotificationUI
-  notificationDocument: {fileID: 660599072498606788}
   notificationAsset: {fileID: 9197481963319205126, guid: e19fe074b0d360841a31ab8b05079a55, type: 3}
-  poolSize: 4
-  displayDuration: 4
-  fadeOutDuration: 0.3
+  poolSize: 3
+  settings: {fileID: 11400000, guid: a9a4f03b684dd1f4cac211384685c005, type: 2}

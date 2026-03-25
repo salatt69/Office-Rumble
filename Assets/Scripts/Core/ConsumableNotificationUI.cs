@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(UIDocument))]
 public class ConsumableNotificationUI : MonoBehaviour
 {
-    [SerializeField] UIDocument notificationDocument;
     [SerializeField] VisualTreeAsset notificationAsset;
     [SerializeField] int poolSize = 4;
-    [SerializeField] float displayDuration = 2f;
-    [SerializeField] float fadeOutDuration = 0.3f;
+    [SerializeField] NotificationSettings settings;
 
+    UIDocument notificationDocument;
     VisualElement[] notificationPool;
     int currentIndex = 0;
 
@@ -56,7 +56,7 @@ public class ConsumableNotificationUI : MonoBehaviour
         notification.style.display = DisplayStyle.Flex;
         notificationRoot.AddToClassList("visible");
 
-        StartCoroutine(HideNotificationAfterDelay(notification, notificationRoot, thisIndex, displayDuration, fadeOutDuration));
+        StartCoroutine(HideNotificationAfterDelay(notification, notificationRoot, thisIndex, settings.displayDuration, settings.fadeOutDuration));
         RepositionNotifications();
     }
 
