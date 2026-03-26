@@ -237,7 +237,7 @@ MonoBehaviour:
   height: 12
   targetNormalRooms: 15
   merchantChance: 0.75
-  hiddenChance: 0
+  hiddenChance: 1
   roomSize: {x: 13, y: 12}
   roomScale: 0.75
   roomModules:
