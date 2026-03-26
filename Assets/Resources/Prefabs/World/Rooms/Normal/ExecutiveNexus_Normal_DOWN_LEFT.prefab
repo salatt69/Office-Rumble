@@ -122,7 +122,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 12
+      m_TileSpriteIndex: 14
       m_TileMatrixIndex: 1
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -191,12 +191,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 901103370179104019, guid: 1f1025687a7e7a1499c80f795af6970d, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: 152834089, guid: 1f1025687a7e7a1499c80f795af6970d, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 152834089, guid: 1f1025687a7e7a1499c80f795af6970d, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 901103370179104019, guid: 1f1025687a7e7a1499c80f795af6970d, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1180833994, guid: 1f1025687a7e7a1499c80f795af6970d, type: 3}
   - m_RefCount: 1
@@ -321,7 +321,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
 --- !u!19719996 &4141048005601472854
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -830,7 +830,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
 --- !u!19719996 &2244718907426186587
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -1304,7 +1304,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
 --- !u!1 &4385587439356573245
 GameObject:
   m_ObjectHideFlags: 0

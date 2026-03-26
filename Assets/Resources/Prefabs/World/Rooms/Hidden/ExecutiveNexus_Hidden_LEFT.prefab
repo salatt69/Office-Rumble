@@ -429,7 +429,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 4
-    m_Data: {fileID: 11400000, guid: 0264e55c5376a874fb35fd4fe6da2aab, type: 2}
+    m_Data: {fileID: 11400000, guid: 41a2970df14bbbc4497c36e34104e0c6, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -472,7 +472,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 4
-    m_Data: {fileID: -601942980, guid: 1f1025687a7e7a1499c80f795af6970d, type: 3}
+    m_Data: {fileID: 1982940821, guid: 1f1025687a7e7a1499c80f795af6970d, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
@@ -1051,6 +1051,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5241871175336406873}
   - component: {fileID: -2718210737621303803}
+  - component: {fileID: 6417433022720137278}
+  - component: {fileID: 2375033163892204520}
   m_Layer: 0
   m_Name: ExecutiveNexus_Hidden_LEFT
   m_TagString: Untagged
@@ -1091,6 +1093,68 @@ MonoBehaviour:
   roomType: 4
   doors: 4
   weight: 1
+--- !u!114 &6417433022720137278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521208865478467435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132b61bacaeff0d46baaed86f4aa52d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HiddenRoomRuntime
+  itemInsteadOfEnemyChance: 1
+  grid: {fileID: 8115195433476954965}
+  mask: {fileID: 5117407282387263420}
+  fadeDuration: 0.5
+--- !u!61 &2375033163892204520
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521208865478467435}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -7, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &5117407282387263420
 GameObject:
   m_ObjectHideFlags: 0

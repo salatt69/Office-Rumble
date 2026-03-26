@@ -475,7 +475,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
 --- !u!19719996 &4343578349820990858
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -1028,7 +1028,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
 --- !u!19719996 &4870820783990810795
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -3894,7 +3894,7 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
 --- !u!1 &9133692352101234681
 GameObject:
   m_ObjectHideFlags: 0
