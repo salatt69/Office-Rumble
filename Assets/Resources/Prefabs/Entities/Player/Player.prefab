@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7988466735491715236}
   - component: {fileID: 5829963198375606277}
   - component: {fileID: 6969409916226433162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6635515909225213351}
   - component: {fileID: 6931672896885333444}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2940539118002258075}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 259932259846991018}
   - component: {fileID: 944576910722163993}
   - component: {fileID: 8751455491251513870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemPickupRange
   m_TagString: Interaction
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 6837947560653786046}
   - component: {fileID: 771166344549135385}
   - component: {fileID: 8634185813196378722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5622159597951492603}
   - component: {fileID: 5844447076809019642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnvironmentalCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 575051467460058292}
   - component: {fileID: 6910137399617142735}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GripPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 8658586755750319074}
   - component: {fileID: 1968571124725215207}
   - component: {fileID: 7097817537143388937}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

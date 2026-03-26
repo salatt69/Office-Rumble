@@ -4,8 +4,10 @@ public class EnemySensor : MonoBehaviour
 {
     public Transform target { get; private set; }
     public float distanceToTarget { get; private set; }
+    public bool hasLineOfSight { get; private set; }
 
     [SerializeField] LayerMask targetMask;
+    [SerializeField] LayerMask obstructionMask;
     [SerializeField] float acquireRadius = 12f;
     [SerializeField] float loseRadius = 15f;
     [SerializeField] float attackRadius = 5f;
@@ -21,20 +23,49 @@ public class EnemySensor : MonoBehaviour
     {
         if (target == null)
         {
-            var hit = Physics2D.OverlapCircle(transform.position, acquireRadius, targetMask);
-            if (hit) target = hit.transform;
+            TryAcquireTarget();
         }
 
         if (target != null)
         {
             distanceToTarget = Vector2.Distance(transform.position, target.position);
+            hasLineOfSight = CheckLineOfSight();
 
+            // Only forget target based on distance, not LoS
             if (distanceToTarget > loseRadius)
                 ForgetTarget();
         }
     }
 
-    public void ForgetTarget() => target = null;
+    void TryAcquireTarget()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, acquireRadius, targetMask);
+        if (hit != null)
+        {
+            target = hit.transform;
+        }
+    }
+
+    bool CheckLineOfSight()
+    {
+        if (target == null) return false;
+
+        Vector2 start = transform.position;
+        Vector2 end = target.position;
+
+        RaycastHit2D hit = Physics2D.Linecast(start, end, obstructionMask);
+        
+        if (hit.collider == null)
+            return true;
+
+        return hit.transform == target;
+    }
+
+    public void ForgetTarget()
+    {
+        target = null;
+        hasLineOfSight = false;
+    }
 
     void OnDrawGizmos()
     {

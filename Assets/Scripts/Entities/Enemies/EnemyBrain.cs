@@ -44,7 +44,6 @@ public class EnemyBrain : MonoBehaviour
 
     void Update()
     {
-        // Feed target into A* or clear it
         if (canPathfind)
             destinationSetter.target = sensor.target;
 
@@ -57,21 +56,21 @@ public class EnemyBrain : MonoBehaviour
         }
 
         float dist = sensor.distanceToTarget;
-        bool inAttackRange = canShoot && dist <= sensor.AttackRadius;
+        bool canSeeTarget = sensor.hasLineOfSight;
 
-        // Stop moving when in attack range, chase otherwise
+        // Chase when no LoS, stop when has LoS (to shoot)
+        bool isChasing = canPathfind && !canSeeTarget;
         if (canPathfind)
-            aiPath.isStopped = inAttackRange;
+            aiPath.isStopped = !isChasing;
 
-        bool isChasing = canPathfind && !inAttackRange;
-
-        if (hasFacing && (isChasing || inAttackRange))
+        if (hasFacing && (!isChasing || canSeeTarget))
             faceTarget.SetTarget(sensor.target);
 
         animator?.SetBool("ShouldChase", isChasing);
-        animator?.SetBool("TargetInShootRange", inAttackRange);
+        animator?.SetBool("TargetInShootRange", canSeeTarget);
 
-        if (inAttackRange)
+        // Shoot only when has LoS
+        if (canSeeTarget)
             shooter.TryShootAt(sensor.target);
     }
 

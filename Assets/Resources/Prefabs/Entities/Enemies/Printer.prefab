@@ -271,6 +271,9 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 256
   acquireRadius: 4.5
   loseRadius: 5.5
   attackRadius: 3.5
@@ -369,7 +372,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 4
   pickNextWaypointDist: 0.6
-  endReachedDistance: 2.5
+  endReachedDistance: 0.75
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0

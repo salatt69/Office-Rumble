@@ -268,6 +268,9 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 256
   acquireRadius: 4
   loseRadius: 4
   attackRadius: 4
