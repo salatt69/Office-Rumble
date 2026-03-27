@@ -15,6 +15,9 @@
     padding-left: 6px;
     top: auto;
     right: 55%;
+    flex-direction: column;
+    align-self: center;
+    align-content: center;
 }
 
 .scrap {
@@ -38,11 +41,25 @@
 }
 
 .scrap-value {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.51);
     font-size: 22px;
     unity-text-align: middle-left;
     -unity-font-definition: resource('Art/Fonts/OR_Font_Stats');
     -unity-text-align: middle-left;
     -unity-font-style: normal;
     top: 5px;
+}
+
+.scrap-delta {
+    font-size: 19px;
+    -unity-text-align: middle-left;
+    -unity-font-definition: resource('Art/Fonts/OR_Font_Stats');
+    -unity-text-align: middle-left;
+    -unity-font-style: normal;
+    margin-left: 0;
+    align-self: center;
+    margin-bottom: 0;
+    top: 12%;
+    left: auto;
+    right: 26%;
 }

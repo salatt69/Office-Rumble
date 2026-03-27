@@ -68,5 +68,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c48b819c6c24cb46b7c26ebe2888c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrapDisplayUIDocumentBinder
-  document: {fileID: 4692829605121082962}
-  wallet: {fileID: 0}
+  settings: {fileID: 11400000, guid: a9a4f03b684dd1f4cac211384685c005, type: 2}

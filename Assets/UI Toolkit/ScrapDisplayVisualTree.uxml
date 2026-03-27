@@ -1,6 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/ScrapDisplayStyleSheet.uss?fileID=7433441132597879392&amp;guid=0e07b4b4552977a4cba28ca1a7939eca&amp;type=3#ScrapDisplayStyleSheet" />
     <ui:VisualElement name="Container" class="scrap-container">
+        <ui:Label name="Delta" text="+0" class="scrap-delta" />
         <ui:VisualElement name="Scap" class="scrap">
             <ui:VisualElement name="Icon" class="scrap-icon" style="background-image: resource(&apos;Art/UI/OR_Scrap&apos;);" />
             <ui:Label name="Value" text="999.999" class="scrap-value" />

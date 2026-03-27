@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d42b1ffc6fe74b488b21d40274c4ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBrain
+  scrapOnDeathRange: {x: 5, y: 10}
 --- !u!114 &3429024404074169232
 MonoBehaviour:
   m_ObjectHideFlags: 0

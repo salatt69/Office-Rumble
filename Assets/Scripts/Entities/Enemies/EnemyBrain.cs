@@ -1,10 +1,13 @@
-﻿using Pathfinding;
+using Pathfinding;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(EnemySensor))]
 public class EnemyBrain : MonoBehaviour
 {
+    [Header("Loot")]
+    [SerializeField] Vector2 scrapOnDeathRange;
+
     EnemySensor sensor;
     EnemyShooter shooter;
     FaceTarget faceTarget;
@@ -32,7 +35,6 @@ public class EnemyBrain : MonoBehaviour
         hasFacing = faceTarget != null;
         canPathfind = aiPath != null && destinationSetter != null;
 
-        // Sync EntityBody.MoveSpeed to AIPath
         if (canPathfind)
         {
             var body = GetComponent<EntityBody>();
@@ -58,7 +60,6 @@ public class EnemyBrain : MonoBehaviour
         float dist = sensor.distanceToTarget;
         bool canSeeTarget = sensor.hasLineOfSight;
 
-        // Chase when no LoS, stop when has LoS (to shoot)
         bool isChasing = canPathfind && !canSeeTarget;
         if (canPathfind)
             aiPath.isStopped = !isChasing;
@@ -69,7 +70,6 @@ public class EnemyBrain : MonoBehaviour
         animator?.SetBool("ShouldChase", isChasing);
         animator?.SetBool("TargetInShootRange", canSeeTarget);
 
-        // Shoot only when has LoS
         if (canSeeTarget)
             shooter.TryShootAt(sensor.target);
     }
@@ -96,5 +96,21 @@ public class EnemyBrain : MonoBehaviour
 
         hurtboxGroup?.SetColliderActive(false);
         animator?.SetTrigger("Dead");
+
+        GiveScrap();
+    }
+
+    void GiveScrap()
+    {
+        var player = FindFirstObjectByType<PlayerController>();
+        if (player == null) return;
+
+        var wallet = player.GetComponent<PlayerWallet>();
+        if (wallet != null)
+        {
+            int min = (int)scrapOnDeathRange.x;
+            int max = (int)scrapOnDeathRange.y;
+            wallet.AddMoney(Random.Range(min, max));
+        }
     }
 }

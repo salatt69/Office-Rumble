@@ -128,7 +128,7 @@ public class StatsDisplayUIDocumentBinder : MonoBehaviour
 
         if (Mathf.Approximately(delta, 0f))
         {
-            deltaLabel.style.display = DisplayStyle.None;
+            deltaLabel.style.opacity = new StyleFloat(0f);
             fadeCoroutines[deltaLabel] = null;
             return;
         }
