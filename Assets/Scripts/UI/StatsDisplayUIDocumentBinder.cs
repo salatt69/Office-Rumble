@@ -26,6 +26,12 @@ public class StatsDisplayUIDocumentBinder : MonoBehaviour
 
     readonly Dictionary<Label, Coroutine> fadeCoroutines = new();
 
+    float prevDamage;
+    float prevMoveSpeed;
+    float prevAttackSpeed;
+    float prevCritChance;
+    float prevCritDamage;
+
     void Awake()
     {
         document = GetComponent<UIDocument>();
@@ -39,7 +45,14 @@ public class StatsDisplayUIDocumentBinder : MonoBehaviour
         this.body = body;
 
         if (isActiveAndEnabled && this.body != null)
+        {
             this.body.OnStatsChanged += Refresh;
+            prevDamage = this.body.Damage;
+            prevMoveSpeed = this.body.MoveSpeed;
+            prevAttackSpeed = this.body.AttackSpeed;
+            prevCritChance = this.body.CritChance;
+            prevCritDamage = this.body.CritDamage;
+        }
 
         Refresh();
     }
@@ -61,7 +74,14 @@ public class StatsDisplayUIDocumentBinder : MonoBehaviour
         critMultDelta = root.Q<Label>("Delta_CritMult");
 
         if (body != null)
+        {
             body.OnStatsChanged += Refresh;
+            prevDamage = body.Damage;
+            prevMoveSpeed = body.MoveSpeed;
+            prevAttackSpeed = body.AttackSpeed;
+            prevCritChance = body.CritChance;
+            prevCritDamage = body.CritDamage;
+        }
 
         Refresh();
     }
@@ -76,17 +96,29 @@ public class StatsDisplayUIDocumentBinder : MonoBehaviour
     {
         if (body == null) return;
 
-        damageValue.text = body.Damage.ToString("0.0");
-        moveSpeedValue.text = body.MoveSpeed.ToString("0.0");
-        attackSpeedValue.text = body.AttackSpeed.ToString("0.00");
-        critChanceValue.text = body.CritChance.ToString("0.00");
-        critMultValue.text = body.CritDamage.ToString("0.00");
+        float damage = body.Damage;
+        float moveSpeed = body.MoveSpeed;
+        float attackSpeed = body.AttackSpeed;
+        float critChance = body.CritChance;
+        float critDamage = body.CritDamage;
 
-        UpdateDelta(damageDelta, body.Damage - body.BaseDamage);
-        UpdateDelta(moveSpeedDelta, body.MoveSpeed - body.BaseMoveSpeed);
-        UpdateDelta(attackSpeedDelta, body.AttackSpeed - body.BaseAttackSpeed);
-        UpdateDelta(critChanceDelta, body.CritChance - body.BaseCritChance);
-        UpdateDelta(critMultDelta, body.CritDamage - body.BaseCritDamage);
+        damageValue.text = damage.ToString("0.0");
+        moveSpeedValue.text = moveSpeed.ToString("0.0");
+        attackSpeedValue.text = attackSpeed.ToString("0.00");
+        critChanceValue.text = critChance.ToString("0.00");
+        critMultValue.text = critDamage.ToString("0.00");
+
+        UpdateDelta(damageDelta, damage - prevDamage);
+        UpdateDelta(moveSpeedDelta, moveSpeed - prevMoveSpeed);
+        UpdateDelta(attackSpeedDelta, attackSpeed - prevAttackSpeed);
+        UpdateDelta(critChanceDelta, critChance - prevCritChance);
+        UpdateDelta(critMultDelta, critDamage - prevCritDamage);
+
+        prevDamage = damage;
+        prevMoveSpeed = moveSpeed;
+        prevAttackSpeed = attackSpeed;
+        prevCritChance = critChance;
+        prevCritDamage = critDamage;
     }
 
     void UpdateDelta(Label deltaLabel, float delta)

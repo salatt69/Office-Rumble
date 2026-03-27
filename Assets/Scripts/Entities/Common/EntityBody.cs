@@ -76,6 +76,7 @@ public class EntityBody : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         buffs.Remove(buuff);
+        OnStatsChanged?.Invoke();
     }
 }
 
