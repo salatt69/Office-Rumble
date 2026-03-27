@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerUIBootstrap : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerUIBootstrap : MonoBehaviour
     [SerializeField] GameObject walletUIPrefab;
     [SerializeField] GameObject statsUIPrefab;
     [SerializeField] GameObject consumableNotificationUIPrefab;
+    [SerializeField] GameObject mapUIPrefab;
 
     [Header("Optional Hierarchy Parent")]
     [SerializeField] Transform uiParent;
@@ -22,6 +24,7 @@ public class PlayerUIBootstrap : MonoBehaviour
     GameObject spawnedWalletUI;
     GameObject spawnedStatsUI;
     GameObject spawnedNotificationUI;
+    GameObject spawnedMapUI;
 
     void Awake()
     {
@@ -43,6 +46,7 @@ public class PlayerUIBootstrap : MonoBehaviour
         SpawnWalletUI();
         SpawnStatsUI();
         SpawnNotificationUI();
+        SpawnMapUI();
     }
 
     void SpawnHealthUI()
@@ -114,6 +118,27 @@ public class PlayerUIBootstrap : MonoBehaviour
         if (!consumableNotificationUIPrefab || spawnedNotificationUI) return;
 
         spawnedNotificationUI = InstantiateUI(consumableNotificationUIPrefab);
+    }
+
+    void SpawnMapUI()
+    {
+        if (!mapUIPrefab || spawnedMapUI) return;
+
+        spawnedMapUI = InstantiateUI(mapUIPrefab);
+
+        var mapUI = spawnedMapUI.GetComponent<MapUIDocumentBinder>();
+        if (!mapUI)
+            mapUI = spawnedMapUI.GetComponentInChildren<MapUIDocumentBinder>(true);
+
+        if (mapUI)
+        {
+            var levelGen = FindAnyObjectByType<ModularLevelGeneration>();
+            mapUI.Bind(levelGen, transform);
+        }
+        else
+        {
+            Debug.LogWarning($"{name}: Spawned map UI prefab has no MapUIDocumentBinder.");
+        }
     }
 
     GameObject InstantiateUI(GameObject prefab)

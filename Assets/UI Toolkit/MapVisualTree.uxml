@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MapStyleSheet.uss?fileID=7433441132597879392&amp;guid=b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7&amp;type=3#MapStyleSheet" />
+    <ui:VisualElement name="MapContainer">
+        <ui:VisualElement name="MapBackground">
+            <ui:VisualElement name="MarkersContainer" />
+            <ui:VisualElement name="PlayerMarker" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

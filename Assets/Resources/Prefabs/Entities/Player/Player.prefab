@@ -970,4 +970,5 @@ MonoBehaviour:
   walletUIPrefab: {fileID: 7231312126042714398, guid: 089a2c618bac0a24080f18488bf965b3, type: 3}
   statsUIPrefab: {fileID: 2254492446892991331, guid: 38bbfac1b7ef156469435c6598fb2ca3, type: 3}
   consumableNotificationUIPrefab: {fileID: 8717688731074238341, guid: a2689604d7963c646b899c4857ccda3a, type: 3}
+  mapUIPrefab: {fileID: 8717688731074238342, guid: c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8, type: 3}
   uiParent: {fileID: 2940539118002258075}

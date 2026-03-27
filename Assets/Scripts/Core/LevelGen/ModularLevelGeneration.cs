@@ -63,6 +63,10 @@ public class ModularLevelGeneration : MonoBehaviour
     readonly Dictionary<Vector2Int, RoomModuleDefinition> spawned = new();
 
     Vector2Int startCell;
+    public Vector2Int StartCell => startCell;
+    public Vector2 RoomSize => roomSize;
+    public float RoomScale => roomScale;
+    public Dictionary<Vector2Int, CellData> Cells => cells;
     AstarPath pathfinderInstance;
 
     static readonly Vector2Int[] DirVecs =
