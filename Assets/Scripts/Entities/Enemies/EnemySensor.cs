@@ -11,6 +11,7 @@ public class EnemySensor : MonoBehaviour
     [SerializeField] float acquireRadius = 12f;
     [SerializeField] float loseRadius = 15f;
     [SerializeField] float attackRadius = 5f;
+    [SerializeField] float sightThickness = 0.5f;
     [SerializeField] bool drawGizmos = false;
 
     RoomRuntime currentRoom;
@@ -65,8 +66,10 @@ public class EnemySensor : MonoBehaviour
 
         Vector2 start = transform.position;
         Vector2 end = target.position;
+        Vector2 direction = (end - start).normalized;
+        float distance = Vector2.Distance(start, end);
 
-        RaycastHit2D hit = Physics2D.Linecast(start, end, obstructionMask);
+        RaycastHit2D hit = Physics2D.BoxCast(start, Vector2.one * sightThickness, 0, direction, distance + sightThickness, obstructionMask);
         
         if (hit.collider == null)
             return true;

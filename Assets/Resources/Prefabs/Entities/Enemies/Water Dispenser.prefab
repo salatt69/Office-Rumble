@@ -274,6 +274,7 @@ MonoBehaviour:
   acquireRadius: 4
   loseRadius: 4
   attackRadius: 4
+  sightThickness: 0.15
   drawGizmos: 1
 --- !u!114 &3330169298969394945
 MonoBehaviour:
