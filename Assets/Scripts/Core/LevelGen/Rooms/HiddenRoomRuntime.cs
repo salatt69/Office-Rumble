@@ -49,10 +49,14 @@ public class HiddenRoomRuntime : RoomRuntime
     {
         if (spawnPoints == null) return;
 
+        GameObject spawned;
         if (Random.value <= itemInsteadOfEnemyChance)
-            SpawnItem(RandomItem(), spawnPoints.GetRandomItemPoint());
+            spawned = SpawnItem(RandomItem(), spawnPoints.GetRandomItemPoint());
         else
-            SpawnEnemy(RandomEnemy(), spawnPoints.GetRandomEnemyPoint());
+            spawned = SpawnEnemy(RandomEnemy(), spawnPoints.GetRandomEnemyPoint());
+
+        if (spawned != null)
+            spawned.GetComponent<EnemySensor>()?.SetRoom(this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -63,6 +67,15 @@ public class HiddenRoomRuntime : RoomRuntime
             hasTriggered = true;
             if (mask != null) mask.SetActive(false);
             StartCoroutine(FadeTilemaps());
+            OnPlayerEntered();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.GetComponent<HurtboxGroup>() && other.GetComponentInParent<PlayerController>())
+        {
+            OnPlayerExited();
         }
     }
 

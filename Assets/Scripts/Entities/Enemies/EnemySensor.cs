@@ -13,14 +13,25 @@ public class EnemySensor : MonoBehaviour
     [SerializeField] float attackRadius = 5f;
     [SerializeField] bool drawGizmos = false;
 
+    RoomRuntime currentRoom;
+    public RoomRuntime CurrentRoom => currentRoom;
+
     public float AcquireRadius => acquireRadius;
     public float LoseRadius => loseRadius;
     public float AttackRadius => attackRadius;
 
     public bool TargetInAttackRange => target != null && distanceToTarget <= attackRadius;
 
+    public void SetRoom(RoomRuntime room) => currentRoom = room;
+
     void Update()
     {
+        if (currentRoom != null && !currentRoom.IsPlayerInside)
+        {
+            ForgetTarget();
+            return;
+        }
+
         if (target == null)
         {
             TryAcquireTarget();
@@ -31,7 +42,6 @@ public class EnemySensor : MonoBehaviour
             distanceToTarget = Vector2.Distance(transform.position, target.position);
             hasLineOfSight = CheckLineOfSight();
 
-            // Only forget target based on distance, not LoS
             if (distanceToTarget > loseRadius)
                 ForgetTarget();
         }
@@ -39,6 +49,9 @@ public class EnemySensor : MonoBehaviour
 
     void TryAcquireTarget()
     {
+        if (currentRoom != null && !currentRoom.IsPlayerInside)
+            return;
+
         Collider2D hit = Physics2D.OverlapCircle(transform.position, acquireRadius, targetMask);
         if (hit != null)
         {

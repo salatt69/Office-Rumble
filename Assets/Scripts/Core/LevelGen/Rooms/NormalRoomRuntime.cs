@@ -27,6 +27,8 @@ public class NormalRoomRuntime : RoomRuntime
 
             Health enemyHealth = enemy.GetComponent<Health>();
             enemyHealth.OnDied += DiedInThisRoom;
+
+            enemy.GetComponent<EnemySensor>()?.SetRoom(this);
         }
     }
 
@@ -53,6 +55,15 @@ public class NormalRoomRuntime : RoomRuntime
             {
                 doors.SetActive(true);
             }
+            OnPlayerEntered();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.GetComponent<HurtboxGroup>() && other.GetComponentInParent<PlayerController>())
+        {
+            OnPlayerExited();
         }
     }
 }

@@ -15,6 +15,10 @@ public abstract class RoomRuntime : MonoBehaviour
     protected List<GameObject> enemyInstances = new();
     protected List<GameObject> itemInstances = new();
 
+    protected bool isPlayerInside { get; private set; }
+
+    public bool IsPlayerInside => isPlayerInside;
+
     protected virtual void Awake()
     {
         if (!spawnPoints)
@@ -28,6 +32,9 @@ public abstract class RoomRuntime : MonoBehaviour
     }
 
     protected abstract void SetupRoom();
+
+    protected virtual void OnPlayerEntered() => isPlayerInside = true;
+    protected virtual void OnPlayerExited() => isPlayerInside = false;
 
     protected GameObject SpawnEnemy(GameObject prefab, Transform point)
     {

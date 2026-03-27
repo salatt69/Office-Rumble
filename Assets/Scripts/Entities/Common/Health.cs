@@ -105,6 +105,9 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (!IsAlive || isTemporaryInvulnerable) return;
 
+        TryGetComponent(out EnemySensor sensor);
+        if (sensor != null && sensor.CurrentRoom != null && !sensor.CurrentRoom.IsPlayerInside) return;
+
         // Flash
         damageFlash?.Flash();
         GameManager.Instance?.SpawnDamageNumber(damageData.amount, objectRoot.transform.position);
