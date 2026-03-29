@@ -7,11 +7,15 @@ public abstract class Item : MonoBehaviour
     [Tooltip("GameObjects to disable when this item is equipped.")]
     [SerializeField] GameObject[] gameObjectsToDisableOnEquip;
 
+    [Tooltip("Child transform where VFX can be spawned.")]
+    [SerializeField] Transform vfxChild;
+
     protected SpriteRenderer spriteRenderer;
     protected GameObject owner;
 
     public ItemData Data => data;
     public GameObject Owner => owner;
+    public Transform VFXChild => vfxChild;
 
     protected virtual void Awake()
     {

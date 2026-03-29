@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: HYPE PILL
   prefab: {fileID: 1538920619850770153, guid: fdd0c2a41107fd348af805b6057e8f82, type: 3}
   price: 42
+  tier: 16
   unequipped: {fileID: 7321534453026923268, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: 4525632182376285636, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: 5125160887291620589, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

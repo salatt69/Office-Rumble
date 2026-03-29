@@ -5,10 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(EnemySensor))]
 public class EnemyBrain : MonoBehaviour
 {
-    [Header("Loot")]
-    [SerializeField] Vector2 scrapOnDeathRange;
+    [Header("Health Bar")]
+    [SerializeField] GameObject healthBarPrefab;
 
     EnemySensor sensor;
+
+    [Header("Loot")]
+    [SerializeField] Vector2 scrapOnDeathRange;
     EnemyShooter shooter;
     FaceTarget faceTarget;
     HurtboxGroup hurtboxGroup;
@@ -42,6 +45,9 @@ public class EnemyBrain : MonoBehaviour
         }
 
         GetComponent<Health>().OnDied += OnDeath;
+
+        if (healthBarPrefab != null)
+            Instantiate(healthBarPrefab, transform);
     }
 
     void Update()
@@ -96,6 +102,10 @@ public class EnemyBrain : MonoBehaviour
 
         hurtboxGroup?.SetColliderActive(false);
         animator?.SetTrigger("Dead");
+
+        var healthBars = GetComponentsInChildren<Canvas>(true);
+        foreach (var hb in healthBars)
+            Destroy(hb.gameObject);
 
         GiveScrap();
     }

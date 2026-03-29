@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: STAY HYDRATED!
   prefab: {fileID: 1538920619850770153, guid: 7e6954fd3e0293847986293c856d530e, type: 3}
   price: 52
+  tier: 32
   unequipped: {fileID: 1067568612, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   highlightedUnequipped: {fileID: 561493201, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   equipped: {fileID: 1918456619, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}

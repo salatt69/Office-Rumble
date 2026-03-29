@@ -8,6 +8,7 @@ public class NormalRoomRuntime : RoomRuntime
 
     int diedAmount;
     bool roomCleared;
+    GameObject lastKilledEnemy;
 
     protected override void Awake()
     {
@@ -26,14 +27,15 @@ public class NormalRoomRuntime : RoomRuntime
             GameObject enemy = SpawnEnemy(RandomEnemy(), point);
 
             Health enemyHealth = enemy.GetComponent<Health>();
-            enemyHealth.OnDied += DiedInThisRoom;
+            enemyHealth.OnDied += () => DiedInThisRoom(enemy);
 
             enemy.GetComponent<EnemySensor>()?.SetRoom(this);
         }
     }
 
-    private void DiedInThisRoom()
+    private void DiedInThisRoom(GameObject enemy)
     {
+        lastKilledEnemy = enemy;
         diedAmount++;
         if (diedAmount >= enemyInstances.Count)
         {
@@ -42,6 +44,18 @@ public class NormalRoomRuntime : RoomRuntime
                 roomCleared = true;
                 doors.SetActive(false);
             }
+            SpawnReward();
+        }
+    }
+
+    private void SpawnReward()
+    {
+        if (lastKilledEnemy == null) return;
+
+        GameObject randomItem = RandomItem();
+        if (randomItem != null)
+        {
+            Instantiate(randomItem, lastKilledEnemy.transform.position, Quaternion.identity);
         }
     }
 

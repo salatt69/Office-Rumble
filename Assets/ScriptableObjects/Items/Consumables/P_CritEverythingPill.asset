@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: CRITICAL PILL
   prefab: {fileID: 1538920619850770153, guid: 40a670f262f689246b23a3c463267760, type: 3}
   price: 32
+  tier: 16
   unequipped: {fileID: -1258817545725926207, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: -8123060180622498267, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: -3863076679526203908, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

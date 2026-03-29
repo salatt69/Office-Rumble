@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: NOW GO DESTROY EVERYHTING, YOU HAVE ONLY 9s
   prefab: {fileID: 1538920619850770153, guid: 0acf094d70bb985429631bbcfec51025, type: 3}
   price: 68
+  tier: 32
   unequipped: {fileID: -599916860111233227, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: -7400867665310262432, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: -1557873089649762680, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

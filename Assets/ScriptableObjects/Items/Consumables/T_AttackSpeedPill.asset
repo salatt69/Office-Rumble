@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: FRENZY PILL
   prefab: {fileID: 1538920619850770153, guid: 42f73d5b69ce21d4d90ece0509f5d18b, type: 3}
   price: 26
+  tier: 32
   unequipped: {fileID: -8647584102727861837, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: -6065824021451516473, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: 8835499619010449626, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

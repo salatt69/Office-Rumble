@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: 4 FOR THE PRICE OF 1 PILL
   prefab: {fileID: 1538920619850770153, guid: 6c3fe4a9b426d4e4e90d1148a0c1c21c, type: 3}
   price: 50
+  tier: 8
   unequipped: {fileID: 7575672447635342005, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: 1347913494616627457, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: -2573074044948308602, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

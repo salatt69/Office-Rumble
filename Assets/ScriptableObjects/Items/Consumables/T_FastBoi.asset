@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: IM FAST .. BOI
   prefab: {fileID: 1538920619850770153, guid: 12d8f5c5ccce9b2428d4d4ccc923e86e, type: 3}
   price: 17
+  tier: 8
   unequipped: {fileID: -768950134606738986, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: 550382905861995993, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: -5778012200100243312, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

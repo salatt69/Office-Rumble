@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: "BON APP\xC9TIT"
   prefab: {fileID: 1538920619850770153, guid: 557804c2c4e3265478be7bf915a3a7c8, type: 3}
   price: 103
+  tier: 8
   unequipped: {fileID: -699628263, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   highlightedUnequipped: {fileID: -148197609, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   equipped: {fileID: -1125818926, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}

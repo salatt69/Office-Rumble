@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: RAGE PILL
   prefab: {fileID: 1538920619850770153, guid: 9703471490f217b469226726c29b924b, type: 3}
   price: 29
+  tier: 16
   unequipped: {fileID: 2847175406539640119, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: -6046069338114382816, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: -7758966421044231880, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

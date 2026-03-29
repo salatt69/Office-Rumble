@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: SPRINT PILL
   prefab: {fileID: 1538920619850770153, guid: 5eb2aadddc47c0649976eeaf8643c36e, type: 3}
   price: 13
+  tier: 64
   unequipped: {fileID: 4808960372913315786, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: 8344287946794766099, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: -8005989714740591243, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: HIGHER PRICE != BETTER PRODUCT
   prefab: {fileID: 1538920619850770153, guid: 50abcec7da19c734f8bd87fb46974491, type: 3}
   price: 99
+  tier: 16
   unequipped: {fileID: 4263126641326163441, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   highlightedUnequipped: {fileID: 1888880813679082724, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}
   equipped: {fileID: 1617600529736728020, guid: 8254172e82f19e34db2ac08644225dc9, type: 3}

@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: ORANGE
   prefab: {fileID: 2115411700821621942, guid: c4641ad64cdcc514390e28a7e173e9ed, type: 3}
   price: 8
+  tier: 64
   unequipped: {fileID: -2594991749270144440, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   highlightedUnequipped: {fileID: -7794112339037250244, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}
   equipped: {fileID: 5710046658965445949, guid: 9a4af570db6f7f34aab42b9633e4b317, type: 3}

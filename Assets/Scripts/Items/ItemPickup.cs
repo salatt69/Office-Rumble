@@ -7,9 +7,12 @@ public class ItemPickup : MonoBehaviour, IInteractable
     [SerializeField] bool requiresPurchase;
 
     ItemData data;
+    Item itemRef;
     GameObject priceTagPrefab;
     GameObject priceTagInstance;
     TMP_Text priceText;
+    Transform vfx;
+    GameObject spawnedVfx;
 
     public ItemData Data => data;
     public bool RequiresPurchase => requiresPurchase;
@@ -17,6 +20,9 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     void Awake()
     {
+        itemRef = GetComponentInParent<Item>();
+
+        vfx = itemRef?.VFXChild;
         data = GetItemDataFromRoot();
 
         priceTagPrefab = Resources.Load<GameObject>("Prefabs/UI/PriceTag");
@@ -27,6 +33,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
             priceTagInstance.transform.localPosition = new Vector3(0f, -0.3f, 0f);
             priceText = priceTagInstance.GetComponentInChildren<TMP_Text>();
         }
+        SpawnVFX();
 
         RefreshVisuals();
     }
@@ -94,7 +101,42 @@ public class ItemPickup : MonoBehaviour, IInteractable
         }
 
         player.AddItemPickupCooldown();
+
+        if (spawnedVfx != null)
+        {
+            var pss = spawnedVfx.GetComponentsInChildren<ParticleSystem>();
+            foreach (var ps in pss)
+            {
+                if (ps != null)
+                {
+                    ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                }
+            }
+        }
+
         Destroy(transform.parent.gameObject);
+    }
+
+    void SpawnVFX()
+    {
+        if (data == null || vfx == null) return;
+
+        string vfxName = data.tier switch
+        {
+            Tier.Common => "Prefabs/VFX/Tier_Common",
+            Tier.Rare => "Prefabs/VFX/Tier_Rare",
+            Tier.Epic => "Prefabs/VFX/Tier_Epic",
+            Tier.Legendary => "Prefabs/VFX/Tier_Legendary",
+            _ => null
+        };
+
+        if (vfxName == null) return;
+
+        GameObject vfxPrefab = Resources.Load<GameObject>(vfxName);
+        if (vfxPrefab != null)
+        {
+            spawnedVfx = Instantiate(vfxPrefab, vfx.position, Quaternion.identity, vfx);
+        }
     }
 
     private ItemData GetItemDataFromRoot()
