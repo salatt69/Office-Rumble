@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,11 +15,15 @@ public class PlayerController : MonoBehaviour
     [Header("Pickup")]
     [SerializeField] float defaultPickupCooldown = 2f;
 
+    [Header("Death Settings")]
+    [SerializeField] GameObject[] objectsToDisableOnDeath;
+
     GameObject mainCameraPrefab;
     GameObject mainCameraInstance;
 
     float pickupCooldownExitTime;
     public bool CanPickup => Time.time >= pickupCooldownExitTime;
+    public bool IsDead { get; private set; }
 
     void Awake()
     {
@@ -56,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (IsDead) return;
+
         if (input && input.AttackHeld)
         {
             inventory?.TryUseSelected();
@@ -76,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (IsDead) return;
+
         if (motor && input)
             motor.SetMoveInput(input.MoveInput);
 
@@ -85,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (IsDead) return;
+
         if (aim && input)
             aim.SetScoped(input.IsScoped);
 
@@ -120,4 +131,36 @@ public class PlayerController : MonoBehaviour
     public void SelectSlot(int index) => inventory?.SelectSlot(index);
     public void SelectNext() => inventory?.SelectNext();
     public void SelectPrevious() => inventory?.SelectPrevious();
+
+    public void SetDead()
+    {
+        IsDead = true;
+
+        if (input != null)
+            input.BlockItemSelection = true;
+
+        foreach (var obj in objectsToDisableOnDeath)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+
+        if (animator != null)
+            animator.SetTrigger("Died");
+
+        UpdateSpriteFlipToMouse();
+    }
+
+    public void UpdateSpriteFlipToMouse()
+    {
+        if (aim != null && aim.Camera != null)
+        {
+            Vector2 mouseScreen = Mouse.current != null ? Mouse.current.position.ReadValue() : Vector2.zero;
+            Vector3 mouseWorld = aim.Camera.ScreenToWorldPoint(mouseScreen);
+            mouseWorld.z = 0f;
+
+            bool isLeft = mouseWorld.x < transform.position.x;
+            aim.SetFacing(isLeft);
+        }
+    }
 }

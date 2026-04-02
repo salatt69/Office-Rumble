@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/AfterDeathStyleSheet.uss?fileID=7433441132597879392&amp;guid=5ec9338e46ac3984ba9ff35b8eb84a2e&amp;type=3#AfterDeathStyleSheet" />
+    <ui:VisualElement name="Container" class="container">
+        <ui:VisualElement name="Content" class="death-content">
+            <ui:Label text="YOU ARE FIRED!" name="DeathLabel" class="death-label" style="font-size: 124px;" />
+            <ui:VisualElement name="ButtonContainer" class="button-container">
+                <ui:Button text="Restart" name="RestartButton" class="button" />
+                <ui:Button text="Main Menu" name="MainMenuButton" class="button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -11,6 +11,8 @@ public class PlayerHandAim : MonoBehaviour
     [Header("Hand Local Position")]
     [SerializeField] bool autoCacheHandLocalPosOnStart = true;
 
+    public Camera Camera => cam;
+
     Camera cam;
 
     Vector3 localHandPos;
@@ -73,5 +75,21 @@ public class PlayerHandAim : MonoBehaviour
     public Vector3 GetItemDropPosition()
     {
         return transform.position + (IsLeftFacing ? Vector3.left : Vector3.right) * 0.5f;
+    }
+
+    public void SetFacing(bool isLeft)
+    {
+        IsLeftFacing = isLeft;
+        if (playerSprite != null)
+            playerSprite.flipX = isLeft;
+
+        if (holder != null)
+            holder.FlipY(isLeft);
+
+        if (hand)
+        {
+            float handX = isLeft ? localHandPosXInverted : localHandPosX;
+            hand.localPosition = new Vector3(handX, localHandPos.y, localHandPos.z);
+        }
     }
 }

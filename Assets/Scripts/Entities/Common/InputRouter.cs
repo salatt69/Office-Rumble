@@ -9,6 +9,7 @@ public class InputRouter : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool AttackHeld { get; private set; }
     public bool IsScoped { get; private set; }
+    public bool BlockItemSelection { get; set; }
 
     PlayerController owner;
 
@@ -132,7 +133,7 @@ public class InputRouter : MonoBehaviour
 
     void OnSelectNext(InputAction.CallbackContext ctx)
     {
-        if (!owner) return;
+        if (!owner || BlockItemSelection) return;
 
         Vector2 s = ctx.ReadValue<Vector2>();
         float v = s.y;

@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
 
 public class PlayerUIBootstrap : MonoBehaviour
 {
+    private static readonly WaitForSeconds _waitForSeconds1 = new(1f);
+
     [Header("UI Prefabs")]
     [SerializeField] GameObject healthUIPrefab;
     [SerializeField] GameObject inventoryUIPrefab;
@@ -10,6 +13,7 @@ public class PlayerUIBootstrap : MonoBehaviour
     [SerializeField] GameObject statsUIPrefab;
     [SerializeField] GameObject consumableNotificationUIPrefab;
     [SerializeField] GameObject mapUIPrefab;
+    [SerializeField] GameObject afterDeathUIPrefab;
 
     [Header("Optional Hierarchy Parent")]
     [SerializeField] Transform uiParent;
@@ -18,6 +22,7 @@ public class PlayerUIBootstrap : MonoBehaviour
     Inventory inventory;
     PlayerWallet wallet;
     EntityBody body;
+    PlayerController playerController;
 
     GameObject spawnedHealthUI;
     GameObject spawnedInventoryUI;
@@ -25,6 +30,9 @@ public class PlayerUIBootstrap : MonoBehaviour
     GameObject spawnedStatsUI;
     GameObject spawnedNotificationUI;
     GameObject spawnedMapUI;
+    GameObject spawnedAfterDeathUI;
+
+    bool deathHandled;
 
     void Awake()
     {
@@ -32,11 +40,44 @@ public class PlayerUIBootstrap : MonoBehaviour
         inventory = GetComponentInChildren<Inventory>(true);
         wallet = GetComponentInChildren<PlayerWallet>(true);
         body = GetComponentInChildren<EntityBody>(true);
+        playerController = GetComponentInChildren<PlayerController>(true);
     }
 
     void Start()
     {
         SpawnAndBindAll();
+
+        if (health != null)
+            health.OnDied += HandlePlayerDeath;
+    }
+
+    void OnDestroy()
+    {
+        if (health != null)
+            health.OnDied -= HandlePlayerDeath;
+    }
+
+    void HandlePlayerDeath()
+    {
+        if (deathHandled) return;
+        deathHandled = true;
+
+        playerController?.SetDead();
+
+        StartCoroutine(ShowAfterDeathUIAfterDelay());
+    }
+
+    IEnumerator ShowAfterDeathUIAfterDelay()
+    {
+        yield return _waitForSeconds1;
+        ShowAfterDeathUI();
+    }
+
+    void ShowAfterDeathUI()
+    {
+        if (!afterDeathUIPrefab || spawnedAfterDeathUI) return;
+
+        spawnedAfterDeathUI = InstantiateUI(afterDeathUIPrefab);
     }
 
     void SpawnAndBindAll()

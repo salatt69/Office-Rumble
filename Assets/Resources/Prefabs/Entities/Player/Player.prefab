@@ -880,14 +880,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195cb969132fce7428c12c3734fc4778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  input: {fileID: 0}
-  motor: {fileID: 0}
-  aim: {fileID: 0}
-  cam: {fileID: 0}
-  combat: {fileID: 0}
-  inventory: {fileID: 0}
-  animator: {fileID: 0}
-  defaultPickupCooldown: 2
+  input: {fileID: 4908869576089569191}
+  motor: {fileID: 6704897193616559558}
+  aim: {fileID: 7306171071307084400}
+  cam: {fileID: 7188666069380491782}
+  combat: {fileID: 1810011428865751550}
+  inventory: {fileID: 3841378942452156498}
+  animator: {fileID: 6969409916226433162}
+  defaultPickupCooldown: 0.5
+  objectsToDisableOnDeath:
+  - {fileID: 5249558467403741469}
+  - {fileID: 7270721203423862347}
 --- !u!114 &3841378942452156498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,4 +974,5 @@ MonoBehaviour:
   statsUIPrefab: {fileID: 2254492446892991331, guid: 38bbfac1b7ef156469435c6598fb2ca3, type: 3}
   consumableNotificationUIPrefab: {fileID: 8717688731074238341, guid: a2689604d7963c646b899c4857ccda3a, type: 3}
   mapUIPrefab: {fileID: 8717688731074238342, guid: c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8, type: 3}
+  afterDeathUIPrefab: {fileID: 2254492446892991331, guid: 3a5e724f42d6f1d4eba6ff8a7f6b5a8a, type: 3}
   uiParent: {fileID: 2940539118002258075}
