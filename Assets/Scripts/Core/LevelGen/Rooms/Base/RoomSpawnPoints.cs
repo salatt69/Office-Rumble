@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RoomSpawnPoints : MonoBehaviour
@@ -52,7 +53,13 @@ public class RoomSpawnPoints : MonoBehaviour
     }
 
     public Transform GetRandomPlayerPoint() => GetRandomFrom(playerPoints);
-    public Transform GetRandomEnemyPoint() => GetRandomFrom(enemyPoints);
+    public Transform GetRandomEnemyPoint(List<Transform> excluded = null)
+    {
+        if (excluded == null || excluded.Count == 0) return GetRandomFrom(enemyPoints);
+        
+        var available = enemyPoints.Where(p => !excluded.Contains(p)).ToList();
+        return GetRandomFrom(available);
+    }
     public Transform GetRandomItemPoint() => GetRandomFrom(itemPoints);
     public Transform GetRandomMerchantPoint() => GetRandomFrom(merchantPoints);
     public Transform GetRandomExitPoint() => GetRandomFrom(exitPoints);

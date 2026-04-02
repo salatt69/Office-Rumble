@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class NormalRoomRuntime : RoomRuntime
 {
@@ -21,9 +22,14 @@ public class NormalRoomRuntime : RoomRuntime
 
         int count = Random.Range(minEnemies, maxEnemies + 1);
 
+        var usedPoints = new List<Transform>();
+
         for (int i = 0; i < count; i++)
         {
-            Transform point = spawnPoints.GetRandomEnemyPoint();
+            Transform point = spawnPoints.GetRandomEnemyPoint(usedPoints);
+            if (point == null) continue;
+            
+            usedPoints.Add(point);
             GameObject enemy = SpawnEnemy(RandomEnemy(), point);
 
             Health enemyHealth = enemy.GetComponent<Health>();
