@@ -12,7 +12,9 @@ public class ConsumableNotificationUI : MonoBehaviour
 
     UIDocument notificationDocument;
     VisualElement[] notificationPool;
+    Coroutine[] hideCoroutines;
     int currentIndex = 0;
+    readonly List<int> visibleOrder = new();
 
     void Awake()
     {
@@ -24,6 +26,7 @@ public class ConsumableNotificationUI : MonoBehaviour
             templateElement.style.display = DisplayStyle.None;
 
         notificationPool = new VisualElement[poolSize];
+        hideCoroutines = new Coroutine[poolSize];
         for (int i = 0; i < poolSize; i++)
         {
             var clone = notificationAsset.CloneTree();
@@ -37,9 +40,16 @@ public class ConsumableNotificationUI : MonoBehaviour
     {
         if (data == null) return;
 
-        var notification = notificationPool[currentIndex];
-        var thisIndex = currentIndex;
-        currentIndex = (currentIndex + 1) % poolSize;
+        int thisIndex = GetAvailableIndex();
+
+        if (visibleOrder.Contains(thisIndex))
+        {
+            if (hideCoroutines[thisIndex] != null)
+                StopCoroutine(hideCoroutines[thisIndex]);
+            visibleOrder.Remove(thisIndex);
+        }
+
+        var notification = notificationPool[thisIndex];
 
         var notificationRoot = notification.Q<VisualElement>("consumable-notification");
         if (notificationRoot == null) notificationRoot = notification;
@@ -56,8 +66,36 @@ public class ConsumableNotificationUI : MonoBehaviour
         notification.style.display = DisplayStyle.Flex;
         notificationRoot.AddToClassList("visible");
 
-        StartCoroutine(HideNotificationAfterDelay(notification, notificationRoot, thisIndex, settings.displayDuration, settings.fadeOutDuration));
+        visibleOrder.Add(thisIndex);
+
+        hideCoroutines[thisIndex] = StartCoroutine(HideNotificationAfterDelay(notification, notificationRoot, thisIndex, settings.displayDuration, settings.fadeOutDuration));
+        BringToFront(notification);
         RepositionNotifications();
+    }
+
+    int GetAvailableIndex()
+    {
+        int startIndex = currentIndex;
+        do
+        {
+            if (notificationPool[currentIndex].style.display == DisplayStyle.None)
+            {
+                int result = currentIndex;
+                currentIndex = (currentIndex + 1) % poolSize;
+                return result;
+            }
+            currentIndex = (currentIndex + 1) % poolSize;
+        } while (currentIndex != startIndex);
+
+        int result2 = currentIndex;
+        currentIndex = (currentIndex + 1) % poolSize;
+        return result2;
+    }
+
+    void BringToFront(VisualElement notification)
+    {
+        notification.RemoveFromHierarchy();
+        notificationDocument.rootVisualElement.Add(notification);
     }
 
     IEnumerator HideNotificationAfterDelay(VisualElement notification, VisualElement notificationRoot, int index, float delay, float fadeOut)
@@ -68,13 +106,15 @@ public class ConsumableNotificationUI : MonoBehaviour
 
         yield return new WaitForSeconds(fadeOut);
         notification.style.display = DisplayStyle.None;
+        visibleOrder.Remove(index);
+        hideCoroutines[index] = null;
         RepositionNotifications();
     }
 
     void RepositionNotifications()
     {
         int yOffset = 0;
-        for (int i = 0; i < poolSize; i++)
+        foreach (int i in visibleOrder)
         {
             if (notificationPool[i].style.display == DisplayStyle.Flex)
             {

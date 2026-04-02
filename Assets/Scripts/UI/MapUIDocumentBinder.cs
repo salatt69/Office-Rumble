@@ -141,6 +141,27 @@ public class MapUIDocumentBinder : MonoBehaviour
         }
     }
 
+    void RebuildMarkers()
+    {
+        if (markersContainer == null) return;
+
+        markersContainer.Clear();
+        roomMarkers.Clear();
+
+        var cells = levelGenerator.Cells;
+
+        foreach (var kv in cells)
+        {
+            Vector2Int cellPos = kv.Key;
+            ModularLevelGeneration.CellData cell = kv.Value;
+
+            float worldX = cellPos.x * roomSize.x * roomScale;
+            float worldY = cellPos.y * roomSize.y * roomScale;
+
+            CreateRoomMarker(cellPos, new Vector2(worldX, worldY), cell.type);
+        }
+    }
+
     void CreateRoomMarker(Vector2Int cellPos, Vector2 worldPos, LevelGeneration.Rooms roomType)
     {
         var marker = new VisualElement();
@@ -244,6 +265,12 @@ public class MapUIDocumentBinder : MonoBehaviour
 
     void UpdateVisibleRooms(Vector2Int currentRoomPos)
     {
+        float worldX = currentRoomPos.x * roomSize.x * roomScale;
+        float worldY = currentRoomPos.y * roomSize.y * roomScale;
+        startCellWorldPos = new Vector2(worldX, worldY);
+
+        RebuildMarkers();
+
         visibleRooms.Clear();
         visibleRooms.Add(currentRoomPos);
 

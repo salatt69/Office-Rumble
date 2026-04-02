@@ -86,9 +86,32 @@ public class Inventory : MonoBehaviour
         OnSlotChanged?.Invoke(selectedIndex, slots[selectedIndex].data);
         OnSlotUsesChanged?.Invoke(selectedIndex, slots[selectedIndex].uses);
 
+        if (newData != null)
+            ShowPickupNotification(newData);
+
         EquipSelected();
 
         return old;
+    }
+
+    void ShowPickupNotification(ItemData data)
+    {
+        if (data is ConsumableData consumableData)
+        {
+            var notifier = UnityEngine.Object.FindAnyObjectByType<ConsumableNotificationUI>();
+            if (notifier != null)
+            {
+                string effects = "";
+                foreach (var b in consumableData.buffs)
+                {
+                    if (b)
+                    {
+                        effects += (string.IsNullOrEmpty(effects) ? "" : ", ") + b.GetDescription();
+                    }
+                }
+                notifier.Show(consumableData, effects);
+            }
+        }
     }
 
     public void Drop(Vector3 dropCoords)

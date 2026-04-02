@@ -53,6 +53,26 @@ public class ItemPickup : MonoBehaviour, IInteractable
             priceText.text = requiresPurchase ? data?.price.ToString() : "";
     }
 
+    void ShowPickupNotification()
+    {
+        if (data is ConsumableData consumableData)
+        {
+            var notifier = Object.FindAnyObjectByType<ConsumableNotificationUI>();
+            if (notifier != null)
+            {
+                string effects = "";
+                foreach (var b in consumableData.buffs)
+                {
+                    if (b)
+                    {
+                        effects += (string.IsNullOrEmpty(effects) ? "" : ", ") + b.GetDescription();
+                    }
+                }
+                notifier.Show(consumableData, effects);
+            }
+        }
+    }
+
     public void TryInteract(PlayerController player)
     {
         if (!player.CanPickup)
@@ -92,6 +112,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
         if (inventory.Add(data))
         {
+            ShowPickupNotification();
             inventory.SelectSlot(inventory.SelectedIndex);
         }
         else
