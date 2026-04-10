@@ -37,6 +37,16 @@ public class NormalRoomRuntime : RoomRuntime
 
             enemy.GetComponent<EnemySensor>()?.SetRoom(this);
         }
+
+        OnRoomCleared += OnClearedCameraReturn;
+    }
+
+    private void OnClearedCameraReturn()
+    {
+        if (CameraFollow2D.Instance != null)
+        {
+            CameraFollow2D.Instance.ReturnToPlayer();
+        }
     }
 
     private void DiedInThisRoom(GameObject enemy)
@@ -51,6 +61,7 @@ public class NormalRoomRuntime : RoomRuntime
                 doors.SetActive(false);
             }
             SpawnReward();
+            OnRoomCleared?.Invoke();
         }
     }
 
@@ -76,6 +87,11 @@ public class NormalRoomRuntime : RoomRuntime
                 doors.SetActive(true);
             }
             OnPlayerEntered();
+
+            if (HasEnemies && CameraFollow2D.Instance != null)
+            {
+                CameraFollow2D.Instance.SnapToRoom(RoomCenter);
+            }
         }
     }
 

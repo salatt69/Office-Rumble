@@ -854,6 +854,9 @@ MonoBehaviour:
   maxOffsetDistance: 2
   scopedPPU: 24
   unscopedPPU: 32
+  playerFollowWeight: 0.3
+  snapSpeed: 2
+  playerOffsetStrength: 0.5
 --- !u!114 &1810011428865751550
 MonoBehaviour:
   m_ObjectHideFlags: 0

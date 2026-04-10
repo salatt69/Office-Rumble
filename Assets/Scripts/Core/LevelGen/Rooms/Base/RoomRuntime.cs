@@ -18,6 +18,10 @@ public abstract class RoomRuntime : MonoBehaviour
     protected bool isPlayerInside { get; private set; }
 
     public bool IsPlayerInside => isPlayerInside;
+    public Vector2 RoomCenter => spawnPoints ? (Vector2)spawnPoints.transform.position : (Vector2)transform.position;
+    public bool HasEnemies => enemyInstances.Count > 0;
+
+    public System.Action OnRoomCleared;
 
     protected virtual void Awake()
     {

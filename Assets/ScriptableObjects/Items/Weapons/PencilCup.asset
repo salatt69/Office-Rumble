@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2720c4dad1e8c409af52ef0861c462, type: 3}
+  m_Name: PencilCup
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  itemName: PENCIL CUP
+  prefab: {fileID: 1538920619850770153, guid: 2e7827dc4bb9e0a4595c5e3052337a88, type: 3}
+  price: 33
+  tier: 32
+  unequipped: {fileID: -1663112789, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  highlightedUnequipped: {fileID: 1321852076, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  equipped: {fileID: 181202693, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  icon: {fileID: 1523242396, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  damageCoefficient: 0.8
+  attackSpeedCoefficient: 2
+  critDamageCoefficient: 1
+  critChanceCoefficient: 3
+  projectilePrefab: {fileID: 1342612922178115808, guid: 001b9ba05e3006147aac47e89e0269a3, type: 3}
+  projectileSpeedOverride: -1
+  projectileLifetimeOverride: -1
