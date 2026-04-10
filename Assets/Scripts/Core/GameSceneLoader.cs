@@ -82,6 +82,8 @@ public class GameSceneLoader : MonoBehaviour
         while (!operation.isDone)
             yield return null;
 
+        yield return new WaitForSeconds(0.5f);
+
         transitionsAnimator?.SetTrigger("End");
     }
 }

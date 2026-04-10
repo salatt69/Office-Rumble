@@ -31,6 +31,9 @@ public class LevelGeneration : MonoBehaviour
     [Header("Grid Settings")]
     [SerializeField] int width;
     [SerializeField] int height;
+
+    public int LevelWidth => width;
+    public int LevelHeight => height;
     [SerializeField, Range(5, 10)] int maxNormalRooms;
 
     [Header("Hidden Room Settings")]
