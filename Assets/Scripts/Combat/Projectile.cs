@@ -23,8 +23,16 @@ public class Projectile : MonoBehaviour
     [SerializeField] bool useSpeedCurve = false;
     [SerializeField] AnimationCurve speedOverLifetime;
 
+    [Header("Persistent Damage (Fire Extinguisher)")]
+    [SerializeField] bool persistentDamage = false;
+    [SerializeField] float damageInterval = 0.5f;
+
+    [Header("Scaling")]
+    [SerializeField] bool scaleOnSpawn = false;
+    [SerializeField] float scaleInDuration = 0.3f;
+
     Rigidbody2D rb;
-    Collider2D col; 
+    Collider2D col;
 
     GameObject owner;
     int ownerLayer;
@@ -40,6 +48,8 @@ public class Projectile : MonoBehaviour
 
     Vector2 moveDir;
     float initialSpeed;
+
+    System.Collections.Generic.Dictionary<Health, float> lastDamageTime = new System.Collections.Generic.Dictionary<Health, float>();
 
     public float Speed
     {
@@ -126,6 +136,24 @@ public class Projectile : MonoBehaviour
         initialized = true;
     }
 
+    public void ConfigureFireExtinguisher(float slowDownDuration, float damageInterval = 0.5f, float scaleDuration = 0.2f)
+    {
+        useSpeedCurve = true;
+        scaleOnSpawn = true;
+        persistentDamage = true;
+        destroyOnWallHit = false;
+
+        this.damageInterval = damageInterval;
+        scaleInDuration = scaleDuration;
+
+        AnimationCurve curve = new AnimationCurve(
+            new Keyframe(0f, 1f),
+            new Keyframe(slowDownDuration / (slowDownDuration + 0.5f), 0.1f),
+            new Keyframe(1f, 0f)
+        );
+        speedOverLifetime = curve;
+    }
+
     void Update()
     {
         if (!initialized || dying) return;
@@ -141,6 +169,34 @@ public class Projectile : MonoBehaviour
             float t = Mathf.Clamp01((Time.time - spawnTime) / usedLifetime); // 0..1
             float mult = speedOverLifetime.Evaluate(t);
             rb.linearVelocity = moveDir * (initialSpeed * mult);
+        }
+
+        // Scale in effect
+        if (scaleOnSpawn && scaleInDuration > 0f)
+        {
+            float t = Mathf.Clamp01((Time.time - spawnTime) / scaleInDuration);
+            transform.localScale = Vector3.one * t;
+        }
+
+        // Persistent damage to enemies inside the projectile
+        if (persistentDamage && lastDamageTime != null)
+        {
+            var keys = new System.Collections.Generic.List<Health>(lastDamageTime.Keys);
+            foreach (var health in keys)
+            {
+                if (health == null)
+                {
+                    lastDamageTime.Remove(health);
+                    continue;
+                }
+
+                if (Time.time - lastDamageTime[health] >= damageInterval)
+                {
+                    damageData.direction = rb.linearVelocity;
+                    health.TakeDamage(damageData);
+                    lastDamageTime[health] = Time.time;
+                }
+            }
         }
     }
 
@@ -167,7 +223,27 @@ public class Projectile : MonoBehaviour
 
             damageData.direction = rb.linearVelocity;
             health.TakeDamage(damageData);
-            DestroyProjectile();
+
+            // For persistent damage, track the enemy instead of destroying
+            if (persistentDamage)
+            {
+                lastDamageTime[health] = Time.time;
+            }
+            else
+            {
+                DestroyProjectile();
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (!initialized || dying || !persistentDamage) return;
+
+        var health = other.transform.root.GetComponent<Health>();
+        if (health != null && health.IsHurtbox(other))
+        {
+            lastDamageTime.Remove(health);
         }
     }
 
@@ -182,6 +258,7 @@ public class Projectile : MonoBehaviour
         if (deathEffect != null)
             Instantiate(deathEffect, transform.position, transform.rotation);
 
+        lastDamageTime.Clear();
         DetachAndStopParticles();
         Destroy(gameObject);
     }

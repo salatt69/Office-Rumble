@@ -183,6 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895970794844763170}
+  - component: {fileID: -4416922558332131659}
   m_Layer: 0
   m_Name: Fireextinguisher
   m_TagString: Untagged
@@ -207,6 +208,25 @@ Transform:
   - {fileID: 5136664646145253405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4416922558332131659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538920619850770153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b610daf41fcf49438477839df9c088d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaplerWeapon
+  data: {fileID: 11400000, guid: 4e80b84fc51ed594f874b9ff69f9fedc, type: 2}
+  gameObjectsToDisableOnEquip:
+  - {fileID: 7086939410063522498}
+  - {fileID: 967848558099630803}
+  - {fileID: 6198260048102430349}
+  vfxChild: {fileID: 86312832684670658}
+  firePoint: {fileID: 7956112187232641809}
 --- !u!1 &4954714290428215971
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a74ee279cb9ca84b99fac28dd0d1434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 3
+  speed: 6
   knockbackMultiplier: 0
-  lifetime: 5
+  lifetime: 2
   destroyOnWallHit: 0
   wallMask:
     serializedVersion: 2
@@ -186,13 +186,35 @@ MonoBehaviour:
   - {fileID: 85968044, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   deathEffect: {fileID: 0}
   trailParticles: {fileID: 0}
-  useSpeedCurve: 0
+  useSpeedCurve: 1
   speedOverLifetime:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -3.9196537
+      outSlope: -3.9196537
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0432
+    - serializedVersion: 3
+      time: 0.7
+      value: 0
+      inSlope: -0.71314466
+      outSlope: -0.71314466
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.067200005
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  persistentDamage: 1
+  damageInterval: 0.75
+  scaleOnSpawn: 1
+  scaleInDuration: 0.1
 --- !u!114 &8239310540337724471
 MonoBehaviour:
   m_ObjectHideFlags: 0

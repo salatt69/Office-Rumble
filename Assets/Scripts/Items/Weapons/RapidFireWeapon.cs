@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StaplerWeapon : Weapon
+public class RapidFireWeapon : Weapon
 {
     float nextShotTime;
 
