@@ -5,6 +5,7 @@ public class NormalRoomRuntime : RoomRuntime
 {
     [SerializeField] int minEnemies = 1;
     [SerializeField] int maxEnemies = 3;
+    [SerializeField] bool useDifficultyScaling = true;
     [SerializeField] GameObject doors;
 
     int diedAmount;
@@ -20,7 +21,17 @@ public class NormalRoomRuntime : RoomRuntime
     {
         if (spawnPoints == null) return;
 
-        int count = Random.Range(minEnemies, maxEnemies + 1);
+        int min = minEnemies;
+        int max = maxEnemies;
+
+        if (useDifficultyScaling && LevelManager.Instance != null)
+        {
+            var diff = LevelManager.Instance.GetCurrentDifficulty();
+            min = diff.minEnemies;
+            max = diff.maxEnemies;
+        }
+
+        int count = Random.Range(min, max + 1);
 
         var usedPoints = new List<Transform>();
 

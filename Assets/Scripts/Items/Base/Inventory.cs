@@ -74,6 +74,22 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    public bool RestoreSlot(int slotIndex, ItemData data, int uses)
+    {
+        if (data == null || slotIndex < 0 || slotIndex >= slotCount) return false;
+
+        slots[slotIndex].data = data;
+        slots[slotIndex].uses = uses;
+
+        OnSlotChanged?.Invoke(slotIndex, slots[slotIndex].data);
+        OnSlotUsesChanged?.Invoke(slotIndex, slots[slotIndex].uses);
+
+        if (slotIndex == selectedIndex)
+            EquipSelected();
+
+        return true;
+    }
+
     public ItemData ReplaceSelected(ItemData newData)
     {
         ValidateSlotIndex(selectedIndex);

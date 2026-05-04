@@ -9,6 +9,12 @@ public class PlayerWallet : MonoBehaviour
 
     public int Money => money;
 
+    public void SetMoney(int amount)
+    {
+        money = Mathf.Max(0, amount);
+        OnMoneyChanged?.Invoke();
+    }
+
     public void AddMoney(int amount)
     {
         money += Mathf.Max(0, amount);

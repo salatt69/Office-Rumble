@@ -36,6 +36,11 @@ public class EntityBody : MonoBehaviour
 
     public event Action OnStatsChanged;
 
+    public List<BuffStat> GetCurrentBuffs()
+    {
+        return new List<BuffStat>(buffs);
+    }
+
     public void AddBuff(BuffStat buff)
     {
         buffs.Add(buff);

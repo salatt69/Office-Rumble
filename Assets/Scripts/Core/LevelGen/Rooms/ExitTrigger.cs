@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitTrigger : MonoBehaviour
 {
@@ -9,7 +10,21 @@ public class ExitTrigger : MonoBehaviour
     {
         if (other.GetComponent<HurtboxGroup>() && other.GetComponentInParent<PlayerController>())
         {
-            GameSceneLoader.Instance.LoadSceneAsync("MainMenu");
+            var player = other.GetComponentInParent<PlayerController>().gameObject;
+            if (LevelManager.Instance != null)
+            {
+                LevelManager.Instance.SavePlayerState(player);
+                LevelManager.Instance.AdvanceLevel();
+            }
+
+            if (LevelManager.Instance != null && LevelManager.Instance.HasMoreLevels)
+            {
+                GameSceneLoader.Instance.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                GameSceneLoader.Instance.LoadSceneAsync("MainMenu");
+            }
         }
     }
 }

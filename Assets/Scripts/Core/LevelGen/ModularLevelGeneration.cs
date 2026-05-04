@@ -34,6 +34,7 @@ public class ModularLevelGeneration : MonoBehaviour
     [SerializeField] int width = 9;
     [SerializeField] int height = 9;
     [SerializeField, Range(5, 15)] int targetNormalRooms = 8;
+    [SerializeField] bool useDifficultyScaling = true;
 
     [Header("Special Rooms")]
     [SerializeField, Range(0f, 1f)] float merchantChance = 0.4f;
@@ -98,6 +99,14 @@ public class ModularLevelGeneration : MonoBehaviour
     public void Generate()
     {
         Clear();
+
+        if (useDifficultyScaling && LevelManager.Instance != null)
+        {
+            var diff = LevelManager.Instance.GetCurrentDifficulty();
+            width = diff.width;
+            height = diff.height;
+            targetNormalRooms = diff.targetNormalRooms;
+        }
 
         startCell = new Vector2Int(width / 2, height / 2);
 
