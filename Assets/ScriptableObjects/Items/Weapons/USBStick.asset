@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2720c4dad1e8c409af52ef0861c462, type: 3}
+  m_Name: USBStick
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  itemName: USB
+  prefab: {fileID: 1538920619850770153, guid: 171754afe51766e468193c0be7bff844, type: 3}
+  price: 33
+  tier: 32
+  unequipped: {fileID: -851394148, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  highlightedUnequipped: {fileID: 1892457761, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  equipped: {fileID: 1278641580, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  icon: {fileID: -1837024674, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
+  damageCoefficient: 7
+  attackSpeedCoefficient: 0.75
+  critDamageCoefficient: 2.2
+  critChanceCoefficient: 0.5
+  projectilePrefab: {fileID: 1342612922178115808, guid: b5d5758e252b26a47a51becf3f9d23cf, type: 3}
+  projectileSpeedOverride: -1
+  projectileLifetimeOverride: -1

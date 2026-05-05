@@ -20,8 +20,8 @@ MonoBehaviour:
   highlightedUnequipped: {fileID: -1193013286, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   equipped: {fileID: 553700501, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
   icon: {fileID: 991446561, guid: ee6f12268c5d29648ba7810a68f9dc57, type: 3}
-  damageCoefficient: 0.75
-  attackSpeedCoefficient: 20
+  damageCoefficient: 0.1
+  attackSpeedCoefficient: 80
   critDamageCoefficient: 1
   critChanceCoefficient: 0
   projectilePrefab: {fileID: 1342612922178115808, guid: b21f063b372dbe043ba1c2d137a7c360, type: 3}
