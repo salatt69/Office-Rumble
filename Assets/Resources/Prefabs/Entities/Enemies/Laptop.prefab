@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyKamikaze
   explosionRadius: 1
   explosionDamageMultiplier: 3
-  knockbackForce: 10
+  knockbackForce: 6
   targetLayers:
     serializedVersion: 2
     m_Bits: 64

@@ -77,13 +77,13 @@ public class EnemyKamikaze : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius, targetLayers);
         foreach (var hit in hits)
         {
-            var damageable = hit.GetComponent<IDamageable>();
-            if (damageable == null) continue;
+            var health = hit.transform.root.GetComponent<Health>();
+            if (health == null || !health.IsHurtbox(hit)) continue;
 
             Vector2 direction = (hit.transform.position - transform.position).normalized;
             var dmgData = new DamageData(gameObject, damageAmount, direction, DamageType.Explosion);
             dmgData.knockbackForceMultiplier = knockbackForce;
-            damageable.TakeDamage(dmgData);
+            health.TakeDamage(dmgData);
         }
 
         if (health)
