@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StartRoomRuntime : RoomRuntime
 {
@@ -25,26 +24,30 @@ public class StartRoomRuntime : RoomRuntime
             LevelManager.Instance.RestorePlayerState(player, context.content);
         }
 
-        Transform itemPoint = spawnPoints ? spawnPoints.GetRandomItemPoint() : null;
+        if (context?.content?.itemPrefabs == null || spawnPoints == null) return;
 
-        List<GameObject> pool = context?.content?.itemPrefabs;
-        if (pool == null || pool.Count == 0) return;
+        GameObject orangePrefab = null;
+        GameObject energyDrinkPrefab = null;
 
-        if (player == null || player.GetComponent<Inventory>() == null || player.GetComponent<Inventory>().Slots == null || player.GetComponent<Inventory>().Slots[0].data == null)
+        foreach (var prefab in context.content.itemPrefabs)
         {
-            List<GameObject> availableItems = new(pool);
-            GameObject weapon = null;
+            if (prefab == null) continue;
+            var item = prefab.GetComponent<Item>();
+            if (item?.Data == null) continue;
 
-            while (pool.Count > 0)
-            {
-                weapon = RandomItem();
-                if (weapon.GetComponent<Weapon>() != null)
-                    break;
-                else
-                    availableItems.Remove(weapon);
-            }
-
-            SpawnItem(weapon, itemPoint);
+            if (item.Data.itemName == "ORANGE")
+                orangePrefab = prefab;
+            else if (item.Data.itemName == "ENERGY DRINK")
+                energyDrinkPrefab = prefab;
         }
+
+        Transform leftPoint = spawnPoints.GetItemPoint(0);
+        Transform rightPoint = spawnPoints.GetItemPoint(1);
+
+        if (orangePrefab && leftPoint)
+            SpawnItem(orangePrefab, leftPoint);
+
+        if (energyDrinkPrefab && rightPoint)
+            SpawnItem(energyDrinkPrefab, rightPoint);
     }
 }
